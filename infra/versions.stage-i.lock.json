@@ -1,0 +1,105 @@
+{
+  "stage": "I",
+  "checkedAt": "2026-10-26",
+  "platform": "linux/amd64",
+  "inheritedLocks": {
+    "toolchain": "infra/versions.lock.json (checked 2026-10-23; immutable base-image digests reused)",
+    "mysql": "infra/versions.stage-b.lock.json (MySQL 8.4.13; immutable digest reused)"
+  },
+  "actions": [
+    {
+      "name": "actions/checkout",
+      "version": "v7.0.1",
+      "commit": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "source": "https://github.com/actions/checkout/releases/tag/v7.0.1"
+    },
+    {
+      "name": "actions/setup-java",
+      "version": "v6.1.0",
+      "commit": "b843ebf9b913146b38da2eaa7aeddf76074ae1ad",
+      "source": "https://github.com/actions/setup-java/releases/tag/v6.1.0"
+    },
+    {
+      "name": "actions/setup-node",
+      "version": "v7.1.0",
+      "commit": "949feb2413d6458794dcd2491c4babbbce0c15c1",
+      "source": "https://github.com/actions/setup-node/releases/tag/v7.1.0"
+    },
+    {
+      "name": "actions/upload-artifact",
+      "version": "v4.6.2",
+      "commit": "ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "source": "https://github.com/actions/upload-artifact/releases/tag/v4.6.2"
+    },
+    {
+      "name": "actions/download-artifact",
+      "version": "v4.3.0",
+      "commit": "d3f86a106a0bac45b974a628896c90dbdf5c8093",
+      "source": "https://github.com/actions/download-artifact/releases/tag/v4.3.0"
+    },
+    {
+      "name": "github/codeql-action",
+      "version": "v4.39.1",
+      "commit": "9b3254085494b55a0f7c4c2b3d2d52cc712ce370",
+      "source": "https://github.com/github/codeql-action/releases/tag/v4.39.1"
+    },
+    {
+      "name": "aquasecurity/trivy-action",
+      "version": "v0.36.0",
+      "commit": "ed142fd0673e97e23eac54620cfb913e5ce36c25",
+      "source": "https://github.com/aquasecurity/trivy-action/releases/tag/v0.36.0"
+    }
+  ],
+  "images": [
+    {
+      "name": "eclipse-temurin",
+      "version": "21-jre-jammy",
+      "reference": "eclipse-temurin@sha256:affcab5356e1270ac35d2361ee83135af2f03e8d580eca78a6d5d6fdbf048db0",
+      "source": "infra/versions.lock.json"
+    },
+    {
+      "name": "node",
+      "version": "24-bookworm-slim",
+      "reference": "node@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205",
+      "source": "infra/versions.lock.json"
+    },
+    {
+      "name": "nginx",
+      "version": "stable-alpine",
+      "reference": "nginx@sha256:47928bf67eb62a1863cb08aaf98f7082a77d318a7f92af3d9fe2c0fd2723df10",
+      "source": "infra/versions.lock.json"
+    },
+    {
+      "name": "mysql",
+      "version": "8.4.13",
+      "reference": "mysql@sha256:76f0358884cb92d9a086d24e5671c38048d3fef40f2588703d73eb55392d6b69",
+      "source": "infra/versions.stage-b.lock.json"
+    },
+    {
+      "name": "prom/prometheus",
+      "version": "v3.15.0",
+      "reference": "prom/prometheus:v3.15.0@sha256:efd719c99d83b060d9daefdcf00360461adf279f45ef5391f8d111892118753e",
+      "source": "https://github.com/grafana/loki/blob/main/production/docker/docker-compose.yaml"
+    },
+    {
+      "name": "grafana/grafana",
+      "version": "13.2.4",
+      "reference": "grafana/grafana:13.2.4@sha256:dbbc38ea21103cefb50396340cd88afec779c7e070b0a7bf5a75b4ce46651d3f",
+      "source": "https://github.com/grafana/loki/blob/main/production/docker/docker-compose.yaml"
+    },
+    {
+      "name": "grafana/loki",
+      "version": "3.7.8",
+      "reference": "grafana/loki:3.7.8@sha256:1107dd5274e0ada47e42472b7a7e71f3b2a2fe878878108f3e2f9e51528f0193",
+      "source": "https://github.com/grafana/loki/blob/main/production/docker/docker-compose.yaml"
+    }
+  ],
+  "verification": {
+    "registryMetadataChecked": true,
+    "localPullOrBuild": false,
+    "reason": "Docker Desktop Linux daemon is unavailable in the current Windows environment; see docs/stages/I-验证与交接.md"
+  },
+  "deferredImages": [
+    "Redis/RabbitMQ are not used by current application wiring and remain blocked by TC-26/27; no unused services were added to production Compose."
+  ]
+}

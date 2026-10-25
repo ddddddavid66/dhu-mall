@@ -1,0 +1,70 @@
+{
+  "stage": "F",
+  "recordedAt": "2026-10-25",
+  "basis": [
+    "FR-08—11",
+    "API-36—62",
+    "API-69",
+    "API-78—83",
+    "API-91",
+    "TC-15—23"
+  ],
+  "repository": {
+    "codeGraphIndexed": false,
+    "gitRepository": false,
+    "commit": null
+  },
+  "contract": {
+    "operations": 92,
+    "implemented": 91,
+    "notImplemented": ["API-89"],
+    "syncCheck": "passed"
+  },
+  "stageFTests": {
+    "suite": "StageFHttpTests",
+    "tests": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "result": "passed",
+    "log": ".artifacts/F-stagef-tests.log",
+    "junit": "backend/target/surefire-reports/TEST-com.yueji.mall.StageFHttpTests.xml"
+  },
+  "backendCleanVerify": {
+    "tests": 118,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "testResult": "passed",
+    "migration": "V1-V10 passed on isolated MySQL test schema",
+    "jarPackaged": true,
+    "verifyResult": "failed",
+    "failure": "JaCoCo service-package branch coverage below configured minimum",
+    "serviceBranchCoverage": {
+      "covered": 992,
+      "total": 1368,
+      "ratio": 0.725146,
+      "minimum": 0.8
+    },
+    "log": ".artifacts/F-backend-verify.log",
+    "jacocoXml": "backend/target/site/jacoco/jacoco.xml"
+  },
+  "frontend": {
+    "typecheck": "passed",
+    "tests": 7,
+    "build": "passed",
+    "openApiLint": "passed",
+    "logs": [
+      ".artifacts/F-frontend-typecheck.log",
+      ".artifacts/F-frontend-tests.log",
+      ".artifacts/F-frontend-build.log",
+      ".artifacts/F-frontend-contract-lint.log"
+    ]
+  },
+  "externalServices": {
+    "alipaySandbox": "not executed; environment inputs unavailable",
+    "merchantPayout": "mock only; no real payout call"
+  },
+  "contractChanges": [],
+  "secretsRecorded": false
+}

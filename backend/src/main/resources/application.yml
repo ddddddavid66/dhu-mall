@@ -1,0 +1,90 @@
+spring:
+  application:
+    name: yueji-mall
+  profiles:
+    default: dev
+  datasource:
+    url: ${DB_URL:jdbc:mysql://127.0.0.1:13306/yueji_mall_dev?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true}
+    username: ${DB_USERNAME:yueji_dev}
+    password: ${DB_PASSWORD:}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 3000
+  flyway:
+    locations: classpath:db/migration
+    clean-disabled: true
+  jackson:
+    time-zone: UTC
+    deserialization:
+      accept-float-as-int: false
+      fail-on-unknown-properties: true
+    mapper:
+      allow-coercion-of-scalars: false
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 26MB
+server:
+  tomcat:
+    max-swallow-size: 26MB
+  address: ${APP_BIND_ADDRESS:127.0.0.1}
+  port: ${APP_PORT:8080}
+  error:
+    include-message: never
+    include-stacktrace: never
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+      group:
+        readiness:
+          include: readinessState,db
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+springdoc:
+  api-docs:
+    version: OPENAPI_3_1
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    supported-submit-methods: []
+yueji:
+  stage: E
+  files:
+    root: ${FILE_STORAGE_ROOT:.artifacts/storage/dev}
+  mock-payment-enabled: ${ENABLE_MOCK_PAYMENT:false}
+  payment:
+    provider: ${PAYMENT_PROVIDER:LOCAL_MOCK}
+    gateway: ${ALIPAY_GATEWAY:https://openapi-sandbox.dl.alipaydev.com/gateway.do}
+    app-id: ${ALIPAY_APP_ID:}
+    seller-id: ${ALIPAY_SELLER_ID:}
+    private-key: ${ALIPAY_APP_PRIVATE_KEY:}
+    public-key: ${ALIPAY_PUBLIC_KEY:}
+    notify-url: ${ALIPAY_NOTIFY_URL:}
+    return-url: ${ALIPAY_RETURN_URL:}
+  allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173}
+  security:
+    jwt-key: ${JWT_SIGNING_KEY:}
+    jwt-issuer: yueji-mall
+    cookie-secure: true
+    login-limit: 10
+    write-limit: 30
+  dev-seed:
+    enabled: false
+    credentials-file: ${DEV_SEED_CREDENTIALS_FILE:}
+logging:
+  structured:
+    format:
+      console: logstash
+  level:
+    root: INFO

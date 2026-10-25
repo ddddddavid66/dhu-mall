@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-23",
+  "inherits": ["versions.lock.json", "versions.stage-b.lock.json"],
+  "imageioWebp": "3.12.0",
+  "source": "https://haraldk.github.io/TwelveMonkeys/",
+  "artifact": "com.twelvemonkeys.imageio:imageio-webp:3.12.0",
+  "imagePolicy": "JPEG/PNG/WebP decoded with ImageIO; persist re-encoded PNG only",
+  "database": "Existing frozen MySQL 8.4.13; no new service or image",
+  "cache": "Direct database reads in this stage; no cached inventory used for writes"
+}

@@ -1,0 +1,151 @@
+{
+  "stage": "H",
+  "reportDate": "2026-10-26",
+  "overallStatus": "QUALITY_GATE_FAILED",
+  "git": {
+    "isRepository": false,
+    "commit": null,
+    "pullRequest": null
+  },
+  "environment": {
+    "os": "Microsoft Windows 11 Home 10.0.26100",
+    "cpu": "AMD Ryzen 9 8945HX with Radeon Graphics",
+    "cpuCores": 16,
+    "logicalProcessors": 32,
+    "visibleMemoryGiB": 15.8,
+    "java": "Temurin 21.0.12.1+1",
+    "maven": "3.9.16",
+    "node": "24.22.1",
+    "pnpm": "10.34.7",
+    "python": "3.11.9",
+    "mysql": "8.4.13 at 127.0.0.1:13306",
+    "testSchema": "yueji_mall_test",
+    "testMigrationRange": "Flyway V1-V10 from empty schema",
+    "k6Installed": false,
+    "dockerClient": "29.6.1",
+    "dockerLinuxDaemonAvailable": false
+  },
+  "automatedResults": {
+    "backend": {
+      "tests": 119,
+      "passed": 119,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cleanVerifyExitCode": 1,
+      "packagedJar": true,
+      "jacocoServiceBranches": {
+        "covered": 992,
+        "missed": 376,
+        "total": 1368,
+        "ratio": 0.725146,
+        "minimum": 0.8,
+        "gate": "failed",
+        "additionalCoveredBranchesRequiredAtCurrentDenominator": 103
+      },
+      "schedulerMissingJobLeaseErrorsAfterTestIsolation": 0
+    },
+    "frontend": {
+      "frozenInstall": "passed",
+      "typecheck": "passed",
+      "vitestFiles": 3,
+      "vitestPassed": 10,
+      "productionBuild": "passed",
+      "openapiLint": "passed"
+    },
+    "playwright": {
+      "configuredTests": 7,
+      "passed": 4,
+      "skipped": 3,
+      "failed": 0,
+      "skipsAreProjectFilters": true
+    },
+    "contract": {
+      "declaredOperations": 92,
+      "implementationInventory": "in sync",
+      "protectedImplementedOperationsCheckedWithoutCredentials": 83
+    },
+    "jarSmoke": {
+      "readiness": "UP",
+      "checks": [
+        {"name": "categories", "status": 200, "code": "OK"},
+        {"name": "products", "status": 200, "code": "OK", "total": 23},
+        {"name": "dashboard", "status": 501, "code": "NOT_IMPLEMENTED"}
+      ]
+    }
+  },
+  "tcSummary": {
+    "total": 32,
+    "passed": 22,
+    "failed": 0,
+    "blocked": 2,
+    "notExecuted": 8
+  },
+  "testCases": [
+    {"id": "TC-01", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.IdentityHttpTests.xml", "backend/target/surefire-reports/TEST-com.yueji.mall.SessionBoundaryTests.xml"]},
+    {"id": "TC-02", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.FoundationHttpTests.xml", "backend/target/surefire-reports/TEST-com.yueji.mall.StageCHttpTests.xml", "backend/target/surefire-reports/TEST-com.yueji.mall.StageDHttpTests.xml", "backend/target/surefire-reports/TEST-com.yueji.mall.StageFHttpTests.xml"]},
+    {"id": "TC-03", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.IdentityHttpTests.xml", "backend/target/surefire-reports/TEST-com.yueji.mall.InitialAdministratorTests.xml"]},
+    {"id": "TC-04", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageCHttpTests.xml"]},
+    {"id": "TC-05", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.IdentityHttpTests.xml", "backend/target/surefire-reports/TEST-com.yueji.mall.StageCHttpTests.xml"]},
+    {"id": "TC-06", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageDHttpTests.xml", "docs/stages/evidence/D-tc06-invariants.json"]},
+    {"id": "TC-07", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageDHttpTests.xml", "docs/stages/evidence/D-tc07-rollback.json"]},
+    {"id": "TC-08", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageDHttpTests.xml", "docs/stages/evidence/D-tc08-replay.json"]},
+    {"id": "TC-09", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageDHttpTests.xml", "docs/stages/evidence/D-tc09-concurrency.json"]},
+    {"id": "TC-10", "status": "blocked", "reason": "Real Alipay sandbox credentials, buyer/seller setup, capability enablement and public callback are absent.", "evidence": ["docs/stages/E-验证与交接.md", "docs/stages/E-官方协议核对.md"]},
+    {"id": "TC-11", "status": "passed", "scope": "LOCAL_MOCK and protocol fixtures only", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageEHttpTests.xml", "backend/target/surefire-reports/TEST-com.yueji.mall.StageESandboxProtocolTests.xml"]},
+    {"id": "TC-12", "status": "passed", "scope": "LOCAL_MOCK race/close/recovery paths", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageEHttpTests.xml", "docs/stages/evidence/E-local-race-invariants.json"]},
+    {"id": "TC-13", "status": "not_executed", "reason": "Service recovery is tested, but independent JAR kill/restart and persistent-state verification were not run.", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageEHttpTests.xml", "docs/stages/E-验证与交接.md"]},
+    {"id": "TC-14", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageEHttpTests.xml", "backend/target/surefire-reports/TEST-com.yueji.mall.ProductionIsolationTests.xml"]},
+    {"id": "TC-15", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageFHttpTests.xml"]},
+    {"id": "TC-16", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageFHttpTests.xml"]},
+    {"id": "TC-17", "status": "passed", "scope": "LOCAL_MOCK; refund idempotency, failure/unknown/recovery and one-time restock", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageFHttpTests.xml"]},
+    {"id": "TC-18", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageFHttpTests.xml"]},
+    {"id": "TC-19", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageFHttpTests.xml"]},
+    {"id": "TC-20", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageFHttpTests.xml"]},
+    {"id": "TC-21", "status": "passed", "scope": "Local test database; fee snapshots and idempotent settlement creation", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageFHttpTests.xml"]},
+    {"id": "TC-22", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageFHttpTests.xml"]},
+    {"id": "TC-23", "status": "passed", "scope": "Mock payout only; adjustment/carry-forward and immutable paid record", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageFHttpTests.xml"]},
+    {"id": "TC-24", "status": "passed", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.ImageSafetyTests.xml", "backend/target/surefire-reports/TEST-com.yueji.mall.StageCHttpTests.xml"]},
+    {"id": "TC-25", "status": "not_executed", "reason": "CSRF, refresh replay and unsafe query checks have coverage, but browser XSS injection and execution assertions were not run.", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.IdentityHttpTests.xml", "docs/stages/B-验证与交接.md"]},
+    {"id": "TC-26", "status": "not_executed", "reason": "Outbox persistence is tested; RabbitMQ confirmation loss, consumer crash, ordering and dead-letter replay were not run.", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageDHttpTests.xml"]},
+    {"id": "TC-27", "status": "not_executed", "reason": "Local payment failure paths are tested; Redis/RabbitMQ outage and recovery injection were not run.", "evidence": ["backend/target/surefire-reports/TEST-com.yueji.mall.StageEHttpTests.xml"]},
+    {"id": "TC-28", "status": "not_executed", "reason": "No isolated backup/restore or deployment rollback environment.", "evidence": ["docs/stages/H-验证与交接.md"]},
+    {"id": "TC-29", "status": "not_executed", "reason": "Host does not match fixed Linux hardware profile; k6 is absent and Docker Linux daemon is unavailable.", "evidence": [".artifacts/H-environment.txt", "docs/01-总需求文档.md"]},
+    {"id": "TC-30", "status": "not_executed", "reason": "No 24-hour probe was run; only one readiness request was made.", "evidence": [".artifacts/H-readiness.json"]},
+    {"id": "TC-31", "status": "not_executed", "reason": "No Git repository, CI pipeline or available Docker Linux daemon.", "evidence": ["docs/stages/H-验证与交接.md"]},
+    {"id": "TC-32", "status": "blocked", "reason": "AI use record was written, but repository has no Git/PR and exact model build/export is unavailable.", "evidence": ["docs/stages/H-AI使用记录.md"]}
+  ],
+  "commands": [
+    {"command": "pnpm --dir frontend install --frozen-lockfile; pnpm --dir frontend run typecheck; pnpm --dir frontend test; pnpm --dir frontend run build; pnpm --dir frontend run contract:lint", "exitCode": 0, "evidence": [".artifacts/H-frontend-quality.log"]},
+    {"command": "python scripts/sync-contract.py --check", "exitCode": 0, "evidence": [".artifacts/H-contract-sync.log"]},
+    {"command": "pnpm --dir frontend run test:e2e", "exitCode": 0, "result": "4 passed, 3 skipped, 0 failed", "evidence": [".artifacts/H-playwright.log", ".artifacts/H-e2e"]},
+    {"command": "python scripts/smoke-stage-g-http.py --base-url http://127.0.0.1:18080", "exitCode": 0, "result": "3 HTTP checks passed", "evidence": [".artifacts/H-http-smoke.log", ".artifacts/H-readiness.json"]},
+    {"command": "./mvnw.cmd -B -ntp -Dtest=FoundationHttpTests test", "exitCode": 0, "result": "6 tests passed", "evidence": [".artifacts/H-contract-http-retest.log"]},
+    {"command": "./mvnw.cmd -B -ntp -Dtest=StageFHttpTests test", "exitCode": 0, "result": "20 tests passed; job_lease missing-table errors 0", "evidence": [".artifacts/H-scheduler-isolation-test.log"]},
+    {"command": "./mvnw.cmd -B -ntp clean verify", "exitCode": 1, "result": "119 tests passed; JaCoCo service branch gate failed at 72.51% vs 80%", "evidence": [".artifacts/H-backend-verify.log"]}
+  ],
+  "artifacts": {
+    "fullBackendLog": ".artifacts/H-backend-verify.log",
+    "preIsolationBackendLog": ".artifacts/H-backend-verify-before-scheduler-isolation.log",
+    "frontendLog": ".artifacts/H-frontend-quality.log",
+    "playwrightLog": ".artifacts/H-playwright.log",
+    "environment": ".artifacts/H-environment.txt",
+    "toolchain": ".artifacts/H-toolchain.txt",
+    "readiness": ".artifacts/H-readiness.json",
+    "httpSmoke": ".artifacts/H-http-smoke.log",
+    "schedulerIsolationTest": ".artifacts/H-scheduler-isolation-test.log",
+    "jacocoXml": "backend/target/site/jacoco/jacoco.xml",
+    "surefireReports": "backend/target/surefire-reports",
+    "testScreenshots": ".artifacts/H-e2e/screenshots"
+  },
+  "performance": {
+    "executed": false,
+    "reason": "Windows 11 host, k6 absent, Docker Linux daemon unavailable, no independent load generator; does not meet docs/01 NFR-01 fixed profile.",
+    "designMetricsReportedAsMeasured": false
+  },
+  "externalActivity": {
+    "realAlipay": false,
+    "realPayout": false,
+    "publicCallback": false
+  }
+}

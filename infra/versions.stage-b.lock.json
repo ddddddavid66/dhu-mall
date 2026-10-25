@@ -1,0 +1,22 @@
+{
+  "clientDate": "2026-10-23",
+  "verifiedAtUtc": "2026-10-23T11:50:52.236709+00:00",
+  "springBoot": "3.5.16",
+  "mybatisPlus": "3.5.17",
+  "flyway": "11.20.3",
+  "jacoco": "0.8.14",
+  "jacocoSource": "https://www.jacoco.org/jacoco/",
+  "mysqlConnector": "9.7.0",
+  "versionSource": "Spring Boot 3.5.16 BOM / Maven Central / baomidou official quick start",
+  "jwt": "Spring Security BOM managed Nimbus JOSE, HS256 only",
+  "mysql": {
+    "version": "8.4.13",
+    "url": "https://cdn.mysql.com/Downloads/MySQL-8.4/mysql-8.4.13-winx64.zip",
+    "officialMd5": "7b94489d5524dea9b27097068bea25a8",
+    "source": "https://dev.mysql.com/downloads/mysql/8.4.html",
+    "image": "mysql@sha256:76f0358884cb92d9a086d24e5671c38048d3fef40f2588703d73eb55392d6b69",
+    "linuxAmd64Digest": "sha256:2068651a18ac6048578647ea57b940ca2daed3f504ebe7fba6a93beeb39aaa1f",
+    "localArchiveSha256": "e9cd98b1d23f122987b1afca26ad942efec5891481103d48ae3cde237fa3ea54"
+  },
+  "flywayNote": "Override Boot BOM 11.7.2 within Flyway 11 after MySQL 8.4 warning; validate actual runtime and migrations."
+}

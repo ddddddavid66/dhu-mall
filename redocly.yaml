@@ -1,0 +1,7 @@
+extends:
+  - minimal
+rules:
+  no-unused-components: off
+  info-license: off
+  # 阶段 A 明确不提供业务 2xx；运行测试逐项确认 501/404，不能为消除警告伪造成功。
+  operation-2xx-response: off

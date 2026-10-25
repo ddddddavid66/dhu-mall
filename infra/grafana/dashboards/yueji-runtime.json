@@ -1,0 +1,27 @@
+{
+  "annotations": {"list": []},
+  "editable": false,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "panels": [
+    {"datasource":{"type":"prometheus","uid":"yueji-prometheus"},"fieldConfig":{"defaults":{"unit":"short"},"overrides":[]},"gridPos":{"h":5,"w":6,"x":0,"y":0},"id":1,"options":{"colorMode":"value","graphMode":"area","justifyMode":"auto","orientation":"auto","reduceOptions":{"calcs":["lastNotNull"],"fields":"","values":false}},"targets":[{"expr":"up{job=\"yueji-backend\"}","refId":"A"}],"title":"Backend scrape health","type":"stat"},
+    {"datasource":{"type":"prometheus","uid":"yueji-prometheus"},"fieldConfig":{"defaults":{"unit":"reqps"},"overrides":[]},"gridPos":{"h":8,"w":9,"x":6,"y":0},"id":2,"options":{"legend":{"displayMode":"list","placement":"bottom"},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"expr":"sum(rate(http_server_requests_seconds_count[5m]))","refId":"A"}],"title":"HTTP requests per second","type":"timeseries"},
+    {"datasource":{"type":"prometheus","uid":"yueji-prometheus"},"fieldConfig":{"defaults":{"unit":"percentunit","min":0,"max":1},"overrides":[]},"gridPos":{"h":8,"w":9,"x":15,"y":0},"id":3,"options":{"legend":{"displayMode":"list","placement":"bottom"},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"expr":"sum(rate(http_server_requests_seconds_count{status=~\"5..\"}[5m])) / clamp_min(sum(rate(http_server_requests_seconds_count[5m])), 1)","refId":"A"}],"title":"HTTP 5xx ratio","type":"timeseries"},
+    {"datasource":{"type":"prometheus","uid":"yueji-prometheus"},"fieldConfig":{"defaults":{"unit":"s"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":0,"y":8},"id":4,"options":{"legend":{"displayMode":"list","placement":"bottom"},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"expr":"histogram_quantile(0.95, sum by (le) (rate(http_server_requests_seconds_bucket[5m])))","refId":"A"}],"title":"HTTP latency P95","type":"timeseries"},
+    {"datasource":{"type":"prometheus","uid":"yueji-prometheus"},"fieldConfig":{"defaults":{"unit":"short"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":12,"y":8},"id":5,"options":{"legend":{"displayMode":"list","placement":"bottom"},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"expr":"hikaricp_connections_pending","refId":"A"}],"title":"Database pool waiters","type":"timeseries"},
+    {"datasource":{"type":"prometheus","uid":"yueji-prometheus"},"fieldConfig":{"defaults":{"unit":"bytes"},"overrides":[]},"gridPos":{"h":8,"w":12,"x":0,"y":16},"id":6,"options":{"legend":{"displayMode":"list","placement":"bottom"},"tooltip":{"mode":"single","sort":"none"}},"targets":[{"expr":"sum(jvm_memory_used_bytes{area=\"heap\"})","refId":"A"}],"title":"JVM heap used","type":"timeseries"},
+    {"datasource":{"type":"loki","uid":"yueji-loki"},"fieldConfig":{"defaults":{},"overrides":[]},"gridPos":{"h":8,"w":12,"x":12,"y":16},"id":7,"options":{"showLabels":false,"showTime":true,"sortOrder":"Descending","wrapLogMessage":true},"targets":[{"expr":"{service=\"yueji-mall\"}","refId":"A"}],"title":"Application logs (requires a configured log shipper)","type":"logs"}
+  ],
+  "refresh":"30s",
+  "schemaVersion":41,
+  "tags":["yueji","operations"],
+  "templating":{"list":[]},
+  "time":{"from":"now-6h","to":"now"},
+  "timepicker":{},
+  "timezone":"browser",
+  "title":"Yueji runtime",
+  "uid":"yueji-runtime",
+  "version":1
+}

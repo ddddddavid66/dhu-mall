@@ -1,0 +1,169 @@
+{
+  "ownedOrderList": {
+    "query_block": {
+      "select_id": 1,
+      "cost_info": {
+        "query_cost": "0.70"
+      },
+      "ordering_operation": {
+        "using_filesort": false,
+        "table": {
+          "table_name": "trade_order",
+          "access_type": "ref",
+          "possible_keys": [
+            "ix_order_user_created"
+          ],
+          "key": "ix_order_user_created",
+          "used_key_parts": [
+            "user_id"
+          ],
+          "key_length": "8",
+          "ref": [
+            "const"
+          ],
+          "rows_examined_per_scan": 2,
+          "rows_produced_per_join": 2,
+          "filtered": "100.00",
+          "backward_index_scan": true,
+          "cost_info": {
+            "read_cost": "0.50",
+            "eval_cost": "0.20",
+            "prefix_cost": "0.70",
+            "data_read_per_join": "6K"
+          },
+          "used_columns": [
+            "id",
+            "created_at",
+            "user_id",
+            "status"
+          ]
+        },
+        "optimized_away_subqueries": [
+          {
+            "dependent": false,
+            "cacheable": true,
+            "query_block": {
+              "select_id": 2,
+              "cost_info": {
+                "query_cost": "1.46"
+              },
+              "ordering_operation": {
+                "using_filesort": true,
+                "cost_info": {
+                  "sort_cost": "1.00"
+                },
+                "table": {
+                  "table_name": "iam_user",
+                  "access_type": "range",
+                  "possible_keys": [
+                    "uk_user_username"
+                  ],
+                  "key": "uk_user_username",
+                  "used_key_parts": [
+                    "username"
+                  ],
+                  "key_length": "130",
+                  "rows_examined_per_scan": 1,
+                  "rows_produced_per_join": 1,
+                  "filtered": "100.00",
+                  "using_index": true,
+                  "cost_info": {
+                    "read_cost": "0.36",
+                    "eval_cost": "0.10",
+                    "prefix_cost": "0.46",
+                    "data_read_per_join": "808"
+                  },
+                  "used_columns": [
+                    "id",
+                    "username"
+                  ],
+                  "attached_condition": "(`yueji_mall_dev`.`iam_user`.`username` like 'd_demo_%')"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "expiringOrders": {
+    "query_block": {
+      "select_id": 1,
+      "cost_info": {
+        "query_cost": "0.46"
+      },
+      "ordering_operation": {
+        "using_filesort": false,
+        "table": {
+          "table_name": "trade_order",
+          "access_type": "range",
+          "possible_keys": [
+            "ix_order_status_expires"
+          ],
+          "key": "ix_order_status_expires",
+          "used_key_parts": [
+            "status",
+            "expires_at"
+          ],
+          "key_length": "105",
+          "rows_examined_per_scan": 1,
+          "rows_produced_per_join": 1,
+          "filtered": "100.00",
+          "using_index": true,
+          "cost_info": {
+            "read_cost": "0.36",
+            "eval_cost": "0.10",
+            "prefix_cost": "0.46",
+            "data_read_per_join": "3K"
+          },
+          "used_columns": [
+            "id",
+            "status",
+            "expires_at"
+          ],
+          "attached_condition": "((`yueji_mall_dev`.`trade_order`.`status` = 'PENDING_PAYMENT') and (`yueji_mall_dev`.`trade_order`.`expires_at` <= <cache>(utc_timestamp(3))))"
+        }
+      }
+    }
+  },
+  "pendingOutbox": {
+    "query_block": {
+      "select_id": 1,
+      "cost_info": {
+        "query_cost": "0.45"
+      },
+      "ordering_operation": {
+        "using_filesort": false,
+        "table": {
+          "table_name": "outbox_event",
+          "access_type": "index",
+          "possible_keys": [
+            "ix_outbox_due"
+          ],
+          "key": "ix_outbox_due",
+          "used_key_parts": [
+            "status",
+            "next_attempt_at"
+          ],
+          "key_length": "73",
+          "rows_examined_per_scan": 2,
+          "rows_produced_per_join": 2,
+          "filtered": "100.00",
+          "using_index": true,
+          "cost_info": {
+            "read_cost": "0.25",
+            "eval_cost": "0.20",
+            "prefix_cost": "0.45",
+            "data_read_per_join": "3K"
+          },
+          "used_columns": [
+            "id",
+            "status",
+            "next_attempt_at"
+          ],
+          "attached_condition": "((`yueji_mall_dev`.`outbox_event`.`status` = 'PENDING') and (`yueji_mall_dev`.`outbox_event`.`next_attempt_at` <= <cache>(utc_timestamp(3))))"
+        }
+      }
+    }
+  }
+}

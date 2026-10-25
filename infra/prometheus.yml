@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    service: yueji-mall
+
+rule_files:
+  - /etc/prometheus/alert-rules.yml
+
+scrape_configs:
+  - job_name: yueji-backend
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets: [backend:9081]
+        labels:
+          service: yueji-mall

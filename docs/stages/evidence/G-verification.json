@@ -1,0 +1,86 @@
+{
+  "stage": "G",
+  "recordedAt": "2026-10-25",
+  "basis": ["UI-01—33", "01—08", "12—13", "OpenAPI 0.5.0", "API-01—92"],
+  "repository": {
+    "codeGraphIndexed": false,
+    "gitRepository": false,
+    "commit": null
+  },
+  "contract": {
+    "operations": 92,
+    "implemented": 91,
+    "notImplemented": ["API-89"],
+    "syncCheck": "passed",
+    "api89HttpStatus": 501,
+    "api89Code": "NOT_IMPLEMENTED",
+    "syncLog": ".artifacts/G-contract-sync.log",
+    "smokeLog": ".artifacts/G-http-smoke.json"
+  },
+  "toolchain": {
+    "node": "24.22.1",
+    "pnpm": "10.34.7",
+    "playwright": "1.63.0",
+    "frozenInstall": "passed using scripts/use-tools.ps1",
+    "frozenInstallOfflineAttempt": "failed because local pnpm metadata mirror lacked @pnpm/exe@10.34.7",
+    "hostNodeAttempt": "failed as expected: host Node v25.8.1 did not satisfy project Node v24.22.1 engines",
+    "playwrightTypecheckWrongWorkingDirectoryAttempt": "failed because root-relative script path was invoked from frontend; rerun from repository root passed"
+  },
+  "frontend": {
+    "typecheck": "passed",
+    "unitTestFiles": 3,
+    "unitTests": 10,
+    "unitFailures": 0,
+    "build": "passed; 1648 modules transformed",
+    "openApiLint": "passed",
+    "logs": [
+      ".artifacts/G-frontend-typecheck.log",
+      ".artifacts/G-frontend-tests.log",
+      ".artifacts/G-frontend-build.log",
+      ".artifacts/G-contract-lint.log",
+      ".artifacts/G-contract-sync.log"
+    ]
+  },
+  "e2e": {
+    "command": "pnpm --dir frontend run test:e2e",
+    "plannedProjectCases": 7,
+    "passed": 4,
+    "skipped": 3,
+    "failed": 0,
+    "log": ".artifacts/G-playwright-final.log",
+    "scenarios": [
+      "mobile buy-now flow previews only the selected SKU via API-26",
+      "mobile public catalog with long title and no-cover layout fixture",
+      "mobile member session, address retry, cart, actual cross-shop server preview, and finance-route denial",
+      "desktop workbench long nickname fixture and actual API-89 501"
+    ],
+    "createdOrder": false,
+    "paymentOrRefundRequested": false
+  },
+  "e2eStrictTypecheck": {
+    "result": "passed",
+    "log": ".artifacts/G-playwright-typecheck.log"
+  },
+  "httpSmoke": {
+    "categories": {"status": 200, "code": "OK", "traceId": true},
+    "products": {"status": 200, "code": "OK", "traceId": true, "total": 23},
+    "dashboard": {"status": 501, "code": "NOT_IMPLEMENTED", "traceId": true},
+    "evidence": ".artifacts/G-http-smoke.json"
+  },
+  "visualEvidence": [
+    ".artifacts/G-mobile-catalog-long-title-no-cover.png",
+    ".artifacts/G-mobile-product-buy-now.png",
+    ".artifacts/G-mobile-member-long-address.png",
+    ".artifacts/G-mobile-member-cart-long-title-no-cover.png",
+    ".artifacts/G-mobile-address-error-retry.png",
+    ".artifacts/G-mobile-cross-store-server-preview.png",
+    ".artifacts/G-desktop-workbench-long-text.png",
+    ".artifacts/G-desktop-api89-not-implemented.png"
+  ],
+  "externalServices": {
+    "alipaySandbox": "not invoked",
+    "merchantPayout": "not invoked; remains mock only"
+  },
+  "ciCd": "not run; no remote workflow or deployment in Stage G scope",
+  "secretsRecorded": false
+}

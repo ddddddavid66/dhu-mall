@@ -1,0 +1,108 @@
+{
+  "verifiedAtUtc": "2026-10-23T13:36:21.208680+00:00",
+  "checks": [
+    {
+      "name": "login-reader_a",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "login-merchant_b",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "public-category-tree",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "public-products-database-filter",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "curated-featured-filter",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "price-sort-and-money-types",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "real-review-table-empty",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "own-cart-real-invalid-items",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "own-shop-inventory",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "cross-shop-denied",
+      "actualStatus": 404,
+      "actualCode": "RESOURCE_NOT_FOUND",
+      "passed": true
+    },
+    {
+      "name": "member-ops-denied",
+      "actualStatus": 403,
+      "actualCode": "ACCESS_DENIED",
+      "passed": true
+    },
+    {
+      "name": "anonymous-cart-denied",
+      "actualStatus": 401,
+      "actualCode": "AUTH_REQUIRED",
+      "passed": true
+    },
+    {
+      "name": "public-draft-hidden",
+      "actualStatus": 404,
+      "actualCode": "RESOURCE_NOT_FOUND",
+      "passed": true
+    },
+    {
+      "name": "public-off_shelf-hidden",
+      "actualStatus": 404,
+      "actualCode": "RESOURCE_NOT_FOUND",
+      "passed": true
+    },
+    {
+      "name": "public-reencoded-cover",
+      "actualStatus": 200,
+      "actualCode": null,
+      "passed": true
+    },
+    {
+      "name": "logout-0",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "logout-1",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    }
+  ],
+  "total": 17
+}

@@ -1,0 +1,38 @@
+{
+  "status": "READY",
+  "username": "d_demo_1e7758a6ad",
+  "batchId": "1",
+  "batchNo": "B9bbb9e17e9bc4d86b40dc9e0ce4235da",
+  "previewId": "1",
+  "totalAmount": "72.80",
+  "orders": [
+    {
+      "id": "1",
+      "orderNo": "O150b309ea59a4615ba87dd50c355b15a",
+      "shopId": "2",
+      "shopName": "虚构演示书店 b",
+      "status": "CLOSING",
+      "financialStatus": "UNPAID",
+      "payableAmount": "33.90",
+      "refundedAmount": "0.00",
+      "expiresAt": "2026-10-23T19:50:23.534Z",
+      "createdAt": "2026-10-23T19:20:23.535Z",
+      "itemCount": 1
+    },
+    {
+      "id": "2",
+      "orderNo": "O4558050ffac1422dbf246ade1a2a5139",
+      "shopId": "3",
+      "shopName": "虚构演示书店 c",
+      "status": "PENDING_PAYMENT",
+      "financialStatus": "UNPAID",
+      "payableAmount": "38.90",
+      "refundedAmount": "0.00",
+      "expiresAt": "2026-10-23T19:50:23.534Z",
+      "createdAt": "2026-10-23T19:20:23.554Z",
+      "itemCount": 1
+    }
+  ],
+  "createdAtUtc": "2026-10-23T19:20:23.684628+00:00",
+  "lastVerifiedAtUtc": "2026-10-23T19:26:27.611061+00:00"
+}

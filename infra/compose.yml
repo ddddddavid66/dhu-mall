@@ -1,0 +1,140 @@
+name: yueji
+
+services:
+  mysql:
+    image: mysql@sha256:76f0358884cb92d9a086d24e5671c38048d3fef40f2588703d73eb55392d6b69
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:?set MYSQL_DATABASE in the protected runtime env file}
+      MYSQL_USER: ${DB_USERNAME:?set DB_USERNAME in the protected runtime env file}
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+    secrets:
+      - db_password
+      - mysql_root_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - yueji
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 45s
+    stop_grace_period: 60s
+    logging: &rotated-logs
+      driver: json-file
+      options:
+        max-size: 20m
+        max-file: "10"
+
+  backend:
+    image: ${BACKEND_IMAGE:?set an immutable backend image digest}
+    restart: unless-stopped
+    init: true
+    read_only: true
+    tmpfs:
+      - /tmp/yueji:rw,noexec,nosuid,size=64m,uid=10001,gid=10001
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      APP_ENV: ${DEPLOY_ENV:?set DEPLOY_ENV to test or prod}
+      APP_BIND_ADDRESS: 0.0.0.0
+      APP_PORT: "8080"
+      MANAGEMENT_SERVER_ADDRESS: 0.0.0.0
+      MANAGEMENT_SERVER_PORT: "9081"
+      DB_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE}?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD_FILE: /run/secrets/db_password
+      JWT_SIGNING_KEY_FILE: /run/secrets/jwt_signing_key
+      FILE_STORAGE_ROOT: /var/lib/yueji/files
+      PAYMENT_PROVIDER: ${PAYMENT_PROVIDER:-ALIPAY_SANDBOX}
+      ENABLE_MOCK_PAYMENT: "false"
+      ALIPAY_GATEWAY: ${ALIPAY_GATEWAY:-https://openapi-sandbox.dl.alipaydev.com/gateway.do}
+      ALIPAY_APP_ID: ${ALIPAY_APP_ID:?set sandbox app id}
+      ALIPAY_SELLER_ID: ${ALIPAY_SELLER_ID:?set sandbox seller id}
+      ALIPAY_APP_PRIVATE_KEY_FILE: /run/secrets/alipay_app_private_key
+      ALIPAY_PUBLIC_KEY_FILE: /run/secrets/alipay_public_key
+      ALIPAY_NOTIFY_URL: ${ALIPAY_NOTIFY_URL:?set reachable sandbox callback URL}
+      ALIPAY_RETURN_URL: ${ALIPAY_RETURN_URL:?set sandbox return URL}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:?set exact HTTPS frontend origin}
+      COOKIE_SECURE: "true"
+      LOG_LEVEL: INFO
+      METRICS_ENABLED: "true"
+      YUEJI_DEVSEED_ENABLED: "false"
+    secrets:
+      - db_password
+      - jwt_signing_key
+      - alipay_app_private_key
+      - alipay_public_key
+    volumes:
+      - ${FILE_STORAGE_PATH:?set a restricted persistent file path}:/var/lib/yueji/files
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - yueji
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          bash -ec 'exec 3<>/dev/tcp/127.0.0.1/9081;
+          printf "GET /actuator/health/readiness HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n" >&3;
+          IFS= read -r status <&3; [[ "$$status" == *"200"* ]]'
+      interval: 15s
+      timeout: 5s
+      retries: 8
+      start_period: 90s
+    stop_signal: SIGTERM
+    stop_grace_period: 60s
+    logging: *rotated-logs
+
+  web:
+    image: ${FRONTEND_IMAGE:?set an immutable frontend image digest}
+    restart: unless-stopped
+    init: true
+    read_only: true
+    tmpfs:
+      - /etc/nginx/conf.d:rw,noexec,nosuid,size=1m
+      - /var/cache/nginx:rw,noexec,nosuid,size=16m
+      - /var/run:rw,noexec,nosuid,size=1m
+    environment:
+      APP_HOSTNAME: ${APP_HOSTNAME:?set APP_HOSTNAME}
+      NGINX_ENVSUBST_FILTER: ^APP_HOSTNAME$
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ${TLS_CERTIFICATE_PATH:?mount a trusted TLS certificate directory}:/etc/nginx/tls:ro
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - yueji
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    stop_grace_period: 30s
+    logging: *rotated-logs
+
+networks:
+  yueji:
+    driver: bridge
+
+volumes:
+  mysql-data:
+
+secrets:
+  db_password:
+    file: ${DB_PASSWORD_FILE:?set a protected database password file}
+  mysql_root_password:
+    file: ${MYSQL_ROOT_PASSWORD_FILE:?set a protected MySQL root password file}
+  jwt_signing_key:
+    file: ${JWT_SIGNING_KEY_FILE:?set a protected JWT signing key file}
+  alipay_app_private_key:
+    file: ${ALIPAY_APP_PRIVATE_KEY_FILE:?set a protected sandbox private key file}
+  alipay_public_key:
+    file: ${ALIPAY_PUBLIC_KEY_FILE:?set a protected sandbox public key file}

@@ -1,0 +1,32 @@
+{
+  "stage": "E",
+  "checkedAt": "2026-10-24",
+  "inherits": "versions.stage-d.lock.json",
+  "newDependencies": {
+    "com.alipay.sdk:alipay-sdk-java": "4.40.1044.ALL"
+  },
+  "source": "https://repo.maven.apache.org/maven2/com/alipay/sdk/alipay-sdk-java/maven-metadata.xml",
+  "metadataLastUpdated": "20261019104322",
+  "migration": "V8 payment schema frozen; V9 approved refund reason capacity/index fix",
+  "migrationDecisionUpdatedAt": "2026-10-25",
+  "contract": "0.5.0",
+  "sandboxGateway": "https://openapi-sandbox.dl.alipaydev.com/gateway.do",
+  "sandboxIntegration": "NOT_RUN_MISSING_ENVIRONMENT_INPUT",
+  "images": "Inherited pinned digests unchanged; no new image",
+  "unchangedMigrations": {
+    "backend/src/main/resources/db/migration/V1__identity_core.sql": "9ee6e3bf05e5ba34aded20dd572558c904d5439e581a9e81768f5dc287117489",
+    "backend/src/main/resources/db/migration/V2__sessions_shops_addresses_audit.sql": "61d311a0b379292c9d0335135eb5f2293cf33f12fc1362cdb2a36c591938bca5",
+    "backend/src/main/resources/db/migration/V3__permission_catalog.sql": "ed23e68ce994ac98d9611f017c766cfcb7e30cdad0146c3d06378a812eb4fc7c",
+    "backend/src/main/resources/db/migration/V4__append_only_audit.sql": "9ab20abdbdde2d5f59fa8360e133fcde5a0fb82d663ff5a14e03f0ccd4763b27",
+    "backend/src/main/resources/db/migration/V5__catalog_files_inventory_cart.sql": "1a092f212adecd5c0568d69fc51b383dddabb34120e14a5e076a6b4b723c559a",
+    "backend/src/main/resources/db/migration/V6__movement_and_evidence_foreign_keys.sql": "e7711f585e33cc720f725a8291c3d527cc48f7d9ebe07ddf54490ef57a992156",
+    "backend/src/main/resources/db/migration/V7__reservations_order_logs_outbox.sql": "6d1ec76b03a6890dfbb0630b8677ef472dbc20a8b4dbaa7e667be4c89d219372"
+  },
+  "sdkJarSha256": "f1ebc30c94b72034d3e72866b37ea2b9958f17889df4fddd41f46dbc6b6d55a8",
+  "metadataSha256": "2469a1c262dd6505062bdaf433b4809db5f35635b55842d9061224785ce2ea19",
+  "exclusions": [
+    "commons-logging:commons-logging",
+    "org.bouncycastle:bcprov-jdk15on",
+    "dom4j:dom4j"
+  ]
+}

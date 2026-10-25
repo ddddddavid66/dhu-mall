@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "stage": "A",
+  "verifiedAtUtc": "2026-10-23T11:16:25.916269+00:00",
+  "clientDate": "2026-10-23",
+  "java": {
+    "version": "21.0.12.1+1-LTS",
+    "source": "https://api.adoptium.net/v3/assets/latest/21/hotspot?architecture=x64&image_type=jdk&os=windows&vendor=eclipse",
+    "url": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_windows_hotspot_21.0.12.1_1.zip",
+    "sha256": "f9d6e191ab098c0d416e7d588a24420a8621cd2f4720dab2459b8b7b2d2d8b4e"
+  },
+  "node": {
+    "version": "24.22.1",
+    "npm": "11.19.1",
+    "url": "https://nodejs.org/dist/v24.22.1/node-v24.22.1-win-x64.zip",
+    "sha256": "d2046d28c2c3dcd211ac5145c0bf30e2047ef9dfb306693c8c6e2eccd8b95fa5",
+    "checksumSource": "https://nodejs.org/dist/v24.22.1/SHASUMS256.txt"
+  },
+  "maven": {
+    "version": "3.9.16",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.16/apache-maven-3.9.16-bin.zip",
+    "sha512": "ed41650d42485cfc243fad22158caf9cbb5dc408ce7a09ddb94dd42a019de929ca43065bfa450612cf12bf78b5cafa3884b96c090de326ff590448c933454af3"
+  },
+  "backend": {
+    "springBoot": {
+      "version": "3.5.16",
+      "source": "https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-parent/maven-metadata.xml",
+      "metadataSha256": "604284a200afe928dc7bbf81dd35a57919dc1cb4df55a5a7325993e25ea3fc9c"
+    },
+    "springdoc": {
+      "version": "2.8.17",
+      "source": "https://repo.maven.apache.org/maven2/org/springdoc/springdoc-openapi-starter-webmvc-ui/maven-metadata.xml",
+      "metadataSha256": "cf000e40228e3210898e64ce31b8b31896acbe3ae586a77ddf35598d9df93a4c"
+    }
+  },
+  "frontend": {
+    "vue": {
+      "version": "3.5.44",
+      "source": "https://registry.npmjs.org/vue/3.5.44",
+      "integrity": "sha512-dvvmaOCG7lAMkJTPqPwWeGMsPS6DIsFsfZDUgBp9V6mHf9b3+/wyVwYR4Es+WV6uJC0FKRxp81Obcq0ZwUcGFQ==",
+      "engines": {}
+    },
+    "vue-router": {
+      "version": "4.6.4",
+      "source": "https://registry.npmjs.org/vue-router/4.6.4",
+      "integrity": "sha512-Hz9q5sa33Yhduglwz6g9skT8OBPii+4bFn88w6J+J4MfEo4KRRpmiNG/hHHkdbRFlLBOqxN8y8gf2Fb0MTUgVg==",
+      "engines": {}
+    },
+    "pinia": {
+      "version": "3.0.4",
+      "source": "https://registry.npmjs.org/pinia/3.0.4",
+      "integrity": "sha512-l7pqLUFTI/+ESXn6k3nu30ZIzW5E2WZF/LaHJEpoq6ElcLD+wduZoB2kBN19du6K/4FDpPMazY2wJr+IndBtQw==",
+      "engines": {}
+    },
+    "element-plus": {
+      "version": "2.14.7",
+      "source": "https://registry.npmjs.org/element-plus/2.14.7",
+      "integrity": "sha512-lrG7pZyCS+mpCNVpzxxyu5r35+T6V0hzkAeIwn7HA6to772XSTHKuYCZG51OfzlqaxGbNegLxs650zAF1j43gA==",
+      "engines": {}
+    },
+    "vite": {
+      "version": "7.3.7",
+      "source": "https://registry.npmjs.org/vite/7.3.7",
+      "integrity": "sha512-AHEzTORMbi7/7aXp7w7KZ5+DCUdSeLsJz0grY8xHpc9DHdYb0vQu6DqJfm2tOw3gDExNgPgnJTXxM6syYFHaCA==",
+      "engines": {
+        "node": "^20.19.0 || >=22.12.0"
+      }
+    },
+    "@vitejs/plugin-vue": {
+      "version": "6.0.10",
+      "source": "https://registry.npmjs.org/@vitejs/plugin-vue/6.0.10",
+      "integrity": "sha512-b80aUQh3n+qEzzZm5oQp3rT2QImeCx58K6eFl/RkJ3d65KW0kTuv5lNsLRVAjbW9YRUpo/wzmvzMgV34bTAItA==",
+      "engines": {
+        "node": "^20.19.0 || >=22.12.0"
+      }
+    },
+    "typescript": {
+      "version": "5.9.3",
+      "source": "https://registry.npmjs.org/typescript/5.9.3",
+      "integrity": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==",
+      "engines": {
+        "node": ">=14.17"
+      }
+    },
+    "vue-tsc": {
+      "version": "3.3.13",
+      "source": "https://registry.npmjs.org/vue-tsc/3.3.13",
+      "integrity": "sha512-jE4/bXdOMSHVxEGgQCqNllJy+9N3Gx6tfSAsg0yhFK/MAN6eXqISihupnDEKSCt12VVnjN2gI3AqLYcqoh5x/A==",
+      "engines": {}
+    },
+    "vitest": {
+      "version": "4.1.12",
+      "source": "https://registry.npmjs.org/vitest/4.1.12",
+      "integrity": "sha512-5eWdz2yb3ajxWF3C8C4TjkXl7FGm3n2E/VlazALrQHzK7nYMSGFnCZto0bbPNl77AwkOZVLk0YnBAejUu0NiWA==",
+      "engines": {
+        "node": "^20.0.0 || ^22.0.0 || >=24.0.0"
+      }
+    },
+    "@vue/test-utils": {
+      "version": "2.5.1",
+      "source": "https://registry.npmjs.org/@vue/test-utils/2.5.1",
+      "integrity": "sha512-V/4a99odJ7hapr0bRt35XxljGk8hefq31gSOnlKTcEq2fUeoj2qb+FcpJYfQu4qfYhW9Ug+O2+CZ3QmZ7gXDzA==",
+      "engines": {}
+    },
+    "jsdom": {
+      "version": "27.4.0",
+      "source": "https://registry.npmjs.org/jsdom/27.4.0",
+      "integrity": "sha512-mjzqwWRD9Y1J1KUi7W97Gja1bwOOM5Ug0EZ6UDK3xS7j7mndrkwozHtSblfomlzyB4NepioNt+B2sOSzczVgtQ==",
+      "engines": {
+        "node": "^20.19.0 || ^22.12.0 || >=24.0.0"
+      }
+    },
+    "pnpm": {
+      "version": "10.34.7",
+      "source": "https://registry.npmjs.org/pnpm/10.34.7",
+      "integrity": "sha512-upirxYVTmTM3W1lx9LxtbHOhtLftxKh559EC/lQj0eAjCdZ8YKEfBJVQk6luUhrZw7E4zdZUylvlY/N4s65IvQ==",
+      "engines": {
+        "node": ">=18.12"
+      }
+    },
+    "@redocly/cli": {
+      "version": "2.70.0",
+      "source": "https://registry.npmjs.org/@redocly/cli/2.70.0",
+      "integrity": "sha512-eZEIQlfAVRFCK0je6pTorg2nbGdfQ7U+eFg3wr46YwDXDwwGU2W+q7chbiZiDSrlVoJsxAd5uEwEx83tlaTTsA==",
+      "engines": {
+        "npm": ">=10",
+        "node": ">=22.12.0 || >=20.19.0 <21.0.0"
+      }
+    },
+    "@types/node": {
+      "version": "24.19.2",
+      "source": "https://registry.npmjs.org/@types/node/24.19.2",
+      "integrity": "sha512-93d49wCWJkCyN87MxLpNN6KXPCwFw7bVUg79mGUV1OS40JGWwVCr8n61DXCSqz7CV6/VfPkb7xec7uP2M+QHWQ==",
+      "engines": {}
+    }
+  },
+  "images": [
+    {
+      "tag": "eclipse-temurin:21-jre-jammy",
+      "indexDigest": "sha256:affcab5356e1270ac35d2361ee83135af2f03e8d580eca78a6d5d6fdbf048db0",
+      "linuxAmd64Digest": "sha256:8ecbec1f32912979c15b86aaf98f7082a77d318a7f92af3d9fe2c0fd2723df10",
+      "reference": "eclipse-temurin@sha256:affcab5356e1270ac35d2361ee83135af2f03e8d580eca78a6d5d6fdbf048db0",
+      "source": "https://hub.docker.com/v2/repositories/library/eclipse-temurin/tags/21-jre-jammy",
+      "verification": "registry metadata verified; container not run"
+    },
+    {
+      "tag": "node:24-bookworm-slim",
+      "indexDigest": "sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205",
+      "linuxAmd64Digest": "sha256:2dd9a4f758e173b65fee15388f7706af6fb01ef50cf7a2c0538711d67a6981ae",
+      "reference": "node@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205",
+      "source": "https://hub.docker.com/v2/repositories/library/node/tags/24-bookworm-slim",
+      "verification": "registry metadata verified; container not run"
+    },
+    {
+      "tag": "nginx:stable-alpine",
+      "indexDigest": "sha256:47928bf67eb62a1863cb08d9ecb52d3e704304ba614eaee17884204677702951",
+      "linuxAmd64Digest": "sha256:84ed8c0dd296c188bfc24ed506f46589e9285fb0b11cf3a04d91d524d3067e11",
+      "reference": "nginx@sha256:47928bf67eb62a1863cb08d9ecb52d3e704304ba614eaee17884204677702951",
+      "source": "https://hub.docker.com/v2/repositories/library/nginx/tags/stable-alpine",
+      "verification": "registry metadata verified; container not run"
+    }
+  ],
+  "deferred": [
+    "MySQL/MyBatis-Plus/Flyway: stage B",
+    "Redis/RabbitMQ: business integration stages",
+    "Prometheus/Grafana/Loki/Compose/CD: stage I"
+  ],
+  "compatibility": [
+    "Java21 and Boot3.5 satisfy official requirements",
+    "springdoc2.8 targets Boot3.5; https://springdoc.org/#what-is-the-compatibility-matrix-of-springdoc-openapi-with-spring-boot",
+    "npm engines recorded per exact package; pnpm peer checks and builds validate combination"
+  ]
+}

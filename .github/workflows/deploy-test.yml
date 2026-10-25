@@ -1,0 +1,103 @@
+name: deploy-test
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_run_id:
+        description: Successful main-branch quality-release run that published these exact image digests
+        required: true
+        type: string
+      maintenance_window_id:
+        description: Operator-approved test maintenance window/change record
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  deploy-test:
+    runs-on: ubuntu-24.04
+    environment: test
+    timeout-minutes: 20
+    steps:
+      - name: Verify successful main release run and image digests
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_RUN_ID: ${{ inputs.release_run_id }}
+          MAINTENANCE_WINDOW_ID: ${{ inputs.maintenance_window_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_RUN_ID" =~ ^[0-9]+$ ]]
+          [[ "$MAINTENANCE_WINDOW_ID" =~ ^[A-Za-z0-9._-]{4,80}$ ]]
+          result="$(gh run view "$RELEASE_RUN_ID" --repo "$GITHUB_REPOSITORY" --json status,conclusion,headBranch,headSha)"
+          jq -e '.status == "completed" and .conclusion == "success" and .headBranch == "main"' <<< "$result" >/dev/null
+      - name: Download digest manifest from that successful run
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: yueji-release-${{ inputs.release_run_id }}
+          path: ${{ runner.temp }}/yueji-release
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.release_run_id }}
+          github-token: ${{ github.token }}
+      - name: Bind deployment to the run's scanned digests
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_RUN_ID: ${{ inputs.release_run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          manifest="$RUNNER_TEMP/yueji-release/release-manifest.json"
+          [[ -f "$manifest" ]]
+          run="$(gh run view "$RELEASE_RUN_ID" --repo "$GITHUB_REPOSITORY" --json headSha,headBranch,status,conclusion)"
+          repository="ghcr.io/${GITHUB_REPOSITORY,,}"
+          sha="$(jq -r '.headSha' <<< "$run")"
+          jq -e --arg run "$RELEASE_RUN_ID" --arg sha "$sha" \
+            '.workflow == "quality-release" and .runId == $run and .branch == "main" and .headSha == $sha and .quality.unitIntegration == true and .quality.codeql == true and .quality.sourceScan == true and .quality.imageScan == true and .quality.sbom == true and .quality.provenance == true' \
+            "$manifest" >/dev/null
+          [[ "$(jq -r '.headBranch' <<< "$run")" == main ]]
+          [[ "$(jq -r '.status' <<< "$run")" == completed ]]
+          [[ "$(jq -r '.conclusion' <<< "$run")" == success ]]
+          backend="$(jq -r '.backendImage' "$manifest")"
+          frontend="$(jq -r '.frontendImage' "$manifest")"
+          [[ "$backend" == "$repository/backend@sha256:"* ]]
+          [[ "$frontend" == "$repository/frontend@sha256:"* ]]
+          [[ "${backend##*@sha256:}" =~ ^[a-f0-9]{64}$ ]]
+          [[ "${frontend##*@sha256:}" =~ ^[a-f0-9]{64}$ ]]
+          printf 'BACKEND_IMAGE=%s\nFRONTEND_IMAGE=%s\nRELEASE_RUN_ID=%s\nRELEASE_HEAD_SHA=%s\n' "$backend" "$frontend" "$RELEASE_RUN_ID" "$sha" >> "$GITHUB_ENV"
+      - name: Prepare strict SSH client
+        env:
+          DEPLOY_KEY: ${{ secrets.TEST_DEPLOY_SSH_PRIVATE_KEY }}
+          KNOWN_HOSTS: ${{ secrets.TEST_DEPLOY_KNOWN_HOSTS }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -d -m 0700 "$RUNNER_TEMP/yueji-ssh"
+          umask 077
+          printf '%s\n' "$DEPLOY_KEY" > "$RUNNER_TEMP/yueji-ssh/id_ed25519"
+          printf '%s\n' "$KNOWN_HOSTS" > "$RUNNER_TEMP/yueji-ssh/known_hosts"
+          chmod 0600 "$RUNNER_TEMP/yueji-ssh/id_ed25519" "$RUNNER_TEMP/yueji-ssh/known_hosts"
+          ssh-keygen -lf "$RUNNER_TEMP/yueji-ssh/known_hosts"
+      - name: Deploy only to the test environment
+        env:
+          DEPLOY_HOST: ${{ secrets.TEST_DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.TEST_DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.TEST_DEPLOY_PORT }}
+          MAINTENANCE_WINDOW_ID: ${{ inputs.maintenance_window_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z0-9._-]+$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          (( DEPLOY_PORT >= 1 && DEPLOY_PORT <= 65535 ))
+          printf '%s\n%s\n%s\n%s\n%s\n' "$BACKEND_IMAGE" "$FRONTEND_IMAGE" "$MAINTENANCE_WINDOW_ID" "$RELEASE_RUN_ID" "$RELEASE_HEAD_SHA" | \
+            ssh -p "$DEPLOY_PORT" \
+              -i "$RUNNER_TEMP/yueji-ssh/id_ed25519" \
+              -o IdentitiesOnly=yes \
+              -o BatchMode=yes \
+              -o StrictHostKeyChecking=yes \
+              -o UserKnownHostsFile="$RUNNER_TEMP/yueji-ssh/known_hosts" \
+              "$DEPLOY_USER@$DEPLOY_HOST" sudo -n /usr/local/sbin/yueji-deploy-test

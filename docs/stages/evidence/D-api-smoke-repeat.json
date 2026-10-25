@@ -1,0 +1,56 @@
+{
+  "stage": "D",
+  "verifiedAtUtc": "2026-10-23T19:26:27.779930+00:00",
+  "freshDataCreated": false,
+  "total": 8,
+  "checks": [
+    {
+      "name": "login-member",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "recover-owned-batch",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "list-owned-orders",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "closing-order-has-snapshot-and-log",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "other-shop-remains-independent",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "payment-remains-unimplemented",
+      "actualStatus": 501,
+      "actualCode": "NOT_IMPLEMENTED",
+      "passed": true
+    },
+    {
+      "name": "batch-anonymous-denied",
+      "actualStatus": 401,
+      "actualCode": "AUTH_REQUIRED",
+      "passed": true
+    },
+    {
+      "name": "logout",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    }
+  ]
+}

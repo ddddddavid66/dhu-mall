@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-24",
+  "inherits": ["versions.lock.json", "versions.stage-b.lock.json", "versions.stage-c.lock.json"],
+  "newDependencies": [],
+  "migration": "V7",
+  "contract": "0.4.0",
+  "transactionIsolation": "READ_COMMITTED for stage D database transactions",
+  "channel": "Not implemented; closing retains reservations",
+  "outbox": "Durable PENDING only; no fabricated broker confirmation"
+}

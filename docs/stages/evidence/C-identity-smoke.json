@@ -1,0 +1,90 @@
+{
+  "verifiedAtUtc": "2026-10-23T13:36:22.323619+00:00",
+  "checks": [
+    {
+      "name": "login-reader_a",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "login-reader_b",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "me",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "create-own-address",
+      "actualStatus": 201,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "horizontal-address-denied",
+      "actualStatus": 404,
+      "actualCode": "RESOURCE_NOT_FOUND",
+      "passed": true
+    },
+    {
+      "name": "delete-own-address",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "rotate-refresh",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "refresh-replay",
+      "actualStatus": 401,
+      "actualCode": "AUTH_REQUIRED",
+      "passed": true
+    },
+    {
+      "name": "family-access-revoked",
+      "actualStatus": 401,
+      "actualCode": "AUTH_REQUIRED",
+      "passed": true
+    },
+    {
+      "name": "logout",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "logout-access-revoked",
+      "actualStatus": 401,
+      "actualCode": "AUTH_REQUIRED",
+      "passed": true
+    },
+    {
+      "name": "login-admin_a",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "admin-list-users",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "admin-logout",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    }
+  ],
+  "total": 14
+}

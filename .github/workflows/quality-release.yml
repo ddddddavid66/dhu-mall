@@ -1,0 +1,239 @@
+name: quality-release
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  security:
+    name: dependency, secret, and configuration scan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Scan source, dependency locks, and deployment configuration
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln,misconfig,secret
+          vuln-type: os,library
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          exit-code: '1'
+
+  codeql:
+    name: CodeQL static analysis
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: github/codeql-action/init@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
+        with:
+          languages: java-kotlin,javascript-typescript
+          queries: +security-extended
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: 21.0.12.1+1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24.22.1
+          package-manager-cache: false
+      - name: Install pinned pnpm
+        run: npm install --global pnpm@10.34.7
+      - name: Build Java and TypeScript for analysis
+        run: |
+          ./backend/mvnw -B -ntp -f backend/pom.xml -DskipTests package
+          pnpm --dir frontend install --frozen-lockfile
+          pnpm --dir frontend run build
+      - uses: github/codeql-action/analyze@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
+
+  frontend:
+    name: frontend quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24.22.1
+          package-manager-cache: false
+      - name: Install pinned pnpm
+        run: npm install --global pnpm@10.34.7
+      - name: Frozen install
+        run: pnpm --dir frontend install --frozen-lockfile
+      - name: Frontend typecheck, tests, build, and contract lint
+        run: |
+          pnpm --dir frontend run typecheck
+          pnpm --dir frontend test
+          pnpm --dir frontend run build
+          pnpm --dir frontend run contract:lint
+          python scripts/sync-contract.py --check
+      - name: Dependency vulnerability audit
+        run: pnpm --dir frontend audit --audit-level high
+
+  backend:
+    name: backend integration and coverage gate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    services:
+      mysql:
+        image: mysql@sha256:76f0358884cb92d9a086d24e5671c38048d3fef40f2588703d73eb55392d6b69
+        env:
+          MYSQL_DATABASE: yueji_mall_test
+          MYSQL_USER: yueji_test
+          MYSQL_PASSWORD: ci-only-disposable-password
+          MYSQL_ROOT_PASSWORD: ci-only-disposable-root-password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    env:
+      YUEJI_TEST_DB_URL: jdbc:mysql://127.0.0.1:3306/yueji_mall_test?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true
+      YUEJI_TEST_DB_USERNAME: yueji_test
+      YUEJI_TEST_DB_PASSWORD: ci-only-disposable-password
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: 21.0.12.1+1
+          cache: maven
+          cache-dependency-path: backend/pom.xml
+      - name: Run MySQL integration suite and JaCoCo gate
+        working-directory: backend
+        run: ./mvnw -B -ntp clean verify
+
+  publish-candidate:
+    name: build and push immutable candidates
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [frontend, backend, security, codeql]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: 21.0.12.1+1
+          cache: maven
+          cache-dependency-path: backend/pom.xml
+      - name: Package backend
+        working-directory: backend
+        run: ./mvnw -B -ntp -DskipTests package
+      - name: Login to GHCR
+        env:
+          GHCR_TOKEN: ${{ github.token }}
+        run: printf '%s' "$GHCR_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+      - name: Build and push SHA-tagged images
+        id: images
+        env:
+          GHCR_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          repository="ghcr.io/${GITHUB_REPOSITORY,,}"
+          tag="${GITHUB_SHA}"
+          docker buildx version
+          docker buildx build --platform linux/amd64 --push --sbom=true --provenance=true \
+            --metadata-file "$RUNNER_TEMP/backend-metadata.json" \
+            --tag "$repository/backend:$tag" --file backend/Dockerfile .
+          docker buildx build --platform linux/amd64 --push --sbom=true --provenance=true \
+            --metadata-file "$RUNNER_TEMP/frontend-metadata.json" \
+            --tag "$repository/frontend:$tag" --file frontend/Dockerfile .
+          backend_digest="$(jq -r '.["containerimage.digest"]' "$RUNNER_TEMP/backend-metadata.json")"
+          frontend_digest="$(jq -r '.["containerimage.digest"]' "$RUNNER_TEMP/frontend-metadata.json")"
+          [[ "$backend_digest" =~ ^sha256:[a-f0-9]{64}$ ]]
+          [[ "$frontend_digest" =~ ^sha256:[a-f0-9]{64}$ ]]
+          echo "backend_digest=$backend_digest" >> "$GITHUB_OUTPUT"
+          echo "frontend_digest=$frontend_digest" >> "$GITHUB_OUTPUT"
+          echo "repository=$repository" >> "$GITHUB_OUTPUT"
+          printf 'BACKEND_IMAGE=%s/backend@%s\nFRONTEND_IMAGE=%s/frontend@%s\n' \
+            "$repository" "$backend_digest" "$repository" "$frontend_digest" > "$RUNNER_TEMP/yueji-images.env"
+          echo "## Candidate images built; vulnerability scan pending" >> "$GITHUB_STEP_SUMMARY"
+          echo "Git SHA: `$GITHUB_SHA`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Candidate image digests have not been published as a deployment manifest until scans pass." >> "$GITHUB_STEP_SUMMARY"
+      - name: Scan backend image
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: image
+          image-ref: ${{ steps.images.outputs.repository }}/backend@${{ steps.images.outputs.backend_digest }}
+          scanners: vuln
+          vuln-type: os,library
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          exit-code: '1'
+      - name: Scan frontend image
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: image
+          image-ref: ${{ steps.images.outputs.repository }}/frontend@${{ steps.images.outputs.frontend_digest }}
+          scanners: vuln
+          vuln-type: os,library
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          exit-code: '1'
+      - name: Prepare immutable release manifest
+        env:
+          IMAGE_REPOSITORY: ${{ steps.images.outputs.repository }}
+        run: |
+          set -euo pipefail
+          source "$RUNNER_TEMP/yueji-images.env"
+          mkdir -p "$RUNNER_TEMP/yueji-release"
+          jq -n \
+            --arg workflow 'quality-release' \
+            --arg runId "$GITHUB_RUN_ID" \
+            --arg headSha "$GITHUB_SHA" \
+            --arg branch "$GITHUB_REF_NAME" \
+            --arg backendImage "$BACKEND_IMAGE" \
+            --arg frontendImage "$FRONTEND_IMAGE" \
+            --arg migrationTarget 'V10' \
+            --arg contractVersion '0.5.0' \
+            --arg createdAtUtc "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{workflow:$workflow,runId:$runId,headSha:$headSha,branch:$branch,backendImage:$backendImage,frontendImage:$frontendImage,migrationTarget:$migrationTarget,contractVersion:$contractVersion,createdAtUtc:$createdAtUtc,quality:{unitIntegration:true,codeql:true,sourceScan:true,imageScan:true,sbom:true,provenance:true}}' \
+            > "$RUNNER_TEMP/yueji-release/release-manifest.json"
+          {
+            echo "## Immutable candidate images (scan passed)"
+            echo "Git SHA: `$GITHUB_SHA`"
+            echo "Backend: `$BACKEND_IMAGE`"
+            echo "Frontend: `$FRONTEND_IMAGE`"
+            echo "Migration target: V10; OpenAPI contract: 0.5.0"
+            echo "SBOM and provenance attestations were attached at build time."
+            echo "No test or production deployment was performed by this job."
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: yueji-release-${{ github.run_id }}
+          path: ${{ runner.temp }}/yueji-release/release-manifest.json
+          if-no-files-found: error
+          retention-days: 90

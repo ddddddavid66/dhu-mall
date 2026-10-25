@@ -1,0 +1,471 @@
+{
+  "stage": "C",
+  "verifiedAtUtc": "2026-10-23T13:37:44.806416+00:00",
+  "git": "No repository / commit / PR available",
+  "contractVersion": "0.3.0",
+  "contractOperations": {
+    "IMPLEMENTED": 46,
+    "NOT_IMPLEMENTED": 45,
+    "DISABLED": 1
+  },
+  "verificationCommands": [
+    {
+      "command": "contract-sync",
+      "exitCode": 0,
+      "log": ".artifacts/contract-sync.log"
+    },
+    {
+      "command": "pnpm-frozen-install",
+      "exitCode": 0,
+      "log": ".artifacts/pnpm-frozen-install.log"
+    },
+    {
+      "command": "frontend-typecheck",
+      "exitCode": 0,
+      "log": ".artifacts/frontend-typecheck.log"
+    },
+    {
+      "command": "frontend-tests",
+      "exitCode": 0,
+      "log": ".artifacts/frontend-tests.log"
+    },
+    {
+      "command": "frontend-build",
+      "exitCode": 0,
+      "log": ".artifacts/frontend-build.log"
+    },
+    {
+      "command": "contract-lint",
+      "exitCode": 0,
+      "log": ".artifacts/contract-lint.log"
+    },
+    {
+      "command": "backend-verify",
+      "exitCode": 0,
+      "log": ".artifacts/backend-verify.log"
+    }
+  ],
+  "backendTestsTotal": 58,
+  "backendTests": [
+    {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite": "com.yueji.mall.common.config.SecurityKeyPolicyTests",
+      "cases": [
+        "productionCannotUseDevelopmentFallbackEvenWhenBothProfilesAreActive",
+        "developmentKeyIsRandomButShortConfiguredSecretsAreRefused"
+      ]
+    },
+    {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite": "com.yueji.mall.ExceptionAndTraceTests",
+      "cases": [
+        "validationAndMalformedJsonHaveSafeConsistentErrors",
+        "businessAndUnexpectedErrorsPreserveTraceAndCleanMdc"
+      ]
+    },
+    {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite": "com.yueji.mall.FoundationHttpTests",
+      "cases": [
+        "corsPreflightAllowsOnlyConfiguredOrigin",
+        "everyDeclaredBusinessOperationFailsClosedWithoutFakeSuccess",
+        "unknownAndWrongMethodUseUniformErrorsAndRegenerateInvalidTraceId",
+        "healthProbesDoNotPretendDatabaseOrBusinessIsReady",
+        "openapiExposesExactlyTheDeclaredSkeleton"
+      ]
+    },
+    {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite": "com.yueji.mall.FoundationValueTests",
+      "cases": [
+        "idNeverTravelsAsANumberAndSupportsUnsignedBigint",
+        "paginationHasOneDefaultAndRejectsUnboundedPageSize",
+        "moneyPreservesDecimalPrecisionAndRejectsNumericCoercion"
+      ]
+    },
+    {
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite": "com.yueji.mall.IdentityHttpTests",
+      "cases": [
+        "csrfOriginAndLogoutCannotBeBypassedWithCookieAlone",
+        "missingSessionsDisabledAccountsAndOversizedUtf8LoginFailClosed",
+        "forgedExpiredWrongAudienceAndExpiredRefreshSessionsAreRejected",
+        "userDisableAndGrantChangesInvalidateOldAccessAndRefreshImmediately",
+        "addressesAreOwnedHaveOneDefaultAndDeleteIdempotently",
+        "failedLoginCountersAndAccountLockPersistAndResetAfterExpiry",
+        "shopMembershipIsServerAssignedScopedAndRevokesExistingTokens",
+        "passwordChangeRevokesAllSessionsAndAcceptsOnlyTheOldPassword",
+        "roleCreationEditingAndPermissionDirectoryFollowTheContract",
+        "accessExpiryCookieAndRefreshRotationAreReal",
+        "auditIsScopedSafeAndSupportsTraceFiltering",
+        "addressCountAndNonDefaultUpdatesRespectTheServerBoundary",
+        "concurrentAdministratorRevocationsCannotRemoveBothOperators",
+        "lastAdministratorAndBuiltinCriticalPermissionsAreProtected",
+        "refreshReplayRevokesTheEntireFamilyAndCommitsDespite401",
+        "registrationHasOnlyMemberRoleAndStrictFieldsAndStoresOnlyHash",
+        "administrationRequiresPermissionsAndNeverTrustsClientRoleClaims",
+        "auditQueryAndAdministrativeSortHaveStrictBounds"
+      ]
+    },
+    {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite": "com.yueji.mall.ImageSafetyTests",
+      "cases": [
+        "generatedStorageKeysStayWithinSeparateRootsAndUnknownPathsAreRejected(Path)",
+        "compressedImageDimensionsAreCheckedBeforePixelAllocation",
+        "realWebpIsDecodedAndReencodedAsPngWithoutOriginalPayload"
+      ]
+    },
+    {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite": "com.yueji.mall.InitialAdministratorTests",
+      "cases": [
+        "firstAdministratorNeedsExplicitCredentialAndEmptyDatabaseAndCannotBeRecreated"
+      ]
+    },
+    {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite": "com.yueji.mall.MySqlMigrationTests",
+      "cases": [
+        "mysqlConstraintsAndAuditImmutabilityAreEnforcedByTheDatabase",
+        "emptyDatabaseRepeatStartupAndForwardCompatibleMigrationPreserveLegacyRows"
+      ]
+    },
+    {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite": "com.yueji.mall.ProductionIsolationTests",
+      "cases": [
+        "productionDoesNotExposeDocsOrMockPaymentAndUsesSeparateManagementPort"
+      ]
+    },
+    {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite": "com.yueji.mall.SeedIsolationTests",
+      "cases": [
+        "explicitDevelopmentSeedsAreRandomIdempotentAndContainSeparateFinancialOperators"
+      ]
+    },
+    {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite": "com.yueji.mall.SessionBoundaryTests",
+      "cases": [
+        "loginLimitHasABoundedMinuteWindowAndDoesNotTrustClientForwardedHeaders",
+        "publicReadsEnforce120PerPeerIpAndReturnUniform429",
+        "coreWritesAreLimitedPerServerResolvedUser",
+        "csrfGuardRequiresExactOriginAndConstantTimeHashMatch"
+      ]
+    },
+    {
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite": "com.yueji.mall.StageCHttpTests",
+      "cases": [
+        "operatorModerationCannotForceMerchantOffShelfProductsOnSale",
+        "inventoryCannotOverwriteReservationsAndFailedAdjustmentRollsBackAllRows",
+        "merchantAndMemberScopesUseServerRelationsAndActionPermissions",
+        "inventoryReplayReturnsOriginalSnapshotAndNeverWritesTwice",
+        "publicSearchFiltersIsbnSortingAndSchemasAreReal",
+        "cartReportsStaleItemsAndRejectsNewUnavailableSelections",
+        "reviewReadingUsesRealEmptyTableWhileWriteAndModerationRemainUnimplemented",
+        "concurrentSameKeyInventoryRequestsCommitExactlyOneMovement",
+        "dangerousMultipartFilesAndMetadataAreRejected",
+        "filesAreDecodedReencodedAndAttachedAsPublicCovers",
+        "privateEvidenceHasNoStaticUrlAndOnlyItsOwnerCanReadWithoutAssociation",
+        "publicReadsExcludeDraftOffShelfDisabledBooksCategoriesAndSuspendedShops",
+        "cartSetsAbsoluteQuantityGroupsByShopAndHasNoCrossUserRows",
+        "evidenceAssociationAllowsOnlyRelatedSupportAndReturnWarehouse",
+        "categoryDepthCycleDisableAndIsbnRulesAreEnforced",
+        "oneProductOneSkuAndVersionUpdatesCannotBeBypassed"
+      ]
+    }
+  ],
+  "frontendTests": 7,
+  "serviceBranchCoverage": {
+    "covered": 357,
+    "missed": 71,
+    "ratio": 0.8341121495327103,
+    "packages": [
+      {
+        "package": "com/yueji/mall/catalog/service",
+        "covered": 105,
+        "missed": 23
+      },
+      {
+        "package": "com/yueji/mall/identity/service",
+        "covered": 115,
+        "missed": 25
+      },
+      {
+        "package": "com/yueji/mall/platform/service",
+        "covered": 87,
+        "missed": 21
+      },
+      {
+        "package": "com/yueji/mall/inventory/service",
+        "covered": 12,
+        "missed": 0
+      },
+      {
+        "package": "com/yueji/mall/cart/service",
+        "covered": 27,
+        "missed": 1
+      },
+      {
+        "package": "com/yueji/mall/common/service",
+        "covered": 11,
+        "missed": 1
+      }
+    ]
+  },
+  "actualToolchainOutput": "openjdk 21.0.12.1 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)\nv24.22.1\n10.34.7\nApache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)\nMaven home: C:\\Users\\123\\Desktop\\temp\\project\\.tools\\maven-user\\wrapper\\dists\\apache-maven-3.9.16\\0daed3be3ebd1c706f0e69e8b07c6b73f5cc4ea3dfce72a8d0ec2e849ca2ddb0\nJava version: 21.0.12.1, vendor: Eclipse Adoptium, runtime: C:\\Users\\123\\Desktop\\temp\\project\\.tools\\java\\jdk-21.0.12.1+1\nDefault locale: zh_CN, platform encoding: UTF-8\nOS name: \"windows 11\", version: \"10.0\", arch: \"amd64\", family: \"windows\"\n",
+  "migrationVersions": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6"
+  ],
+  "databaseRuntime": "Real isolated MySQL 8.4.13 Windows; no H2",
+  "limitations": [
+    "No Docker/Testcontainers/Linux run",
+    "No remote CI/CD, vulnerability scan, business browser E2E, load or recovery exercise",
+    "No Redis cache enabled",
+    "Order/after-sale/review writes remain unimplemented"
+  ],
+  "sha256": {
+    "AGENTS.md": "e72a9145300f2f086f6ca2d6eba30d93d05c57fc014171922dd66b58557c2248",
+    "backend/pom.xml": "50dc0c17acca355b26ea8d0d1a0b56c549c4b62e12c8e0c21c99b8902b7189de",
+    "backend/src/main/java/com/yueji/mall/aftersales/controller/package-info.java": "5b6281d419292f4c2835b865bfbfa21212466226b973042d2749ba907315ecac",
+    "backend/src/main/java/com/yueji/mall/aftersales/repository/package-info.java": "0a0b48d5d3b10a2694a2d29517c8b5acbb0dca67e961f46df86725f92fb100da",
+    "backend/src/main/java/com/yueji/mall/aftersales/service/package-info.java": "2547913676a3420cdaafe8e6dd85b8ae606c205c2bdba763294ea2a49c4dd870",
+    "backend/src/main/java/com/yueji/mall/cart/controller/AddressController.java": "189c9f3f83ec0c7699cfed149d8c24a92763b809076e045a9ec6acf5adb4177e",
+    "backend/src/main/java/com/yueji/mall/cart/controller/CartController.java": "066adc6fe7b10b1d476aae1d92a2a0f969356777a69cadb9b11a86ec6bf6f39b",
+    "backend/src/main/java/com/yueji/mall/cart/controller/package-info.java": "e0a8f13c158628e9427bd9670d07d88f77bd62d67b7805ded73d209bec9b1c28",
+    "backend/src/main/java/com/yueji/mall/cart/model/AddressInput.java": "10a37eaa216e414baa39f9007e69aa25499182ed430c4468c0f67b10985923e6",
+    "backend/src/main/java/com/yueji/mall/cart/model/AddressView.java": "124f23168d161d3d18b6015b36ab5e3ebb59c30f14fcd2e1997487b9fda22969",
+    "backend/src/main/java/com/yueji/mall/cart/model/CartModels.java": "a25acb470ce178f0977a653443e6f02865197145a50713b72874e25b1feb47fd",
+    "backend/src/main/java/com/yueji/mall/cart/repository/AddressRepository.java": "363c19308b1246b876f8061b2e82744e69d8329465a541b8c7ad68579a736b30",
+    "backend/src/main/java/com/yueji/mall/cart/repository/CartRepository.java": "a9272aacac130d4cbf09fc65fec0a155d9ce24163e9c6e82722e66c578786f82",
+    "backend/src/main/java/com/yueji/mall/cart/repository/package-info.java": "24b4b1c14d57bc52b909812eefb5656e6ec570734a9ff95382b2a52e9231d2f6",
+    "backend/src/main/java/com/yueji/mall/cart/service/AddressService.java": "325096d7773b71d5bb010515de20be58390b2ff037b684e9f98fa2984a37c5d2",
+    "backend/src/main/java/com/yueji/mall/cart/service/CartService.java": "80d375b4bda575087e4458ad71b1795249cda5c9bda61207dbff153472f5adea",
+    "backend/src/main/java/com/yueji/mall/cart/service/package-info.java": "c6762d4a8b8d1fbf20590448d33afbe6fd93f3d6478f89dc4dff8bbbf8980ae7",
+    "backend/src/main/java/com/yueji/mall/catalog/controller/CatalogController.java": "18b9604ea9e4998329c760c8ad42258b525e11c4291addaff2e71be294c9a741",
+    "backend/src/main/java/com/yueji/mall/catalog/controller/package-info.java": "fa06117f534e1fb0dc9a654d6d28248bcd83e788712d3601cdc51dca99c3956c",
+    "backend/src/main/java/com/yueji/mall/catalog/model/CatalogInputs.java": "f4a1c7660a98688d7dc634ac5aa96ae163fdd65162439b22dd17da9b3c19bfe2",
+    "backend/src/main/java/com/yueji/mall/catalog/model/CatalogViews.java": "70a8802d95e2a73e50c79e1a39fea25aa0d0f015aa73be1ca9d2968450071ef1",
+    "backend/src/main/java/com/yueji/mall/catalog/repository/CatalogRepository.java": "f13193e475cd614213154b88a72197da6c40f0c7ce24efb5869d589c01b1a72c",
+    "backend/src/main/java/com/yueji/mall/catalog/repository/package-info.java": "bb1b293ac1fce41bbc8fedf15ff5f6620ed64625d788fe3c75f467ab9b3a8901",
+    "backend/src/main/java/com/yueji/mall/catalog/service/CatalogAccess.java": "89fd6103698a9c708a92ad228122d8113894110f91ad3beba48eba01f977f026",
+    "backend/src/main/java/com/yueji/mall/catalog/service/CatalogMaintenance.java": "d8f366653f31815faad3218ae20d896b1ae1120cf86f935c15f2565f5f22cdf2",
+    "backend/src/main/java/com/yueji/mall/catalog/service/package-info.java": "e39fc62d57de87942885f5389570be72d7dd81261c48bf7b41d160fdd95764c5",
+    "backend/src/main/java/com/yueji/mall/catalog/service/ProductService.java": "6beca410c2083329433f9c53fafdd1beb9df070a36468a398d8ce7e4e8171093",
+    "backend/src/main/java/com/yueji/mall/common/api/ApiId.java": "d565281ff18b448ab723b5ccbfada636308cce77700279a3ea55fe98fc03a669",
+    "backend/src/main/java/com/yueji/mall/common/api/ApiMoney.java": "bd8a2830a0994c303026f5f3b671a864d6f6f23f58cfd0eccc65e6b760f35d66",
+    "backend/src/main/java/com/yueji/mall/common/api/BusinessException.java": "e2f36ba8f9038c568d9f5383639b46167297c5b75a8002e2593e9b3178a84761",
+    "backend/src/main/java/com/yueji/mall/common/api/ErrorCode.java": "ecbd1697009e4989005fa57465e342d1ae439453c1f62f009ccdaf1aa90cca11",
+    "backend/src/main/java/com/yueji/mall/common/api/FieldErrorDetail.java": "f5226173be3db66fe094b90186519cee9cc2b2fb09a6500b08abc68081f495c8",
+    "backend/src/main/java/com/yueji/mall/common/api/PageData.java": "963ce47d3cd2e184351dc27a2f929d920a472d71b0ca11a3da7d1ab05f46c3a7",
+    "backend/src/main/java/com/yueji/mall/common/api/PageQuery.java": "a7a2d90f1c8ae8fd8d5150d0658e6f08996da0e8a12070aa27f49df359f96f05",
+    "backend/src/main/java/com/yueji/mall/common/api/Result.java": "7884e555365700cff04e85f339024226ddb349d32f59b3674d6fabfe6cc3b851",
+    "backend/src/main/java/com/yueji/mall/common/config/IdentitySecurityBeans.java": "a03886cbfb68d5c0bc1367510a613bf4881bb07c4b4bcbe9eda846108eccf5cc",
+    "backend/src/main/java/com/yueji/mall/common/config/OpenApiConfiguration.java": "99dbedca0d5e3568ebf8ddcf0453d791711daa70cf12972a3bc987aa528dc4e9",
+    "backend/src/main/java/com/yueji/mall/common/config/SecurityConfiguration.java": "14218ccb5fd9e56daacf103113792416bc2d3fb5734dcfcfb6a79935a2929d3e",
+    "backend/src/main/java/com/yueji/mall/common/persistence/RowValues.java": "9fc08f6ead6a37c0a14900d800d47223c3a8f22e28aec5099902cb2ef7d25961",
+    "backend/src/main/java/com/yueji/mall/common/persistence/SqlStore.java": "a803100dd0b2abbb921de0de3159036fd1c003b4521139bbe826d9d7f8ea092c",
+    "backend/src/main/java/com/yueji/mall/common/service/IdempotencyService.java": "c20b0e2a428c3fa967d66fd3e885c452c2c8b2bad081c3a65c2ddd340b753057",
+    "backend/src/main/java/com/yueji/mall/common/web/ApiErrorWriter.java": "cf0231420e6e5ce203a4d6599fabee40069b16f943fd13c68590a4fee1df739a",
+    "backend/src/main/java/com/yueji/mall/common/web/ContractStubFilter.java": "4f9a5f3322ae9fe20199e54f6918f53252f61a9a7b4ca9f47d18cb9eb5826e42",
+    "backend/src/main/java/com/yueji/mall/common/web/GlobalExceptionHandler.java": "5f08742e4e416fdb589686bf8de2a37dbe4311ded6e3bbc744e2a1640d9e7434",
+    "backend/src/main/java/com/yueji/mall/common/web/PublicReadLimiter.java": "3c13db7fbb3435e1d3c4521569aec35115309584f48eb0dfff94cf99de51156a",
+    "backend/src/main/java/com/yueji/mall/common/web/TraceIdFilter.java": "4de37fdefd31df0c7f6e0f4a7996d902a822314dfaad36d2b8276fbc170b703b",
+    "backend/src/main/java/com/yueji/mall/fulfillment/controller/package-info.java": "8b975cf37925f9f6c0280c4f5af427831a34b8932d9539f0af88a494bb73dccd",
+    "backend/src/main/java/com/yueji/mall/fulfillment/repository/package-info.java": "98f6452d7f6d814fee62639ded35fe0b02cce9b8c2806833da1e027c38670af5",
+    "backend/src/main/java/com/yueji/mall/fulfillment/service/package-info.java": "c0150eff37db7c658b48019c41d15bda06459496c4af89d0012f3a16c365f1a2",
+    "backend/src/main/java/com/yueji/mall/identity/controller/AdministrationController.java": "0aa3ca1d9f9bfbb97e217f377f7be7d50e39be33af6ddfdc3dea3be10b3ea5e3",
+    "backend/src/main/java/com/yueji/mall/identity/controller/IdentityController.java": "74cdece1213075efc4a53531e4f4748427c70e1be258355711c85e49edf75a3c",
+    "backend/src/main/java/com/yueji/mall/identity/controller/package-info.java": "f9677aff136e97e864ebe2bd405247215f6475ba0a518a442675f0def1a701c4",
+    "backend/src/main/java/com/yueji/mall/identity/model/Actor.java": "9fc3aed788c5af92baed38faabc563520a0cba79b2f339c934bfa316ecc4b47c",
+    "backend/src/main/java/com/yueji/mall/identity/model/IdentityInputs.java": "eaf2684728bc9b69ae3cabd2dda2dbc710d4629abdbb4a55ca703f0c4d87ea75",
+    "backend/src/main/java/com/yueji/mall/identity/model/IdentityViews.java": "c3b0a74e061bf053d9f1a601f9745ead8a2001cc0641f536cdba85ca8433ee69",
+    "backend/src/main/java/com/yueji/mall/identity/model/PasswordValidator.java": "cfbd5bfc895f4f4101c6f3b450df67d591c8745e961feb47133d278de68f5b94",
+    "backend/src/main/java/com/yueji/mall/identity/model/ValidPassword.java": "2b77bc76dd38974a2e308a567f1d8bfcf3c4a86d5f990c62c164953738a849d7",
+    "backend/src/main/java/com/yueji/mall/identity/repository/AdministrationRepository.java": "dbcb827757051e4339f3afce33d93722d7c1de8e74225d611156b38e312ef10f",
+    "backend/src/main/java/com/yueji/mall/identity/repository/BootstrapRepository.java": "1bb76775892f033f342f4374940d0462ca26a219d6f16ff4d99a165f94d18e17",
+    "backend/src/main/java/com/yueji/mall/identity/repository/IdentityRepository.java": "dd4ded43f3e679ebbcdea2d0d3f4ede0f2f2d9de3959fed4c807f850e5f3fa16",
+    "backend/src/main/java/com/yueji/mall/identity/repository/package-info.java": "1f7e9ad600e01aa5e98fe208c9011acfa634da41452b9b6e27d1d9ea0414c594",
+    "backend/src/main/java/com/yueji/mall/identity/repository/PermissionEntity.java": "504a237195e3f0782473ef62f845f02fa7ec61aea1d979e7febe22d18b311b21",
+    "backend/src/main/java/com/yueji/mall/identity/repository/PermissionMapper.java": "9ed65ddb1681867f34553770efe3f397e7899f2179b87a76c59df1818dda22c7",
+    "backend/src/main/java/com/yueji/mall/identity/repository/SessionRepository.java": "36648e49a614ce24d10bacb27883012dbf120760f1fde2488b89f08bf300b7b6",
+    "backend/src/main/java/com/yueji/mall/identity/service/AccessTokens.java": "c68bd9714ad29bf60075c6799d93f7f5aee7c5e398ef5e22103bf7bbbaa3f5b4",
+    "backend/src/main/java/com/yueji/mall/identity/service/AccountService.java": "c21df354f13a4bf633bc6a3181d34ded3323d22afc5b67906a47da0223270f6f",
+    "backend/src/main/java/com/yueji/mall/identity/service/AdministrationService.java": "d2349b45b9b6f3838f64105d6c60f3e9db7a1e790f67e4ebf04d1bed71a8a74d",
+    "backend/src/main/java/com/yueji/mall/identity/service/BrowserSessionGuard.java": "2690194a2aa16e265ef8f9c31440d441754da6fdbfdd2d9d8734f5eae32049b0",
+    "backend/src/main/java/com/yueji/mall/identity/service/Crypto.java": "684a07d466d91e15adc32b33a3a6bcefd7843e0d4eac59195f9c4c3301e44b02",
+    "backend/src/main/java/com/yueji/mall/identity/service/DevSeedRunner.java": "5d405dc75df7b2f1d0a3ed4d89ef98a18bd33ea9d9955b98f526dfec6d8890d9",
+    "backend/src/main/java/com/yueji/mall/identity/service/DevSeedService.java": "b82217ddaf7a35b16e9bc4bb7abee1e9b88827e46eb5da02b1ae4f7337cbad44",
+    "backend/src/main/java/com/yueji/mall/identity/service/IdentityPolicy.java": "e050fd2859186db3da7c8ee4f3a1949e45beff0f9292082fc41c57660639f67b",
+    "backend/src/main/java/com/yueji/mall/identity/service/InitialAdministratorRunner.java": "57627b0a38602ad2e2ee1c6c4b93dd1fda252fa1de324d6de610a320048736f8",
+    "backend/src/main/java/com/yueji/mall/identity/service/InitialAdministratorService.java": "2f72c7b8add9b88f82511aa7c3a4f549c11e2da9512c556581e10f5530a7bc9f",
+    "backend/src/main/java/com/yueji/mall/identity/service/JwtAuthenticationFilter.java": "7f37f49f21315df4b5ddefc5b501e30ae76c736251f6d98c31983d78c2b3d0d6",
+    "backend/src/main/java/com/yueji/mall/identity/service/LoginLimiter.java": "b5063edf8b98d4ab74394321591ee13b530112616b1ffeb9be8cfc6864830198",
+    "backend/src/main/java/com/yueji/mall/identity/service/package-info.java": "cc4e119c9ca155f3b210aef16c9a542eec4f0c0617995f79129a7269252bd89e",
+    "backend/src/main/java/com/yueji/mall/identity/service/SessionRejectedException.java": "470cd4c43928f25f1a57c161cc4fb0656de2277a68305e9b290e69c0b8d88777",
+    "backend/src/main/java/com/yueji/mall/identity/service/SessionService.java": "5b81ed14ab0df01c5f3c6baabf46b942692dfb1b3c43a818831d167d28641c78",
+    "backend/src/main/java/com/yueji/mall/identity/service/UserWriteLimiter.java": "bc195ffc8ae4262e1b36e917c154096aa76995d38420135af5c883546c0a4438",
+    "backend/src/main/java/com/yueji/mall/inventory/controller/InventoryController.java": "7d888b01e7d7488389baa68e893569b5b872a13573a8efc7fec03a87b9ff12c6",
+    "backend/src/main/java/com/yueji/mall/inventory/controller/package-info.java": "878b6d22b19554f0ccc790ae1acd50af380bf8d12c8756ac8f8c0f7c80a7e57a",
+    "backend/src/main/java/com/yueji/mall/inventory/model/InventoryModels.java": "c5ec74b942e6f4611a2fc61c70f297a03a21760b96bdff53e6e4410fbe8eb9b1",
+    "backend/src/main/java/com/yueji/mall/inventory/repository/InventoryRepository.java": "bd4cab7fe96fe1c65afc104e732d663d785d8b9f4274dcd7871a9f5e5fcb8ded",
+    "backend/src/main/java/com/yueji/mall/inventory/repository/package-info.java": "5f599b8cea0fdc73fcc3296a397a49a2b4a00ab815952f242ef4fd26ce09ede1",
+    "backend/src/main/java/com/yueji/mall/inventory/service/InventoryService.java": "9ca07570eb7c96a869722b2648452050333423e7b2e1489ee5e8d83d85b7d21e",
+    "backend/src/main/java/com/yueji/mall/inventory/service/package-info.java": "19b52c8ed8182af4242d9815b767b720e67b1acc7c958c500e1fb8ee6c532d1e",
+    "backend/src/main/java/com/yueji/mall/payment/controller/package-info.java": "8c86c9e91d7c4205dbeab6315d95a30bc1fd296c48e7beb32d4d5f46fcdc7653",
+    "backend/src/main/java/com/yueji/mall/payment/repository/package-info.java": "d975472d3d24c3d584bdd1f57fe0513bb1b812c82d6622b9a16a495502dc53e8",
+    "backend/src/main/java/com/yueji/mall/payment/service/package-info.java": "28d1aef1345d96ab7b33672256d6f745ded6cad4afd19f59db780e7ca88c6be0",
+    "backend/src/main/java/com/yueji/mall/platform/controller/AuditController.java": "1e3a7b7bc35a9c584c0d2b38fb29f0152c8df23d744749660be68699b99bd131",
+    "backend/src/main/java/com/yueji/mall/platform/controller/FileController.java": "690aa2c7e19dee307ef1e43d3e2698272475d6236dc732c127171768980f464b",
+    "backend/src/main/java/com/yueji/mall/platform/controller/package-info.java": "8e5a12fa3a1d68d4f3aedc13c484440ee2f451db0d8fd2673c7fc4c4bcc4a82c",
+    "backend/src/main/java/com/yueji/mall/platform/model/FileModels.java": "9c9f54fa16c391315b1bc288649e868d8338c126cb96df5e12d922a80c40312c",
+    "backend/src/main/java/com/yueji/mall/platform/repository/AuditQueries.java": "d592ccb139b9d741d834106fee7e42c64eeb9fd30b7751828c3296181e7a7ec8",
+    "backend/src/main/java/com/yueji/mall/platform/repository/AuditRepository.java": "524b3f5545a9e51bf98cc94b17389e316468b66d76132439b3f41c7d62ff0ceb",
+    "backend/src/main/java/com/yueji/mall/platform/repository/FileRepository.java": "e8de5757576680a0a293868b10bbf75af7e6c63b19e39e83999b172be8fb5bc1",
+    "backend/src/main/java/com/yueji/mall/platform/repository/package-info.java": "293d5f481fc7226879ef6511e56d0f140320c8b623cb6d15dc93d785c09c7ea2",
+    "backend/src/main/java/com/yueji/mall/platform/service/AuditService.java": "78c982c99269d6b4d2fe29276ef14729257039fbad766ead53c9d7a3e06e322e",
+    "backend/src/main/java/com/yueji/mall/platform/service/FileService.java": "2846a4b973cd81c1cfb79ca53f13f407396034283025a0df3a76343635a19a57",
+    "backend/src/main/java/com/yueji/mall/platform/service/FileStorage.java": "2f31833c23276fa4fd12e95f4ed41dbd2eecb7cf93cd95f3ab8b917e6d1bc454",
+    "backend/src/main/java/com/yueji/mall/platform/service/package-info.java": "e89b371ca43e7e301edcdf2dbc48e621752ff08e6e9bd287321ee8afe2585953",
+    "backend/src/main/java/com/yueji/mall/platform/service/SafeImageCodec.java": "780ae3dbf11c4f4f350ef33fba55130fced3ad6a58046b8385e078c58aed263e",
+    "backend/src/main/java/com/yueji/mall/review/controller/package-info.java": "862aae3bfa2125eaa2bcbca25ff467b34c0447c2e327727935852ef9e37d41cd",
+    "backend/src/main/java/com/yueji/mall/review/repository/package-info.java": "40fd54dacbf74fb95c90dec35544c9f4de199a5ed3c24d74269ee0a28154ab98",
+    "backend/src/main/java/com/yueji/mall/review/service/package-info.java": "7cb318b8c2f1854745bfadcd8e4af936f64046c50b22dcad26ac3c52391104b9",
+    "backend/src/main/java/com/yueji/mall/settlement/controller/package-info.java": "b1964994f375f3db2f997a0dd625b6db185656d9cec5739f97149510d0a66f5c",
+    "backend/src/main/java/com/yueji/mall/settlement/repository/package-info.java": "b8c3b24d3ea35a505a3fa104e2803354ef79a50765880087b49c1ba65a29e863",
+    "backend/src/main/java/com/yueji/mall/settlement/service/package-info.java": "a861ff16aa0a61013afc11bb8147d9f623dae1e6285e585d580e4164de521a01",
+    "backend/src/main/java/com/yueji/mall/trade/controller/package-info.java": "c464a0021d3ebf400aad998ef19d06507c750cfe34d5c6bb58f7e2b47c2a1b9b",
+    "backend/src/main/java/com/yueji/mall/trade/repository/package-info.java": "7d167b5d66b10a1fedb2a80ef02e0f53cf7c2829b62a5e5692c2e3c76b78e4a7",
+    "backend/src/main/java/com/yueji/mall/trade/service/package-info.java": "0405a15f30147a9b94c8250c3c5e154da181cfc2e3a2d66f9ecef2230cbefc64",
+    "backend/src/main/java/com/yueji/mall/YuejiApplication.java": "6209128cb350bc3f0072d804e88e51cee95f459185dfb56e1f4ace945e2ba880",
+    "backend/src/main/resources/application-dev.yml": "103bd802272b1036a0fce15b3078efd6ed3437ace0bec5c196c2c5cd5c669baf",
+    "backend/src/main/resources/application-prod.yml": "6fae1024f9134eedcb48bce28565b0e86212ea2ea498df6531a4b9bd91035c48",
+    "backend/src/main/resources/application-test.yml": "ffb69e47ec78a5812d97329c1ff8b46d886a4fced96daf14adc35f7305493a20",
+    "backend/src/main/resources/application.yml": "cb8b1f57d8e42abf2a5adc022ca994f7d5466da3127d3e5a8e585af2b6c21fce",
+    "backend/src/main/resources/db/migration/V1__identity_core.sql": "9ee6e3bf05e5ba34aded20dd572558c904d5439e581a9e81768f5dc287117489",
+    "backend/src/main/resources/db/migration/V2__sessions_shops_addresses_audit.sql": "61d311a0b379292c9d0335135eb5f2293cf33f12fc1362cdb2a36c591938bca5",
+    "backend/src/main/resources/db/migration/V3__permission_catalog.sql": "ed23e68ce994ac98d9611f017c766cfcb7e30cdad0146c3d06378a812eb4fc7c",
+    "backend/src/main/resources/db/migration/V4__append_only_audit.sql": "9ab20abdbdde2d5f59fa8360e133fcde5a0fb82d663ff5a14e03f0ccd4763b27",
+    "backend/src/main/resources/db/migration/V5__catalog_files_inventory_cart.sql": "1a092f212adecd5c0568d69fc51b383dddabb34120e14a5e076a6b4b723c559a",
+    "backend/src/main/resources/db/migration/V6__movement_and_evidence_foreign_keys.sql": "e7711f585e33cc720f725a8291c3d527cc48f7d9ebe07ddf54490ef57a992156",
+    "backend/src/test/java/com/yueji/mall/common/config/SecurityKeyPolicyTests.java": "271037575b9c20d7377846f2ff39a5aaa4144e2d130b0a6ae6761a654c9727a1",
+    "backend/src/test/java/com/yueji/mall/ExceptionAndTraceTests.java": "60b9ef13d525d7967209002e1c304eb93657eaeacde98b0dde9ef0d3fe63a4f8",
+    "backend/src/test/java/com/yueji/mall/FoundationHttpTests.java": "0fed018d1e6148a8b17d044f6f89abd2a042354e155fb96b6b877f674b6e0b14",
+    "backend/src/test/java/com/yueji/mall/FoundationValueTests.java": "176c7916579be2fd80fe921c5cfb10b8103e0a9b5dfbf63673b897bd98446cf1",
+    "backend/src/test/java/com/yueji/mall/IdentityHttpTests.java": "7bc2d804584886b8522e7b87231b4375302b948013e350f6c5ac437532929db0",
+    "backend/src/test/java/com/yueji/mall/ImageSafetyTests.java": "0666aab095bc4950c35408251de35ca399379eea410a8e7f1d98577e29e95397",
+    "backend/src/test/java/com/yueji/mall/InitialAdministratorTests.java": "aff29a46a4a0496b1431c273801d1ed4148b6948d99082c12cac3fbbed4067c8",
+    "backend/src/test/java/com/yueji/mall/MySqlMigrationTests.java": "5961f9bdaabafce4e07ddc7c49e75555741fce8f88a1a983a1c4739d2285ed49",
+    "backend/src/test/java/com/yueji/mall/MySqlTestSupport.java": "f38db420a17be29875f2440708e42a7d16caf6e368da073ad158bea8c25e6334",
+    "backend/src/test/java/com/yueji/mall/ProductionIsolationTests.java": "6cd3481d54a61c2db6f52e3f24ce054677c57788ae9376d1a278f5fef2d5236b",
+    "backend/src/test/java/com/yueji/mall/SeedIsolationTests.java": "8da33274a6018e216c011a10c57972401d0b4912509badc1a7297faf8c2fdcd6",
+    "backend/src/test/java/com/yueji/mall/SessionBoundaryTests.java": "c3854308a8ba3d81442e255f88853204aa2a9bcbd592ec70fb9a9d032b8148f4",
+    "backend/src/test/java/com/yueji/mall/StageCHttpTests.java": "07f3136486c694bbd67562f3805003700a73cc9da1099c3cd81923612879cd2d",
+    "backend/src/test/resources/fixtures/one-pixel.webp": "c5032ff6bf72651d54f55eb0295275e8d0d11cccd7dd1b5da46023785288cc21",
+    "contracts/openapi.json": "4ef5973960f426a7f61c465cfaf6d7a1ca6793bdb7df63a1b699d7f3afffa49f",
+    "docs/01-总需求文档.md": "251ab759591b091eb8cc4dc407e3893e25b154d9c90082913cb74175a831fa6c",
+    "docs/02-系统设计文档.md": "200f233e068fe5c810a7c7715b5804f30248b721639e7e013fe892fb2dbe2ffd",
+    "docs/03-数据库设计.md": "8107229549da4d53706ef5e5f68340df21b42801fa79ae995c1bee67dbae4502",
+    "docs/04-接口设计.md": "b249ddc98b029f7cef7597ea68aea80cc40483fdf11540331f91d45956b72160",
+    "docs/05-前端页面与交互设计.md": "886ca58ce4cd9bbfd5b98573039c79a3b0476107e958217c6f1ca0a28f0a710c",
+    "docs/06-开发环境与部署设计.md": "0c01e70cf94eb4495bcc9445c4e5b928c4f80cdbb9b7c3ee87776afef3bafa14",
+    "docs/07-测试与验收设计.md": "97cac4e74419e35c914fa70e1f5ca87083ffbac763eea11d9f519939a111442d",
+    "docs/08-CI-CD与运维设计.md": "f9708c5798825a7d4dab14b4b7490f11a3d3124848d0e2cc3768f2072d1b1943",
+    "docs/09-AI开发提示词与留痕规范.md": "747c0551fb9b2002cb532640725a5bee1f07da2f2fec33150e6d4a190410b9e4",
+    "docs/10-交付清单与演示脚本.md": "5637fc46526cd71dd8914ca726f8ac831adb512ab16dcc61d48eb778b70dc196",
+    "docs/11-实验要求追踪矩阵.md": "d7c374d0405c168fee1899269f9d5a1b841e24f49915947017612ab8e408da1a",
+    "docs/12-架构决策记录.md": "081ad5f2803169918568952a0f3984152d827fb52b369f159c59340ceb626965",
+    "docs/13-记录与报告模板.md": "22883e40198ff3ac71894bc6d6303b397462ed4d12cff4f496da0c4756a15ce1",
+    "docs/README.md": "a2d4e3f8016ff03d33e91ab818c02fb60cd7f4948b64a961341244d7c654c847",
+    "docs/stages/A-AI使用记录.md": "6eba38d09694465f510161b20482437b1283427625cabba0d22d63fe02e70f17",
+    "docs/stages/A-接口契约清单.md": "e86ecef1fee81c5e4f80aa07e6b4b99551d715736b7c6bd14d68856334a3a07f",
+    "docs/stages/A-版本冻结.md": "59501280c63f9cc2169aab5d92edb97e33e236c18022c0175e789ac64461ee84",
+    "docs/stages/A-验证与交接.md": "ed0d5325053582f86e826f543173178a299b2e5f96fb41f4552b7f0bf9b64fd6",
+    "docs/stages/B-AI使用记录.md": "c5f1511413df33b11ee5307a62bdf8ff4ef08339ffffdb0f4f7c6f167a23ac26",
+    "docs/stages/B-接口契约清单.md": "11bb885ba0b644ce17c546eafaaf5445009caf031caeec81f232a4dc02cf4870",
+    "docs/stages/B-版本冻结.md": "90463f30155e038f591497285c3f918f5cac3cb08706f646b1221e63f5362803",
+    "docs/stages/B-验证与交接.md": "2b32f57a8243078e1e0db9525cf6a53eb02794b06660bdc41623da83e9891fd9",
+    "docs/stages/C-AI使用记录.md": "2e92e2665989d97a3d12f896b846c188ab136abefa2ea0879fff9714ad9cf2c7",
+    "docs/stages/C-接口契约清单.md": "aaccd3f2b647cd3b9a43ca500524a14f57651de38136642766503e86bad8bcfd",
+    "docs/stages/C-版本冻结.md": "fe878712abdef7bfd57840a1aa3d5ebe213f1c56c1f6db193061bf60e5da4f54",
+    "docs/stages/C-验证与交接.md": "03e3a8209ee93050a6acde2a2c8ccaa6a55381ee2e6dda24ad91ff5fbbb3ec5b",
+    "frontend/pnpm-lock.yaml": "648d9e33a93958a2a5f83b910f962e8c5e5408eb462925281f1c0599402076f7",
+    "frontend/src/api/client.ts": "07199af503b0a91521803588bdeee1b75646b162ee3fd46bac5f439a28e9dd3a",
+    "frontend/src/api/generated.ts": "ecd8159f6c2840d1effa19f83366706ec440e29e5c496915a9d355f6e56155c9",
+    "frontend/src/api/types.ts": "cd43b19f584d25dec9138fca501cc6c52cf182baef55438a40fa3984b18fab62",
+    "frontend/src/App.vue": "0b8a4870148802a2a9b3037b443fb2cd1019b3b8855fc17cb656ae9ab8ac3838",
+    "frontend/src/main.ts": "463a013dbb2b0a380c8163781920c8b08296097f7efb1e45000ffafe608bc490",
+    "frontend/src/pages/FoundationPage.vue": "080cc7911ccf30dc857336435fcdeee40ef94b0cb164e8d76dc9bf09570d1676",
+    "frontend/src/pages/NotFoundPage.vue": "7e949cb860cd27c8a429ccea1081cd36c6a7df016881d54600818011463537f5",
+    "frontend/src/router.ts": "9108079770d7932825e92e278decfe15a3829c17a4260e5c809811306107b4c7",
+    "frontend/src/stores/foundation.ts": "be1c319c0ab9fd6ba3f644b18bfe2f3fffebd979fa4dcc14bff130f24e1a32dc",
+    "frontend/tests/foundation-page.test.ts": "0cd120a3a32f2b89555996b52f62be762a2f43fe5771abeda5c655cb5b3b8f1a",
+    "frontend/tests/foundation.test.ts": "26fa8dd10537efc3fcc74862638ac423437403eaa43b7cf2a93d827e0b4fbefc",
+    "infra/backend-dependencies.lock.txt": "4aaed83869c862016116659115d0fdfc7a8ec8ecde7054bfe7506125b558cfb4",
+    "infra/versions.lock.json": "341e7066e4fbe6f9620b97fa7f0bbbca00f1b0f3c163f6186340bf1488eb285b",
+    "infra/versions.stage-b.lock.json": "5aff1165539685f89629d9333d6870deb4190718679b875a9a021b1964c63054",
+    "infra/versions.stage-c.lock.json": "bcd96ba03377e31a4ae3b686377008c9ef51348eb470bac22a8d2d8491f2c152",
+    "README.md": "440c6af0ebc048063f674c02c47005b2c35b67f3885fa868757ccc7138fbb505",
+    "scripts/bootstrap-stage-b-db.ps1": "013905a2d0c4f5fe109b1a87319e8bf1b571295c6406d38822dc3973843d15de",
+    "scripts/bootstrap-tools.ps1": "7e974a79924fde63ee4e8e6dd49e779dd88b20ba54755cbf1165bdee303f3f09",
+    "scripts/freeze-environment.py": "00146c91b7c54cf20d43dce6f30f6e51c5923dea4d18a167913ee8919bb704f8",
+    "scripts/generate-stage-c-migrations.py": "c8cf6ca5a6ce44c1de7accdf2da46838478abb2059b70f6d0bc4bf994565ce25",
+    "scripts/record-stage-b-evidence.py": "17c74469fa4a4895bf61fb4264e907c13be80204921667c4e822d87affa15feb",
+    "scripts/record-stage-c-evidence.py": "e2dc5d9e07734e86bd92d8fd71e696de71a475ab248a933bed15f69e1c059157",
+    "scripts/seed-stage-c.py": "12affe3f54bcf8adb9e7dfe6dfd6a6f7e70793ce37e99f61a9f4dad6e5e80499",
+    "scripts/smoke-foundation.py": "33776d1f77fe78a1ffaceefb139cd73e2846dc6a4cbe271381563f1f3a036d79",
+    "scripts/smoke-identity.py": "3da92dd2feac70c380a32a9cd81085f3209402067d5b2b4f38266b476814746c",
+    "scripts/smoke-stage-c.py": "74f87a484c8eac92e78235540daf64d4c8d8b2f86d99e8e7ddc02c0bfdddddf3",
+    "scripts/stage_b_contract.py": "dabdec86ea46229567d7230676e091a64502afb9c3a565b7840cec544163edbe",
+    "scripts/stage_c_contract.py": "91a630abe6b3163b30b1bfbb595d1ba2d319529cba8a9cffb158b69a7f6e155f",
+    "scripts/sync-contract.py": "9da712a5c141fa9511d7c8f24341796ae2f4ad95ff85950d2e3a433e85ceeba7",
+    "scripts/use-db.ps1": "9d53f51fb54ab259dab34ed71fc99ebd2f294af06204d083c443e2471fc35b7a",
+    "scripts/use-tools.ps1": "4746198fbaeaae8d4cda1ae1515c7630a0bf82b2693671557bf600948731caf3",
+    "scripts/verify.ps1": "8bcb3815b103a1f19f7ee6bd055ed056da4dd9bea85046ca19c1f30f58acf7b7"
+  },
+  "artifactSha256": "5502da3606e9f11b99cd818cf1d97a59bc8e15819d10e8f069e088646fdc90ba"
+}

@@ -1,0 +1,14 @@
+{
+  "port": 13306,
+  "roles": 7,
+  "shops": 3,
+  "users": 14,
+  "members": 6,
+  "migrations": 4,
+  "permissions": 38,
+  "mysqlVersion": "8.4.13",
+  "sessionTimezone": "+00:00",
+  "auditProtectionTriggers": 2,
+  "seedCredentialsUnchangedAfterRestart": true,
+  "repeatedStartup": "Existing Flyway V4 validated, no migration applied"
+}

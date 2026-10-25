@@ -1,0 +1,16 @@
+{
+  "stockConstraintViolations": 0,
+  "reservationMismatches": 0,
+  "batchAmountMismatches": 0,
+  "orderAmountMismatches": 0,
+  "missingReservations": 0,
+  "movementMismatches": 0,
+  "outboxMismatches": 0,
+  "missingCreationLog": 0,
+  "previewMismatches": 0,
+  "batches": 1,
+  "orders": 2,
+  "reserved": 3,
+  "databaseVersion": "8.4.13",
+  "capturedAt": "2026-10-23T19:19:23.491622600Z"
+}

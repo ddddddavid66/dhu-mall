@@ -1,0 +1,15 @@
+server:
+  port: 0
+yueji:
+  trade:
+    expiry-enabled: false
+  payment:
+    recovery-enabled: false
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: false
+logging:
+  level:
+    root: WARN

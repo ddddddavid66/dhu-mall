@@ -1,0 +1,122 @@
+{
+  "stage": "D",
+  "verifiedAtUtc": "2026-10-23T19:20:23.829155+00:00",
+  "freshDataCreated": true,
+  "total": 19,
+  "checks": [
+    {
+      "name": "register-independent-member",
+      "actualStatus": 201,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "login-member",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "select-real-purchasable-products",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "create-fictional-address",
+      "actualStatus": 201,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "set-cart-30",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "set-cart-20",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "preview-two-shops",
+      "actualStatus": 201,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "create-atomic-batch",
+      "actualStatus": 201,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "replay-lost-response",
+      "actualStatus": 201,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "reject-used-preview-new-key",
+      "actualStatus": 409,
+      "actualCode": "STATE_CONFLICT",
+      "passed": true
+    },
+    {
+      "name": "reject-same-key-other-preview",
+      "actualStatus": 409,
+      "actualCode": "IDEMPOTENCY_CONFLICT",
+      "passed": true
+    },
+    {
+      "name": "cancel-accepted-not-final",
+      "actualStatus": 202,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "recover-owned-batch",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "list-owned-orders",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "closing-order-has-snapshot-and-log",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "other-shop-remains-independent",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    },
+    {
+      "name": "payment-remains-unimplemented",
+      "actualStatus": 501,
+      "actualCode": "NOT_IMPLEMENTED",
+      "passed": true
+    },
+    {
+      "name": "batch-anonymous-denied",
+      "actualStatus": 401,
+      "actualCode": "AUTH_REQUIRED",
+      "passed": true
+    },
+    {
+      "name": "logout",
+      "actualStatus": 200,
+      "actualCode": "OK",
+      "passed": true
+    }
+  ]
+}

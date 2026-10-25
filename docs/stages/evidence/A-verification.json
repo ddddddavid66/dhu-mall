@@ -1,0 +1,107 @@
+{
+  "clientDate": "2026-10-23",
+  "recordedAtUtc": "2026-10-23T11:42:53.817886+00:00",
+  "stage": "A",
+  "gitCommit": null,
+  "gitNote": "No Git repository was present; no commit or remote created.",
+  "commands": [
+    {
+      "command": "contract-sync",
+      "exitCode": 0,
+      "log": ".artifacts/contract-sync.log"
+    },
+    {
+      "command": "pnpm-frozen-install",
+      "exitCode": 0,
+      "log": ".artifacts/pnpm-frozen-install.log"
+    },
+    {
+      "command": "frontend-typecheck",
+      "exitCode": 0,
+      "log": ".artifacts/frontend-typecheck.log"
+    },
+    {
+      "command": "frontend-tests",
+      "exitCode": 0,
+      "log": ".artifacts/frontend-tests.log"
+    },
+    {
+      "command": "frontend-build",
+      "exitCode": 0,
+      "log": ".artifacts/frontend-build.log"
+    },
+    {
+      "command": "contract-lint",
+      "exitCode": 0,
+      "log": ".artifacts/contract-lint.log"
+    },
+    {
+      "command": "backend-verify",
+      "exitCode": 0,
+      "log": ".artifacts/backend-verify.log"
+    }
+  ],
+  "backend": {
+    "tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "suites": [
+      {
+        "name": "com.yueji.mall.ExceptionAndTraceTests",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "name": "com.yueji.mall.FoundationHttpTests",
+        "tests": 5,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "name": "com.yueji.mall.FoundationValueTests",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "name": "com.yueji.mall.ProductionIsolationTests",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0
+      }
+    ]
+  },
+  "frontend": {
+    "testFiles": 2,
+    "tests": 7,
+    "failures": 0
+  },
+  "operations": {
+    "declared": 92,
+    "implementedBusinessOperations": 0,
+    "expected501": 91,
+    "disabledMock404": 1
+  },
+  "docker": {
+    "digestSourceVerified": true,
+    "containerRunVerified": false,
+    "reason": "Docker daemon unavailable"
+  },
+  "fingerprintsSha256": {
+    "AGENTS.md": "e72a9145300f2f086f6ca2d6eba30d93d05c57fc014171922dd66b58557c2248",
+    "infra/versions.lock.json": "341e7066e4fbe6f9620b97fa7f0bbbca00f1b0f3c163f6186340bf1488eb285b",
+    "infra/backend-dependencies.lock.txt": "31be79fe1fd0ad712cab04951ff6bcc06f595f46c3f2b5b3b7c979133390dbe4",
+    "backend/pom.xml": "db3b1c58971020ae8c2761ed3ef63b1a8286d95b46ab7a24cf69d11c62d60bf5",
+    "backend/.mvn/wrapper/maven-wrapper.properties": "51b221ede4e074d19bb44d6d485bb7b298e77874572a09697aba0a9e234e0745",
+    "contracts/openapi.json": "99c671138e4f91be74a297c68d8e5eb853fc8abef926b433c2ce190ca227dffd",
+    "frontend/package.json": "4ebb9a5042e5d257609f137e82dd917b71c7c11757ed1fd56fff01f222732389",
+    "frontend/pnpm-lock.yaml": "648d9e33a93958a2a5f83b910f962e8c5e5408eb462925281f1c0599402076f7"
+  },
+  "notes": [
+    "Initial CORS test failure fixed; initial log retained locally.",
+    "No database, business authentication, payments, or CD deployed.",
+    "No business throughput, coverage target, or full course acceptance is claimed."
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "stage": "I",
+  "date": "2026-10-26",
+  "overall": "PARTIAL_BLOCKED",
+  "releaseManifest": "NOT_CREATED",
+  "testDeployment": "NOT_EXECUTED",
+  "productionDeployment": "NOT_EXECUTED_NO_EXPLICIT_AUTHORIZATION",
+  "baseline": {
+    "stageHStatus": "QUALITY_GATE_FAILED",
+    "coveredBranches": 992,
+    "branchDenominator": 1368,
+    "branchCoveragePercent": 72.51,
+    "requiredBranchCoveragePercent": 80.0,
+    "source": "docs/stages/H-验证与交接.md and .artifacts/H-backend-verify.log"
+  },
+  "environment": {
+    "os": "Windows 11; no Linux deployment host attached",
+    "dockerCompose": "v5.3.0",
+    "dockerDaemonAvailable": false,
+    "gitMetadataAvailable": false,
+    "actionlintAvailable": false,
+    "workflowYamlParserAvailable": false
+  },
+  "localChecks": [
+    {
+      "name": "stage-i-static-policy-validator",
+      "status": "PASS",
+      "checkCount": 26,
+      "command": "python scripts/validate-stage-i.py",
+      "evidence": ".artifacts/I-static-validation.json"
+    },
+    {
+      "name": "docker-compose-configuration-parse",
+      "status": "PASS",
+      "command": "docker compose --env-file .artifacts/I-compose-validation/compose.env -f infra/compose.yml -f infra/compose.observability.yml --profile observability config --quiet",
+      "note": "Uses disposable validation-only values; parsed configuration only; no containers started.",
+      "evidence": ".artifacts/I-compose-validation.log"
+    },
+    {
+      "name": "shell-syntax",
+      "status": "PASS",
+      "shell": "Git for Windows Bash",
+      "count": 8,
+      "command": "bash -n over scripts/*.sh and backend/docker-entrypoint.sh",
+      "evidence": ".artifacts/I-shell-syntax.log"
+    },
+    {
+      "name": "json-parse",
+      "status": "PASS",
+      "command": "python -m json.tool on infra/versions.stage-i.lock.json, infra/grafana/dashboards/yueji-runtime.json, .artifacts/I-static-validation.json, and docs/stages/evidence/I-verification.json",
+      "evidence": "all four JSON files parsed with exit 0"
+    }
+  ],
+  "environmentChecks": [
+    {
+      "name": "docker-compose-version",
+      "status": "PASS",
+      "observed": "Docker Compose version v5.3.0"
+    },
+    {
+      "name": "docker-daemon",
+      "status": "BLOCKED",
+      "command": "docker info --format '{{.ServerVersion}}'",
+      "exitCode": 1,
+      "observed": "failed to connect to npipe:////./pipe/docker_engine; Docker Desktop Linux engine unavailable"
+    },
+    {
+      "name": "git-worktree-status",
+      "status": "BLOCKED",
+      "command": "git -C C:\\Users\\123\\Desktop\\temp\\project status --short --branch",
+      "exitCode": 128,
+      "observed": "fatal: not a git repository"
+    },
+    {
+      "name": "github-actions-yaml-lint",
+      "status": "NOT_EXECUTED",
+      "reason": "actionlint and a YAML parser are not installed; workflows received static reference/policy checks only"
+    }
+  ],
+  "acceptance": {
+    "TC-26": {
+      "status": "NOT_EXECUTED",
+      "reason": "No RabbitMQ broker/consumer runtime; transaction/Outbox writes do not prove publish acknowledgement, crash recovery, ordering, or dead-letter replay."
+    },
+    "TC-27": {
+      "status": "NOT_EXECUTED",
+      "reason": "Redis/RabbitMQ failover and dependency recovery were not provisioned or run."
+    },
+    "TC-28": {
+      "status": "BLOCKED",
+      "reason": "No Linux Docker host, running test database, age identity, or rclone destination was provided; backup and isolated restore scripts were not executed."
+    },
+    "TC-29": {
+      "status": "NOT_EXECUTED",
+      "reason": "No fixed 4 vCPU/8 GB Linux SSD environment or independent k6 load generator; performance numbers were not produced."
+    },
+    "TC-30": {
+      "status": "NOT_EXECUTED",
+      "reason": "No test host or continuous 24-hour probe window."
+    },
+    "TC-31": {
+      "status": "BLOCKED",
+      "reason": "No Git metadata, configured GitHub repository/runner, test host, bad-image release, or rollback run. Static workflow artifacts are not CI/CD evidence."
+    }
+  },
+  "knownGaps": [
+    "Prometheus/Grafana/Loki Compose and dashboards exist, but no Loki log shipper is configured.",
+    "Prometheus rules exist, but there is no Alertmanager or test notification receiver; no alert was fired or delivered.",
+    "The currently observed Stage H 80% branch coverage gate fails, so the release job cannot publish a release manifest or promote a candidate.",
+    "No production deployment workflow or production release was created."
+  ],
+  "evidenceFiles": [
+    "docs/stages/I-验证与交接.md",
+    "docs/stages/I-发布与恢复清单.md",
+    "docs/stages/I-AI使用记录.md",
+    ".artifacts/I-static-validation.json",
+    ".artifacts/I-shell-syntax.log",
+    ".artifacts/I-compose-validation.log",
+    ".artifacts/I-environment-check.txt"
+  ]
+}

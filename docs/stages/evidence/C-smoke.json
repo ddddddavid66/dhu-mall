@@ -1,0 +1,62 @@
+{
+  "verifiedAtUtc": "2026-10-23T13:36:20.245016+00:00",
+  "checks": [
+    {
+      "name": "jar-liveness",
+      "url": "http://127.0.0.1:18080/actuator/health/liveness",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true
+    },
+    {
+      "name": "jar-readiness",
+      "url": "http://127.0.0.1:18080/actuator/health/readiness",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true
+    },
+    {
+      "name": "jar-openapi-92",
+      "url": "http://127.0.0.1:18080/v3/api-docs",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true
+    },
+    {
+      "name": "jar-swagger-ui",
+      "url": "http://127.0.0.1:18080/swagger-ui/index.html",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true
+    },
+    {
+      "name": "frontend-entry",
+      "url": "http://127.0.0.1:15173/",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true
+    },
+    {
+      "name": "frontend-workbench-entry",
+      "url": "http://127.0.0.1:15173/workbench",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true
+    },
+    {
+      "name": "frontend-health-proxy",
+      "url": "http://127.0.0.1:15173/actuator/health/readiness",
+      "expectedStatus": 200,
+      "actualStatus": 200,
+      "passed": true
+    },
+    {
+      "name": "frontend-api-proxy-501",
+      "url": "http://127.0.0.1:15173/api/v1/orders",
+      "expectedStatus": 501,
+      "actualStatus": 501,
+      "passed": true
+    }
+  ],
+  "total": 8
+}

@@ -1,0 +1,42 @@
+{
+  "stockBounds": 0,
+  "reservationMismatch": 0,
+  "duplicatePayments": 0,
+  "duplicateCompensation": 0,
+  "duplicateMovement": 0,
+  "cancelledWithCommit": 0,
+  "orders": [
+    {
+      "status": "CANCELLED",
+      "financial_status": "UNPAID",
+      "count": 1
+    },
+    {
+      "status": "PENDING_PAYMENT",
+      "financial_status": "UNPAID",
+      "count": 1
+    }
+  ],
+  "payments": [
+    {
+      "provider": "LOCAL_MOCK",
+      "status": "CLOSED",
+      "count": 1
+    }
+  ],
+  "reservations": [
+    {
+      "status": "RELEASED",
+      "quantity": 2
+    },
+    {
+      "status": "RESERVED",
+      "quantity": 1
+    }
+  ],
+  "refunds": [],
+  "capturedAt": "2026-10-25T10:47:27.092137100Z",
+  "database": {
+    "version": "8.4.13"
+  }
+}
