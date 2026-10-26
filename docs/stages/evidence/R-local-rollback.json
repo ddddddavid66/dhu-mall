@@ -1,0 +1,27 @@
+{
+  "status": "LOCAL_FRONTEND_ROLLBACK_PASSED",
+  "checkedAt": "2026-10-26T06:56:39.403332+00:00",
+  "rejectedCandidateExitCode": 1,
+  "previousFrontend": "yueji-local-frontend@sha256:d3a112a08a11cb3775e3486321d58ed8b58ddb224ea63157925cd4fd6e8451c3",
+  "restoredFrontend": "yueji-local-frontend@sha256:6447d0b2e1d73e027a9dced8163700f449c0e23c6e1319695f6ab89f10a9e8bd",
+  "before": {
+    "orders": 7,
+    "refunds": 4,
+    "payments": 6,
+    "reserved": 1,
+    "inventory": 297,
+    "migration": 11.0,
+    "settlements": 1
+  },
+  "after": {
+    "orders": 7,
+    "refunds": 4,
+    "payments": 6,
+    "reserved": 1,
+    "inventory": 297,
+    "migration": 11.0,
+    "settlements": 1
+  },
+  "destructiveMigration": false,
+  "limitation": "Frontend digest rollback on the local stack; backend version rollback and remote CD were not exercised."
+}

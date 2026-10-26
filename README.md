@@ -1,44 +1,39 @@
 # 阅集图书商城
 
-业务与页面实施至阶段 G；阶段 H 于 2026-10-26 执行质量验证，阶段 I 已增加容器、CI、监控及 test 发布/恢复产物，但尚无实际 Linux 部署或 CI run。后端测试 119/119、前端 Vitest 10/10、Playwright 4 passed/3 skipped；Maven clean verify 未通过 JaCoCo 服务分支门槛：992/1368（72.51%），低于 80%。因此当前不是全质量通过或可发布状态，I 流水线也会阻止 manifest 晋级。API-89 仍真实返回 501/NOT_IMPLEMENTED，支付宝真实沙箱仍缺环境输入。阶段 H/I 交接见 [H 验证与交接](docs/stages/H-验证与交接.md)、[I 验证与交接](docs/stages/I-验证与交接.md)、[I 发布与恢复清单](docs/stages/I-发布与恢复清单.md)、[I AI 使用记录](docs/stages/I-AI使用记录.md) 和 [I 机器证据](docs/stages/evidence/I-verification.json)。设计入口为 [docs/README.md](docs/README.md)，实施规则为 [AGENTS.md](AGENTS.md)。Java 21 / Spring Boot 3.5 模块化单体，Vue 3 独立前端。
+Java21 / Spring Boot3.5.16模块化单体，Vue3独立前端，多商家实体新书商城。每店独立订单和支付；商家出款始终模拟。数据库V11，OpenAPI0.7.0，92项操作已实现。
 
-## 当前能力
+截至2026-10-26，本地完整后端178项通过，服务分支1173/1463=80.1777%，达到80%门槛；前端单元10项、桌面手机真实浏览器5项通过。已实际运行Redis/RabbitMQ、容器、日志监控告警、进程SIGKILL恢复、加密隔离恢复和前端digest回退。首两次GitHub CI中的后端/浏览器/前端/CodeQL通过；非root配置问题已由04c562f修复并通过本地和第三次远端源码安全扫描，镜像晋级结果见CI记录。不是全课程验收通过或已上线。
 
-服务端已有 91 项接口能力；API-89 仍明确标记未实现。完整 [92 项接口状态](docs/stages/F-接口契约清单.md) 与 OpenAPI 0.5.0 同步。模拟支付仅 dev/test + LOCAL_MOCK + ENABLE_MOCK_PAYMENT=true 注册，其余配置返回 404；商家出款始终为模拟。实现标记不代表真实沙箱验收通过。阶段 G 前端页面及本地联调的测试边界见 [G 验证与交接](docs/stages/G-验证与交接.md)；API-89 未被静态数据掩盖。
+用户已取消Boot4/Spring7及兼容补丁升级，接受当前安全发现的本地使用风险；保留扫描失败。支付宝沙箱只读查单取得真实应答，因买家暂不能登录，付款、有效通知、关闭与退款未验收。24小时探测已于北京时间2026-10-26 14:57启动，完成前保持电脑及Docker运行。
 
-## 阶段 H 完整质量验证
+## 当前验收与交付入口
 
-完整后端 clean verify 实际运行 119 项测试，全部通过；JaCoCo 核心服务分支 72.51% 未达到 80%，故 Maven 退出失败。前端质量检查全部通过，本轮 Playwright 为 4 passed、3 skipped；单次本地 readiness 和 HTTP 冒烟通过。真实沙箱、进程级恢复、消息代理故障、备份恢复、固定 Linux 性能、24 小时探测和 CI 回滚仍未执行。逐项 TC-01—32 状态、实际数据和证据见 [H 阶段交接](docs/stages/H-验证与交接.md)；本阶段不得视为全通过。
+- [剩余任务表](docs/14-剩余任务与验收计划.md)：已完成项、责任人与剩余输入。
+- [本地验收报告](docs/16-本地验收报告.md)、[收尾交接](docs/stages/R-验证与交接.md)、[机器证据](docs/stages/evidence/R-validation.json)。
+- [92项接口矩阵](docs/stages/R-契约验收矩阵.md)、[AI记录](docs/stages/R-AI使用记录.md)。
+- [环境获取教程](docs/15-外部验收环境获取教程.md)、[设计入口](docs/README.md)。
+- 课程Word、PPT、LOCAL_MOCK录像及源码包位于本机deliverables，见[课程交付索引](docs/17-课程交付索引.md)。
 
-## 阶段 I CI/CD、监控与恢复产物
+历史A—I记录描述各阶段当时状态；例如H的72.51%和API-89未实现不代表当前版本。历史首次失败和修复证据保持原样。无生产发布授权，未执行prod发布。
 
-已新增非 root 后端镜像、Vue/Nginx 镜像、digest 锁定 Compose、Prometheus/Grafana/Loki 配置、PR 无部署 secrets 的质量流水线、同一成功 run 的 digest manifest 晋级和 test-only 手工部署入口，以及维护窗备份、隔离恢复和应用 digest 回退脚本。静态检查、Compose 配置解析和 shell 语法检查通过；本机 Windows Docker daemon 未运行，目标目录没有 Git 元数据，Linux/CI 主机未提供。TC-26—31 仍按未执行/阻塞记录，日志 shipper 和告警通知接收器未配置。H 的 80% 分支覆盖门槛仍未通过，因此没有可部署 manifest，未执行 test 或 prod 发布。实际情况见 [I 阶段交接](docs/stages/I-验证与交接.md)、[发布与恢复清单](docs/stages/I-发布与恢复清单.md)、[机器证据](docs/stages/evidence/I-verification.json)。
+## 本地启动与验证
 
-## 阶段 G 前端页面与联调
+先运行scripts/bootstrap-tools.ps1准备冻结工具链；MySQL开发和测试库按scripts/bootstrap-stage-b-db.ps1及B交接准备，Redis/RabbitMQ按scripts/bootstrap-dependencies.ps1准备。测试数据库必须是隔离的yueji_mall_test，禁止把测试环境指向业务库。
 
-商城、会员中心、工作台、商家仓库、客服财务、运营和管理员路由按 UI-01—33 建立。共享 API 层复用 OpenAPI 操作、错误码、Result 和 traceId；401 刷新合并、幂等写请求复用键、店铺切换取消旧请求。前端显示服务器金额和业务状态，API-89 显示真实未实现错误。阶段 G 本地 HTTP 冒烟为分类/商品 200、dashboard 501；商品共 23 项。浏览器测试包含手机跨店预览、会话失败恢复、角色拒绝和桌面长文本检查。
+```powershell
+. ./scripts/use-tools.ps1
+. ./scripts/use-db.ps1
+. ./scripts/use-dependencies.ps1
+./scripts/verify.ps1
+```
 
-验证记录、截图、未执行项和下一步见 [G 验证与交接](docs/stages/G-验证与交接.md)、[G AI 使用记录](docs/stages/G-AI使用记录.md) 与 [机器证据](docs/stages/evidence/G-verification.json)。本地 UI 用例没有创建订单、请求支付或退款；E2E 为 4 项通过、3 项项目过滤跳过，不是 UI-01—33 每个业务分支均已浏览器验收。远程 CI/CD、真实沙箱及全量角色 E2E 仍未运行。
+LOCAL_MOCK仅dev/test显式启用；真实沙箱使用受限密钥文件，不能提交runtime.env、.artifacts随机账号或密钥。现有本机容器使用.artifacts/local-test/runtime.env和infra/compose.local-test.yml，运行命令为：
 
-Flyway V1—V7 原有 30 表；V8 新增支付/差异结构，V9 扩展退款原因字段和唯一索引，V10 新增履约与结算结构。内置 7 类角色和 38 项动作权限。阶段 F 将订单物流状态与退款财务状态分开；退货可再售和未发货退款各自按业务键恰好回补一次。对账逐笔核实并记录差异；结算保存逐订单快照、职责分离审核和不可改写的已出款记录。readiness 检查真实数据库；UP 不代表交易能力可用。
+```powershell
+docker compose -p yueji-local-test --env-file .artifacts/local-test/runtime.env -f infra/compose.yml -f infra/compose.local-test.yml -f infra/compose.observability.yml --profile observability up -d --wait
+```
 
-## 阶段 F 履约、退款与结算
-
-阶段 F 依据 FR-08—11、API-36—62/API-69/API-78—83/API-91 实现。实施范围、实际调用及锁顺序见 [F 服务调用与锁边界](docs/stages/F-服务调用与锁边界.md)；验证结论与交接见 [F 验证与交接](docs/stages/F-验证与交接.md)。StageFHttpTests 20 项通过，全量 118 项测试通过；但 clean verify 的 JaCoCo 服务包分支覆盖率为 72.51%，未达到 80% 门槛，不能把 Maven verify 记为通过。
-
-## 阶段 E 支付与当前阻塞
-
-每订单唯一 paymentNo，先提交 PENDING 再在事务外生成渠道动作/查单；原号恢复，用户回跳不能确认支付。CLOSING 仅在渠道核实关闭或确认从未发起支付后释放，未知继续预占、退避查询并记录告警。支付和关单在同一订单锁下收敛，扣减/释放与流水、订单日志和 Outbox 同事务，Outbox 不冒充已发布。
-
-迟到支付补偿原因 `LATE_PAYMENT_COMPENSATION` 长 25 字符。用户已同意字段扩为 VARCHAR(32)，按 ADR-17 由 V9 同步重建函数唯一索引，保留每笔支付只创建一次补偿退款的约束；决策和迁移结果见 [变更记录](docs/stages/E-待决策变更.md)。真实沙箱仍未联调，因此 E 不标记为全通过。
-
-真实沙箱的应用/卖家、私钥/支付宝公钥、买家、能力开通与公网回调尚未提供；[官方协议核对](docs/stages/E-官方协议核对.md) 与一次性 RSA 协议测试不是实际沙箱交易证据。支付配置名称见 [.env.payment.example](.env.payment.example)；该文件不会被 Spring 自动加载，需按进程环境注入，不能把密钥传入前端。
-
-本地调试可在准备好的 PowerShell 会话设置 `$env:PAYMENT_PROVIDER='LOCAL_MOCK'` 与 `$env:ENABLE_MOCK_PAYMENT='true'`，Linux 使用 `export PAYMENT_PROVIDER=LOCAL_MOCK ENABLE_MOCK_PAYMENT=true`。生产 profile 禁止 LOCAL_MOCK；沙箱必须显式 ALIPAY_SANDBOX，网关只允许冻结沙箱地址。先解决阻塞并通过验证，再按后文方式启动 JAR。
-
-执行 `./scripts/verify.ps1` 记录真实结果，不得忽略失败将其写为通过。当前交接见 [G 验证与交接](docs/stages/G-验证与交接.md)、[G AI 使用记录](docs/stages/G-AI使用记录.md)、[F 验证与交接](docs/stages/F-验证与交接.md) 与 [F AI 使用记录](docs/stages/F-AI使用记录.md)；支付沙箱阻塞见 [E 验证与交接](docs/stages/E-验证与交接.md)。G 本地前端验证不替代根级脚本的后端覆盖门槛。
-
-[D 交接及证据](docs/stages/D-验证与交接.md) 保留为当时基线；smoke-stage-d.py 的“支付未实现、CLOSING 不释放”断言只适用于 D，不是当前 E 的验收脚本。原 D 联调订单不得手工改账或清除预占；待 E 核实关闭后自动收敛。
+会员/管理页面：https://localhost:18443（本机自签名证书）；API：http://127.0.0.1:18080/api/v1；readiness：http://127.0.0.1:19081/actuator/health/readiness。随机测试账号仅在本机.artifacts/R-e2e-accounts.json。新环境应按工具和数据库脚本重新生成，不能复制固定生产口令。数据库持久化卷与文件必须保留，普通停止不要附带-v清卷。
 
 ## 阶段 C 联调数据与文件
 

@@ -1,0 +1,350 @@
+{
+  "databaseId": 40288130302,
+  "headSha": "88f76bd587e9ee34897433cf100827daa19d8015",
+  "status": "completed",
+  "conclusion": "failure",
+  "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40288130302",
+  "jobs": [
+    {
+      "name": "dependency, secret, and configuration scan",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40288130302/job/121456559552",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Scan source, dependency locks, and deployment configuration",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Scan source, dependency locks, and deployment configuration",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "backend integration and coverage gate",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40288130302/job/121456559863",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Initialize containers",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Prepare isolated infrastructure and migration privileges",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run MySQL integration suite and JaCoCo gate",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install browser test dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Real browser acceptance gate",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve test and coverage evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Stop isolated dependency containers",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Stop containers",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "CodeQL static analysis",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40288130302/job/121456559913",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run github/codeql-action/init@9b3254085494b55a0f7c4c2b3d2d52cc712ce370",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install pinned pnpm",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build Java and TypeScript for analysis",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run github/codeql-action/analyze@9b3254085494b55a0f7c4c2b3d2d52cc712ce370",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run github/codeql-action/analyze@9b3254085494b55a0f7c4c2b3d2d52cc712ce370",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run github/codeql-action/init@9b3254085494b55a0f7c4c2b3d2d52cc712ce370",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "frontend quality",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40288130302/job/121456559920",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install pinned pnpm",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Frozen install",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Frontend typecheck, tests, build, and contract lint",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Dependency vulnerability audit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "build and push immutable candidates",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40288130302/job/121462025961",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Package backend",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Login to GHCR",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build and push SHA-tagged images",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Scan backend image",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Scan frontend image",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Prepare immutable release manifest",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Scan backend image",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "productionDeployment": false
+}

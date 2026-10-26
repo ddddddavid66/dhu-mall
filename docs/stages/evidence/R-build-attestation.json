@@ -1,0 +1,14 @@
+{
+  "status": "LOCAL_SBOM_AND_PROVENANCE_EXPORT_PASSED",
+  "driver": "docker-container",
+  "buildkitVersion": "v0.34.1",
+  "buildkitImage": "moby/buildkit@sha256:99368f3e46177c6405b9740e4461d91cee004128daeecca78d4ceac50ec1da5c",
+  "sbomGenerator": "docker/buildkit-syft-scanner@sha256:ae4f3b554449e7e25548e7d8ccc029d17357348e30c6e3df01b92bc93654d6a9",
+  "predicateTypes": [
+    "https://spdx.dev/Document",
+    "https://slsa.dev/provenance/v1"
+  ],
+  "ociArchiveSha256": "29f34e9ad86ebea5ac244ab1800937182fca555ebd154a08a66d0b4193543135",
+  "sbomLocalStatus": "PASSED",
+  "limitation": "Minimal scratch image only; not a commerce image or vulnerability gate. Initial host auth timeout retained; retry used existing system local proxy for this process only."
+}

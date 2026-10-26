@@ -1,0 +1,49 @@
+{
+  "repository": "ddddddavid66/dhu-mall",
+  "runId": 40282687327,
+  "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40282687327",
+  "headSha": "834174529daf14a50ee8d0276fdf0b84ece30c04",
+  "status": "completed",
+  "conclusion": "failure",
+  "jobs": [
+    {
+      "name": "frontend quality",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40282687327/job/121439257089"
+    },
+    {
+      "name": "CodeQL static analysis",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40282687327/job/121439257264"
+    },
+    {
+      "name": "backend integration and coverage gate",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40282687327/job/121439257304"
+    },
+    {
+      "name": "dependency, secret, and configuration scan",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40282687327/job/121439257355"
+    },
+    {
+      "name": "build and push immutable candidates",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40282687327/job/121441620636"
+    }
+  ],
+  "fullVerifyTests": 178,
+  "browserTestsPassed": 5,
+  "browserSkipped": 0,
+  "artifactJUnitTests": 179,
+  "extraJUnitExplanation": "178 full verify tests plus the explicitly invoked E2EFixturePreparation test",
+  "sourceScanFindings": "DS-0002 HIGH in frontend/Dockerfile and infra/Dockerfile.recovery-tools; no secret findings",
+  "imagePromotion": false,
+  "productionDeployment": false,
+  "reportUploadFix": "include-hidden-files enabled for the existing explicit report allowlist; next run records proof"
+}

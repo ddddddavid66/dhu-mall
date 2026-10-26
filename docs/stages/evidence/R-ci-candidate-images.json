@@ -1,0 +1,25 @@
+{
+  "runId": 40288130302,
+  "headSha": "88f76bd587e9ee34897433cf100827daa19d8015",
+  "images": {
+    "backend": "ghcr.io/ddddddavid66/dhu-mall/backend@sha256:bd4c846299f456c1fdc8efd88b976ff3c5d807b34f669ab3b1ad0d270303f3a4",
+    "frontend": "ghcr.io/ddddddavid66/dhu-mall/frontend@sha256:3804c2383222b025a3d78db2420dd6f4ca204172a66b4945d5be41cab7ba4b71"
+  },
+  "buildAndPush": "PASSED",
+  "sbomAndProvenance": "GENERATED_AND_PUSHED_PER_BUILD_LOG",
+  "backendVulnerabilities": {
+    "high": 11,
+    "critical": 6
+  },
+  "frontendImageScan": "SKIPPED_AFTER_BACKEND_GATE_FAILURE",
+  "releaseManifest": false,
+  "productionDeployment": false,
+  "logSha256": "8ae7a4dc6c312a996bb12c63f8d5507f8ef51ef78f5627da720920ddfcf5f3e8",
+  "sourceSecretMisconfigurationRescan": {
+    "files": 470,
+    "findings": 0,
+    "exitCode": 0,
+    "offlineDependencyResolution": true,
+    "limitation": "Only secret/misconfig scanners; no claim of dependency vulnerability clearance. First online attempt failed Maven429; retained."
+  }
+}

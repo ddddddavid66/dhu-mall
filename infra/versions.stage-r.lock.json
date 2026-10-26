@@ -25,10 +25,11 @@
     "docker-cli": "docker@sha256:862099ada15c669000bef53aa4cb9d821262829f45b0dda2159ccb276443043b",
     "nginx": "nginx@sha256:47928bf67eb62a1863cb08d9ecb52d3e704304ba614eaee17884204677702951",
     "buildkit": "moby/buildkit@sha256:99368f3e46177c6405b9740e4461d91cee004128daeecca78d4ceac50ec1da5c",
-    "sbom-generator": "docker/buildkit-syft-scanner@sha256:ae4f3b554449e7e25548e7d8ccc029d17357348e30c6e3df01b92bc93654d6a9"
+    "sbom-generator": "docker/buildkit-syft-scanner@sha256:ae4f3b554449e7e25548e7d8ccc029d17357348e30c6e3df01b92bc93654d6a9",
+    "recovery-tools": "yueji-local-recovery-tools@sha256:85b60b82134d4b1260888b9a166da96e1db22513e861d64c158af1614bcae0e3"
   },
   "nginxCorrection": "Stage I Dockerfile transcription corrected to Stage A digest, actually pulled and built; historical Stage I record retained",
-  "applicationDigests": "Read actual final builds from docs/stages/evidence/R-validation.json; do not promote a candidate blocked by security scan",
+  "applicationDigests": "Actual local application image references are recorded in docs/stages/evidence/R-local-runtime.json; local images are not a scan-passed remote deployment manifest.",
   "buildAttestation": {
     "buildkitVersion": "v0.34.1",
     "buildkitCommit": "f5b59a1f2fb25a0cb7072c398cab9aed7835da4e",

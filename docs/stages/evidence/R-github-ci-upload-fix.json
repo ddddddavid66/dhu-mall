@@ -1,0 +1,48 @@
+{
+  "runId": 40284373617,
+  "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40284373617",
+  "headSha": "59f748b7d06a42bc5aa1ad2f363379d6e797330d",
+  "status": "completed",
+  "conclusion": "failure",
+  "jobs": [
+    {
+      "name": "CodeQL static analysis",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40284373617/job/121444491342"
+    },
+    {
+      "name": "frontend quality",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40284373617/job/121444491541"
+    },
+    {
+      "name": "dependency, secret, and configuration scan",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40284373617/job/121444491628"
+    },
+    {
+      "name": "backend integration and coverage gate",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40284373617/job/121444491693"
+    },
+    {
+      "name": "build and push immutable candidates",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/ddddddavid66/dhu-mall/actions/runs/40284373617/job/121446564411"
+    }
+  ],
+  "browserReportUploaded": true,
+  "browserStats": {
+    "startTime": "2026-10-26T07:18:04.443Z",
+    "duration": 42022.424,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

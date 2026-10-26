@@ -1,0 +1,41 @@
+{
+  "commit": "04c562f",
+  "scanExitCode": 0,
+  "scanner": "0.76.1",
+  "findings": [
+    {
+      "target": "backend/pom.xml",
+      "misconfigurations": 0,
+      "secrets": 0
+    },
+    {
+      "target": "frontend/pnpm-lock.yaml",
+      "misconfigurations": 0,
+      "secrets": 0
+    },
+    {
+      "target": "backend/Dockerfile",
+      "misconfigurations": 0,
+      "secrets": 0
+    },
+    {
+      "target": "frontend/Dockerfile",
+      "misconfigurations": 0,
+      "secrets": 0
+    },
+    {
+      "target": "infra/Dockerfile.recovery-tools",
+      "misconfigurations": 0,
+      "secrets": 0
+    }
+  ],
+  "frontendUser": "101:101",
+  "recoveryImageDefaultUser": "10001:10001",
+  "recoveryInvocation": "Explicit --user 0:0 only for isolated administrative backup/restore with Docker socket",
+  "frontendHealth": true,
+  "productProxy": true,
+  "recoveryPassed": true,
+  "dependencyUpgrade": false,
+  "scannerExclusion": false,
+  "limitation": "Previously accepted image dependency vulnerabilities remain unresolved; remote rerun recorded separately"
+}

@@ -1,0 +1,47 @@
+{
+  "recordedAt": "2026-10-26T08:10:05.681319+00:00",
+  "documents": [
+    {
+      "name": "01-阅集商城需求文档.docx",
+      "pages": 5,
+      "sha256": "2e6f15045c3ceeb4dc08607635bc07664741ed12854e8c7dd484d625651a34ff",
+      "renderedPageInspection": true
+    },
+    {
+      "name": "02-阅集商城设计文档.docx",
+      "pages": 6,
+      "sha256": "90d5fc7bf909a2b54f7809ad12aa4dd9b506f2b6b9b281a226f12ab21df9691f",
+      "renderedPageInspection": true
+    },
+    {
+      "name": "03-阅集商城测试报告.docx",
+      "pages": 4,
+      "sha256": "7c346eb09495c10f5743167118ff9a0d679ecf39bb8950271dae32a018bf09fd",
+      "renderedPageInspection": true
+    }
+  ],
+  "presentation": {
+    "name": "04-阅集商城项目汇报.pptx",
+    "slides": 10,
+    "sha256": "2b24a481818138acb3e963038af610a6bf36cf651742a8d960f7d6297c7a6438",
+    "renderedSlideInspection": true,
+    "nativePowerPointOpened": false,
+    "validationReceiptSha256": "90a54373149663ba8f2472e9883cb1bc27c2289fb18756a971a1096e4a46596f"
+  },
+  "video": {
+    "output": "05-阅集商城本地联调演示.mp4",
+    "durationSeconds": 123.033333,
+    "sha256": "a7b5dbf457074d23ce69b17cf40ba84f965380a08a5f50197fb488159c0dd6ff",
+    "scope": "LOCAL_MOCK recorded automated browser excerpts; sandbox transaction and live narration absent",
+    "sourceRecordings": [
+      ".artifacts\\R-playwright-results\\commerce-真实页面跨店购买、独立模拟支付、履约评价和退款闭环-desktop\\video.webm",
+      ".artifacts\\R-playwright-results\\commerce-真实页面跨店购买、独立模拟支付、履约评价和退款闭环-mobile\\video.webm"
+    ],
+    "slowdown": 3,
+    "sourceDurationsSeconds": [
+      16.16,
+      15.52
+    ]
+  },
+  "limitation": "Submission preview; teacher/member/signatures absent; video has no live narration and no actual sandbox transaction"
+}

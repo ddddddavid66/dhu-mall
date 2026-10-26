@@ -1,0 +1,7 @@
+{
+  "DEPLOY_ENV": "test",
+  "BACKEND_IMAGE": "yueji-local-backend@sha256:eb40210bfa75e89b4feaad0220b31bec38c17119f7bf7ab424bedce3e94ea6ae",
+  "FRONTEND_IMAGE": "yueji-local-frontend@sha256:8856a6245aae78c0a37b59e35752e34ad99087dccfc862df3aacdd9deccde548",
+  "PAYMENT_PROVIDER": "LOCAL_MOCK",
+  "MYSQL_DATABASE": "yueji_mall_test"
+}

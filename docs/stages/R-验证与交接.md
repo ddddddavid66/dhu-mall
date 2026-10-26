@@ -33,7 +33,14 @@
 | 后端镜像漏洞扫描 | 17项HIGH/CRITICAL发现，未修复；用户接受本地风险，不能写通过 | .artifacts/R-trivy-backend-image.json；ADR-19 |
 | pnpm --dir frontend audit --audit-level high | 0漏洞 | .artifacts/R-pnpm-audit.json |
 | actionlint / python scripts/validate-stage-i.py | 工作流语法通过，运维静态检查26项通过 | .artifacts/R-actionlint.log、R-static-ops-check.log |
+| python scripts/drill-local-rollback.py | 本地坏候选退出1未晋级；前端回退旧digest再恢复当前digest；账目和库存计数一致，数据库保持V11 | docs/stages/evidence/R-local-rollback.json |
+| GitHub Actions run 40282687327 | 后端178项及80.1777%门槛、5项浏览器、前端质量、CodeQL通过；安全配置扫描失败，镜像晋级跳过 | docs/stages/evidence/R-github-ci.json；实际运行URL见该文件 |
+| python scripts/probe-availability.py --base-url http://127.0.0.1:18080 --health-base-url http://127.0.0.1:19081 --output 新运行文件 | 北京时间2026-10-26 14:57:09启动；仍在运行，不是24小时通过 | .artifacts/R-availability-process.json；docs/stages/evidence/R-availability-snapshot.json |
 | AlipaySandboxProbe 对固定沙箱网关只读查单 | 真实code=40004、ACQ.TRADE_NOT_EXIST；未付款、未退款 | docs/stages/evidence/R-alipay-connectivity.json |
+
+2026-10-26追加修复：04c562f将前端设为UID101并为临时目录分配对应权限；恢复工具默认UID10001，隔离维护命令显式--user 0:0。未升级依赖、未增加扫描忽略规则。本地实际Trivy配置/秘密扫描退出0，三个Dockerfile无HIGH/CRITICAL配置发现；非root前端健康与真实商品代理通过；新恢复镜像完整加密恢复复验通过。远端复验运行40285947137单独记录最终结果。Linux TLS私钥需允许nginx组101只读，目录可遍历，不能设为全局可读。
+
+24小时探测在北京时间15:27:12记录1次RemoteDisconnected，对应本轮显式恢复维护窗。原始样本保留，当前阶段不重新起算或从分母删掉；最终是否达到99%须等窗口完整结束。
 
 完整后端结论引用保留的最终原基线报告，不引用后来取消的依赖升级诊断测试。运行报告聚合脚本不会重跑测试。92项观测不是所有输入组合的穷举证明。随机开发账号及原始认证头不进入仓库；脱敏JUnit删除环境属性和输出，保留用例名、时间及计数。
 
@@ -50,17 +57,25 @@
 | TC-27 | 中间件/适配器故障与回源、拒绝、恢复本地验证通过；真实支付宝故障场景未验收 |
 | TC-28 | 部分完成；本地隔离恢复和文件引用通过，独立备份目标及标准RPO/RTO验收未齐 |
 | TC-29 | 阻塞；没有符合01固定口径的独立负载/监控和4vCPU/8GB Linux环境，未产生正式性能数值 |
-| TC-30 | 未完成；需连续24小时的全部样本，启动后的进度单独记录 |
-| TC-31 | 部分完成；静态门禁与本地容器通过，远端CI及回退演练另记实际结果 |
+| TC-30 | 进行中；已启动每分钟探测，需完整24小时全部样本，不将当前成功率当整项通过 |
+| TC-31 | 部分完成；真实CI后端/浏览器/前端/CodeQL及源码配置扫描通过；候选构建推送通过，镜像依赖扫描17项失败；坏候选拒绝与前端回退通过，无后端版本回退或远端CD证明 |
 | TC-32 | 部分完成；真实AI记录、需求契约和测试可追溯，完整对话导出、成员签名及不可见模型build不能代填 |
 
 ## 尚未解决的风险和交接记录
 
 1. 用户明确不部署生产并接受当前依赖安全发现。禁止将该决定解释为扫描通过、取消鉴权或开放管理端口。
 2. 用户已提供沙箱appId/sellerId、密钥受限文件路径和cloudflared；买家尚不可用，因此真实交易仍阻塞。密钥未写入仓库或前端。公网临时回调需要运行时建立，并核验可达，不能伪填。
-3. GitHub仓库为 ddddddavid66/dhu-mall，当前授权已核验；实际推送及Actions结果补充到CI证据，未完成前不写成功。
+3. GitHub仓库为 ddddddavid66/dhu-mall，源码在main/backend/src和main/frontend/src。已推送实现8341745、报告上传修复59f748b及容器用户修复04c562f。前两次Actions安全配置扫描失败；第二次浏览器报告已实际下载并确认5通过0跳过。配置修复后本地扫描及运行通过，第三次远端结果另记。未发布部署清单或prod。
 4. 同机rclone副本不构成独立备份；性能及24小时结果不能用单次健康、设计指标或截图代替。
 5. 原始对话、教师模板、成员信息和本人签名由提交者提供。课程材料只能作为待补资料的提交预览。
 6. 用户既有未提交内容为此前授权的收尾工作，本轮在同一工作区继续，未清共享开发库。未执行任何prod发布。
 
-下一步优先完成CI真实运行、回退/连续探测、课程材料和源码归档；具备可用买家后再执行付款、通知、查单、关单和退款。证据汇总入口：evidence/R-validation.json。
+下一步继续连续探测和报告上传复验；课程预览材料按交付索引提供，模板、成员及签名待补。具备可用买家后再执行付款、通知、查单、关单和退款。证据汇总入口：evidence/R-validation.json。
+
+## 后续 CI 与容器联调修复记录
+
+远端40285947137的四个质量job全部通过；候选镜像任务因默认docker驱动不支持attestation而失败，不是GHCR登录失败。88f76bd改用docker-container驱动，冻结BuildKit v0.34.1与SBOM生成器digest，保留SBOM/provenance；本地最小上下文已实际导出含SLSA provenance及SPDX SBOM的OCI镜像并解析核对；首次Windows端auth.docker.io超时失败保留，使用已配置的系统本地代理后通过，没有修改系统设置。远端40288130302执行商城镜像复验，最终结果见R-CI实测记录.md与机器证据，不能预写通过。
+
+同一提交只为本地专用环境补上https://localhost:18443精确Origin。真实Chromium经过非root Nginx和TLS验证登录、重载Cookie刷新、会员订单页与退出全部通过，CSRF保持启用；证据evidence/R-container-browser.json。未将所有Origin放行，未改变业务权限或令牌策略。追加修复后没有修改后端业务源码；已通过的完整后端与核心E2E结果仍由原始及远端报告支撑。
+
+最终远端40288130302：四个质量job通过，前后端SHA候选镜像成功构建、生成SBOM/provenance并推送GHCR；后端依赖镜像扫描17项（11高危、6严重）退出1，前端镜像扫描和release-manifest跳过。候选digest见evidence/R-ci-candidate-images.json；未执行部署。最终470文件快照秘密/配置复扫退出0；在线首次Maven429保留，离线依赖解析复扫不代替漏洞验收。

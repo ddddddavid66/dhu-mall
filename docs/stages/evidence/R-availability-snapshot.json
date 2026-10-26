@@ -1,0 +1,13 @@
+{
+  "recordedAt": "2026-10-26T08:06:44.146078+00:00",
+  "output": ".artifacts/R-availability-20261026-145709.jsonl",
+  "status": "RUNNING",
+  "startedAtEpoch": 1792997830.056378,
+  "elapsedSeconds": 4140.03,
+  "expectedSamples": 1440,
+  "recordedSamples": 70,
+  "successfulSamples": 69,
+  "successPercent": 98.5714,
+  "targetDurationSeconds": 86400,
+  "complete24Hours": false
+}

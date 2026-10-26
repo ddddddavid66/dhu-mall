@@ -1,0 +1,11 @@
+{
+  "status": "PASSED",
+  "origin": "https://localhost:18443",
+  "login": 200,
+  "refresh": 200,
+  "logout": 200,
+  "memberOrdersPage": true,
+  "csrfEnabled": true,
+  "scope": "Real Chromium through non-root Nginx and HTTPS; local self-signed certificate only",
+  "checkedAt": "2026-10-26T07:44:17.157Z"
+}

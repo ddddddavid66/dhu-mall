@@ -2,6 +2,7 @@
 .pnpm-store/
 .artifacts/
 deliverables/
+.chart-data-*/
 *.pem
 *.key
 *.p12

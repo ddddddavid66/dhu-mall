@@ -1,5 +1,5 @@
 {
-  "generatedAtUtc": "2026-10-26T06:54:54.212971+00:00",
+  "generatedAtUtc": "2026-10-26T07:28:53.426446+00:00",
   "baseline": "Java 21 / Spring Boot 3.5.16 / V11 / OpenAPI 0.7.0",
   "backend": {
     "tests": 178,
@@ -3336,8 +3336,8 @@
   },
   "recovery": {
     "status": "LOCAL_RESTORE_INVARIANTS_PASSED",
-    "restoreDatabase": "yueji_mall_restore_20261026T065010Z",
-    "restoreSubpath": "restore/20261026T065010Z",
+    "restoreDatabase": "yueji_mall_restore_20261026T072651Z",
+    "restoreSubpath": "restore/20261026T072651Z",
     "invariants": {
       "files": 1,
       "onHand": 297,
@@ -3360,7 +3360,7 @@
     "restoredLogin": "OK",
     "readiness": "UP",
     "completedOrderStatus": "COMPLETED",
-    "checkedAt": "2026-10-26T06:50:25.1551867+00:00",
+    "checkedAt": "2026-10-26T07:27:09.7032767+00:00",
     "referencedFileSha256": "98350a9c096e253c66105834a35cb544d066e794419a8674abae42d8fbef89d7",
     "status": "PASSED",
     "offsiteVerified": false

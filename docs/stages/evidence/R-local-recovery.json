@@ -1,7 +1,7 @@
 {
   "status": "LOCAL_RESTORE_INVARIANTS_PASSED",
-  "restoreDatabase": "yueji_mall_restore_20261026T065010Z",
-  "restoreSubpath": "restore/20261026T065010Z",
+  "restoreDatabase": "yueji_mall_restore_20261026T072651Z",
+  "restoreSubpath": "restore/20261026T072651Z",
   "invariants": {
     "files": 1,
     "onHand": 297,
