@@ -153,6 +153,7 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: quality-evidence-${{ github.run_id }}
+          include-hidden-files: true
           path: |
             backend/target/surefire-reports/
             backend/target/site/jacoco/
