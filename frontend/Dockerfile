@@ -11,4 +11,5 @@ FROM nginx@sha256:47928bf67eb62a1863cb08d9ecb52d3e704304ba614eaee178842046777029
 ENV NGINX_ENVSUBST_FILTER=^APP_HOSTNAME$
 COPY frontend/nginx.conf.template /etc/nginx/templates/default.conf.template
 COPY --from=build /workspace/dist/ /usr/share/nginx/html/
+USER 101:101
 EXPOSE 80 443

@@ -2,4 +2,6 @@ FROM docker@sha256:862099ada15c669000bef53aa4cb9d821262829f45b0dda2159ccb2764430
 RUN apk add --no-cache age rclone python3 bash coreutils tar gzip util-linux
 COPY scripts/yueji-ops-common.sh scripts/backup-yueji-linux.sh scripts/restore-yueji-isolated-linux.sh /usr/local/lib/yueji/
 COPY infra/local-recovery-runner.sh /usr/local/bin/local-recovery-runner
+RUN addgroup -g 10001 yueji-ops && adduser -D -u 10001 -G yueji-ops yueji-ops
+USER 10001:10001
 ENTRYPOINT ["bash", "/usr/local/bin/local-recovery-runner"]

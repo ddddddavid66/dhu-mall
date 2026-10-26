@@ -10,7 +10,8 @@ if($LASTEXITCODE -ne 0){throw 'Compose resolution failed'}
 if($LASTEXITCODE -ne 0){throw 'Could not establish local maintenance window'}
 try {
     $taskName='yueji-local-recovery-'+[DateTimeOffset]::UtcNow.ToUnixTimeSeconds()
-    & docker run --name $taskName --network yueji-local-test_yueji --mount 'type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock' --mount "type=bind,source=$taskRoot,target=/src,readonly" --mount 'type=volume,source=yueji-local-recovery,target=/opt/yueji' --mount "type=bind,source=$taskRoot/.artifacts/local-test/files,target=/opt/yueji/files" yueji-local-recovery-tools@sha256:4bc6c0545adc96066181e81eb53e59c94ef4fa98c9ab0f1c9e3d48aef5ea7d25 *> .artifacts/R-recovery-run.log
+    # 恢复属于显式管理员维护操作；工具镜像默认非root，此处按隔离演练范围申请root与Docker socket。
+    & docker run --name $taskName --user 0:0 --network yueji-local-test_yueji --mount 'type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock' --mount "type=bind,source=$taskRoot,target=/src,readonly" --mount 'type=volume,source=yueji-local-recovery,target=/opt/yueji' --mount "type=bind,source=$taskRoot/.artifacts/local-test/files,target=/opt/yueji/files" yueji-local-recovery-tools@sha256:85b60b82134d4b1260888b9a166da96e1db22513e861d64c158af1614bcae0e3 *> .artifacts/R-recovery-run.log
     $taskExit=$LASTEXITCODE
     & docker cp "${taskName}:/opt/yueji/records/." $taskRecord
     if($taskExit -ne 0){throw 'Encrypted backup / isolated restore failed; inspect preserved logs'}
