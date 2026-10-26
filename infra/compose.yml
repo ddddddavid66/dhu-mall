@@ -1,7 +1,39 @@
 name: yueji
 
 services:
+  redis:
+    mem_limit: 256m
+    image: redis:7.4.11@sha256:44960b3100c48159a66d28c18b0588c193492e25f7551d60e51dd464fc3eca5b
+    restart: unless-stopped
+    command: [sh, -c, 'exec redis-server --appendonly yes --requirepass "$$(cat /run/secrets/redis_password)"']
+    secrets: [redis_password]
+    volumes: [redis-data:/data]
+    networks: [yueji]
+    healthcheck:
+      test: [CMD-SHELL, 'REDISCLI_AUTH=$$(cat /run/secrets/redis_password) redis-cli ping | grep -q PONG']
+      interval: 5s
+      timeout: 2s
+      retries: 20
+  rabbitmq:
+    mem_limit: 512m
+    image: rabbitmq:4.1.8-management@sha256:789893c0b4907f0ff3bc6e630120174ab6879825907f4c3ab79439e2488409cc
+    restart: unless-stopped
+    entrypoint: [sh, /etc/yueji/rabbitmq-entrypoint.sh]
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME:?set non-default broker user}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST:?set isolated broker vhost}
+    secrets: [rabbitmq_password]
+    volumes:
+      - ./rabbitmq-entrypoint.sh:/etc/yueji/rabbitmq-entrypoint.sh:ro
+      - rabbitmq-data:/var/lib/rabbitmq
+    networks: [yueji]
+    healthcheck:
+      test: [CMD, rabbitmq-diagnostics, -q, ping]
+      interval: 10s
+      timeout: 5s
+      retries: 20
   mysql:
+    mem_limit: 2g
     image: mysql@sha256:76f0358884cb92d9a086d24e5671c38048d3fef40f2588703d73eb55392d6b69
     restart: unless-stopped
     environment:
@@ -30,6 +62,7 @@ services:
         max-file: "10"
 
   backend:
+    mem_limit: 1g
     image: ${BACKEND_IMAGE:?set an immutable backend image digest}
     restart: unless-stopped
     init: true
@@ -60,17 +93,38 @@ services:
       ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:?set exact HTTPS frontend origin}
       COOKIE_SECURE: "true"
       LOG_LEVEL: INFO
+      LOGGING_FILE_NAME: /var/log/yueji/application.log
+      LOGGING_STRUCTURED_FORMAT_FILE: logstash
       METRICS_ENABLED: "true"
+      REDIS_ENABLED: 'true'
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_PASSWORD_FILE: /run/secrets/redis_password
+      REDIS_NAMESPACE: yueji.${DEPLOY_ENV}
+      MESSAGING_ENABLED: 'true'
+      MESSAGING_NAMESPACE: yueji.${DEPLOY_ENV}
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: '5672'
+      RABBITMQ_USERNAME: ${RABBITMQ_USERNAME}
+      RABBITMQ_PASSWORD_FILE: /run/secrets/rabbitmq_password
+      RABBITMQ_VHOST: ${RABBITMQ_VHOST}
       YUEJI_DEVSEED_ENABLED: "false"
     secrets:
       - db_password
       - jwt_signing_key
       - alipay_app_private_key
       - alipay_public_key
+      - redis_password
+      - rabbitmq_password
     volumes:
       - ${FILE_STORAGE_PATH:?set a restricted persistent file path}:/var/lib/yueji/files
+      - application-logs:/var/log/yueji
     depends_on:
       mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     networks:
       - yueji
@@ -126,8 +180,15 @@ networks:
 
 volumes:
   mysql-data:
+  application-logs:
+  redis-data:
+  rabbitmq-data:
 
 secrets:
+  redis_password:
+    file: ${REDIS_PASSWORD_FILE:?protected Redis secret file required}
+  rabbitmq_password:
+    file: ${RABBITMQ_PASSWORD_FILE:?protected RabbitMQ secret file required}
   db_password:
     file: ${DB_PASSWORD_FILE:?set a protected database password file}
   mysql_root_password:

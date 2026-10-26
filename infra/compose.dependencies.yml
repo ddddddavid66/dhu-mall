@@ -1,0 +1,32 @@
+name: yueji-local-dependencies
+services:
+  redis:
+    image: redis:7.4.11@sha256:44960b3100c48159a66d28c18b0588c193492e25f7551d60e51dd464fc3eca5b
+    command: [sh, -c, 'exec redis-server --appendonly yes --requirepass "$$(cat /run/secrets/redis_password)"']
+    secrets: [redis_password]
+    ports: ['127.0.0.1:16379:6379']
+    volumes: [redis-data:/data]
+    healthcheck:
+      test: [CMD-SHELL, 'REDISCLI_AUTH=$$(cat /run/secrets/redis_password) redis-cli ping | grep -q PONG']
+      interval: 5s
+      timeout: 2s
+      retries: 20
+  rabbitmq:
+    image: rabbitmq:4.1-management@sha256:789893c0b4907f0ff3bc6e630120174ab6879825907f4c3ab79439e2488409cc
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME:?isolated username required}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:?isolated password required}
+      RABBITMQ_DEFAULT_VHOST: yueji_test
+    ports: ['127.0.0.1:15673:5672', '127.0.0.1:15674:15672']
+    volumes: [rabbit-data:/var/lib/rabbitmq]
+    healthcheck:
+      test: [CMD, rabbitmq-diagnostics, -q, ping]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+volumes:
+  redis-data:
+  rabbit-data:
+secrets:
+  redis_password:
+    file: ${REDIS_PASSWORD_FILE:?protected password file required}

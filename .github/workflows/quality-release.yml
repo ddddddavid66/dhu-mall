@@ -32,7 +32,7 @@ jobs:
           scanners: vuln,misconfig,secret
           vuln-type: os,library
           severity: CRITICAL,HIGH
-          ignore-unfixed: true
+          ignore-unfixed: false
           exit-code: '1'
 
   codeql:
@@ -62,7 +62,7 @@ jobs:
         run: npm install --global pnpm@10.34.7
       - name: Build Java and TypeScript for analysis
         run: |
-          ./backend/mvnw -B -ntp -f backend/pom.xml -DskipTests package
+          (cd backend && ./mvnw -B -ntp -DskipTests package)
           pnpm --dir frontend install --frozen-lockfile
           pnpm --dir frontend run build
       - uses: github/codeql-action/analyze@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
@@ -126,9 +126,46 @@ jobs:
           java-version: 21.0.12.1+1
           cache: maven
           cache-dependency-path: backend/pom.xml
+      - name: Prepare isolated infrastructure and migration privileges
+        env:
+          MYSQL_SERVICE_ID: ${{ job.services.mysql.id }}
+        run: |
+          docker exec -e MYSQL_PWD=ci-only-disposable-root-password "$MYSQL_SERVICE_ID" mysql -uroot -e "CREATE DATABASE IF NOT EXISTS yueji_migration_test; GRANT ALL ON yueji_migration_test.* TO 'yueji_test'@'%'; SET GLOBAL log_bin_trust_function_creators=1;"
+          python scripts/prepare-test-dependencies.py
+          docker compose --env-file .artifacts/R-dependencies.env -f infra/compose.dependencies.yml up -d --wait
       - name: Run MySQL integration suite and JaCoCo gate
         working-directory: backend
         run: ./mvnw -B -ntp clean verify
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: 24.22.1
+          package-manager-cache: false
+      - name: Install browser test dependencies
+        run: |
+          npm install --global pnpm@10.34.7
+          pnpm --dir frontend install --frozen-lockfile
+          pnpm --dir frontend exec playwright install --with-deps chromium
+      - name: Real browser acceptance gate
+        run: bash scripts/run-acceptance-linux.sh
+      - name: Preserve test and coverage evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: quality-evidence-${{ github.run_id }}
+          path: |
+            backend/target/surefire-reports/
+            backend/target/site/jacoco/
+            .artifacts/R-playwright-report/
+            .artifacts/R-playwright.json
+            .artifacts/R-*-refund.png
+            .artifacts/R-*-xss.png
+            .artifacts/R-settlement-mock-paid.png
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Stop isolated dependency containers
+        if: always()
+        run: docker compose --env-file .artifacts/R-dependencies.env -f infra/compose.dependencies.yml stop
 
   publish-candidate:
     name: build and push immutable candidates
@@ -175,14 +212,18 @@ jobs:
           frontend_digest="$(jq -r '.["containerimage.digest"]' "$RUNNER_TEMP/frontend-metadata.json")"
           [[ "$backend_digest" =~ ^sha256:[a-f0-9]{64}$ ]]
           [[ "$frontend_digest" =~ ^sha256:[a-f0-9]{64}$ ]]
-          echo "backend_digest=$backend_digest" >> "$GITHUB_OUTPUT"
-          echo "frontend_digest=$frontend_digest" >> "$GITHUB_OUTPUT"
-          echo "repository=$repository" >> "$GITHUB_OUTPUT"
+          {
+            echo "backend_digest=$backend_digest"
+            echo "frontend_digest=$frontend_digest"
+            echo "repository=$repository"
+          } >> "$GITHUB_OUTPUT"
           printf 'BACKEND_IMAGE=%s/backend@%s\nFRONTEND_IMAGE=%s/frontend@%s\n' \
             "$repository" "$backend_digest" "$repository" "$frontend_digest" > "$RUNNER_TEMP/yueji-images.env"
-          echo "## Candidate images built; vulnerability scan pending" >> "$GITHUB_STEP_SUMMARY"
-          echo "Git SHA: `$GITHUB_SHA`" >> "$GITHUB_STEP_SUMMARY"
-          echo "Candidate image digests have not been published as a deployment manifest until scans pass." >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo "## Candidate images built; vulnerability scan pending"
+            printf 'Git SHA: %s\n' "$GITHUB_SHA"
+            echo "Candidate image digests have not been published as a deployment manifest until scans pass."
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Scan backend image
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
@@ -191,7 +232,7 @@ jobs:
           scanners: vuln
           vuln-type: os,library
           severity: CRITICAL,HIGH
-          ignore-unfixed: true
+          ignore-unfixed: false
           exit-code: '1'
       - name: Scan frontend image
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
@@ -201,7 +242,7 @@ jobs:
           scanners: vuln
           vuln-type: os,library
           severity: CRITICAL,HIGH
-          ignore-unfixed: true
+          ignore-unfixed: false
           exit-code: '1'
       - name: Prepare immutable release manifest
         env:
@@ -217,17 +258,17 @@ jobs:
             --arg branch "$GITHUB_REF_NAME" \
             --arg backendImage "$BACKEND_IMAGE" \
             --arg frontendImage "$FRONTEND_IMAGE" \
-            --arg migrationTarget 'V10' \
-            --arg contractVersion '0.5.0' \
+            --arg migrationTarget 'V11' \
+            --arg contractVersion '0.7.0' \
             --arg createdAtUtc "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
-            '{workflow:$workflow,runId:$runId,headSha:$headSha,branch:$branch,backendImage:$backendImage,frontendImage:$frontendImage,migrationTarget:$migrationTarget,contractVersion:$contractVersion,createdAtUtc:$createdAtUtc,quality:{unitIntegration:true,codeql:true,sourceScan:true,imageScan:true,sbom:true,provenance:true}}' \
+            '{workflow:$workflow,runId:$runId,headSha:$headSha,branch:$branch,backendImage:$backendImage,frontendImage:$frontendImage,migrationTarget:$migrationTarget,contractVersion:$contractVersion,createdAtUtc:$createdAtUtc,quality:{browserAcceptance:true,unitIntegration:true,codeql:true,sourceScan:true,imageScan:true,sbom:true,provenance:true}}' \
             > "$RUNNER_TEMP/yueji-release/release-manifest.json"
           {
             echo "## Immutable candidate images (scan passed)"
-            echo "Git SHA: `$GITHUB_SHA`"
-            echo "Backend: `$BACKEND_IMAGE`"
-            echo "Frontend: `$FRONTEND_IMAGE`"
-            echo "Migration target: V10; OpenAPI contract: 0.5.0"
+            printf 'Git SHA: %s\n' "$GITHUB_SHA"
+            printf 'Backend: %s\n' "$BACKEND_IMAGE"
+            printf 'Frontend: %s\n' "$FRONTEND_IMAGE"
+            echo "Migration target: V11; OpenAPI contract: 0.7.0"
             echo "SBOM and provenance attestations were attached at build time."
             echo "No test or production deployment was performed by this job."
           } >> "$GITHUB_STEP_SUMMARY"

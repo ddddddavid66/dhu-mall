@@ -57,7 +57,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/v1/after-sales/**","/api/v1/support/**","/api/v1/finance/**","/api/v1/reviews").authenticated()
                         .requestMatchers(org.springframework.http.HttpMethod.POST,"/api/v1/payments/alipay/notify").permitAll()
                         .requestMatchers("/api/v1/checkout/**","/api/v1/orders","/api/v1/orders/**","/api/v1/payments/**").authenticated()
-                        .requestMatchers("/api/v1/me","/api/v1/me/**","/api/v1/addresses","/api/v1/addresses/**","/api/v1/admin/**").authenticated()
+                        .requestMatchers("/api/v1/dashboard","/api/v1/me","/api/v1/me/**","/api/v1/addresses","/api/v1/addresses/**","/api/v1/admin/**").authenticated()
                         .anyRequest().denyAll())
                 .exceptionHandling(exceptions -> exceptions
                         .authenticationEntryPoint((request, response, exception) -> errors.write(request, response, ErrorCode.AUTH_REQUIRED))

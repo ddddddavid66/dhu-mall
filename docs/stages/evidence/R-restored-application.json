@@ -1,0 +1,9 @@
+{
+  "restoredLogin": "OK",
+  "readiness": "UP",
+  "completedOrderStatus": "COMPLETED",
+  "checkedAt": "2026-10-26T06:50:25.1551867+00:00",
+  "referencedFileSha256": "98350a9c096e253c66105834a35cb544d066e794419a8674abae42d8fbef89d7",
+  "status": "PASSED",
+  "offsiteVerified": false
+}

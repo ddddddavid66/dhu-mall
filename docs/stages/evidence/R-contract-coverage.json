@@ -1,0 +1,2265 @@
+{
+  "note": "HTTP observation evidence, not a claim of full schema or business assertion coverage",
+  "operations": 92,
+  "observedBoth": 92,
+  "rows": [
+    {
+      "operationId": "API-01",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        400,
+        409
+      ],
+      "observations": 10,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.IdentityHttpTests.missingSessionsDisabledAccountsAndOversizedUtf8LoginFailClosed(IdentityHttpTests.java:117)",
+        "com.yueji.mall.IdentityHttpTests.registrationHasOnlyMemberRoleAndStrictFieldsAndStoresOnlyHash(IdentityHttpTests.java:101)",
+        "com.yueji.mall.IdentityHttpTests.registrationHasOnlyMemberRoleAndStrictFieldsAndStoresOnlyHash(IdentityHttpTests.java:102)",
+        "com.yueji.mall.IdentityHttpTests.registrationHasOnlyMemberRoleAndStrictFieldsAndStoresOnlyHash(IdentityHttpTests.java:103)",
+        "com.yueji.mall.IdentityHttpTests.registrationHasOnlyMemberRoleAndStrictFieldsAndStoresOnlyHash(IdentityHttpTests.java:96)"
+      ]
+    },
+    {
+      "operationId": "API-02",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        403
+      ],
+      "observations": 328,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.IdentityHttpTests.failedLoginCountersAndAccountLockPersistAndResetAfterExpiry(IdentityHttpTests.java:178)",
+        "com.yueji.mall.IdentityHttpTests.failedLoginCountersAndAccountLockPersistAndResetAfterExpiry(IdentityHttpTests.java:180)",
+        "com.yueji.mall.IdentityHttpTests.login(IdentityHttpTests.java:52)",
+        "com.yueji.mall.IdentityHttpTests.missingSessionsDisabledAccountsAndOversizedUtf8LoginFailClosed(IdentityHttpTests.java:106)",
+        "com.yueji.mall.IdentityHttpTests.missingSessionsDisabledAccountsAndOversizedUtf8LoginFailClosed(IdentityHttpTests.java:107)",
+        "com.yueji.mall.IdentityHttpTests.missingSessionsDisabledAccountsAndOversizedUtf8LoginFailClosed(IdentityHttpTests.java:109)",
+        "com.yueji.mall.StageCHttpTests.login(StageCHttpTests.java:54)"
+      ]
+    },
+    {
+      "operationId": "API-03",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        403
+      ],
+      "observations": 24,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.session(IdentityHttpTests.java:61)"
+      ]
+    },
+    {
+      "operationId": "API-04",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        403
+      ],
+      "observations": 12,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.session(IdentityHttpTests.java:61)"
+      ]
+    },
+    {
+      "operationId": "API-05",
+      "method": "GET",
+      "path": "/api/v1/me",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        403
+      ],
+      "observations": 28,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.accessExpiryCookieAndRefreshRotationAreReal(IdentityHttpTests.java:150)",
+        "com.yueji.mall.IdentityHttpTests.csrfOriginAndLogoutCannotBeBypassedWithCookieAlone(IdentityHttpTests.java:171)",
+        "com.yueji.mall.IdentityHttpTests.csrfOriginAndLogoutCannotBeBypassedWithCookieAlone(IdentityHttpTests.java:174)",
+        "com.yueji.mall.IdentityHttpTests.forgedExpiredWrongAudienceAndExpiredRefreshSessionsAreRejected(IdentityHttpTests.java:78)",
+        "com.yueji.mall.IdentityHttpTests.forgedExpiredWrongAudienceAndExpiredRefreshSessionsAreRejected(IdentityHttpTests.java:87)",
+        "com.yueji.mall.IdentityHttpTests.passwordChangeRevokesAllSessionsAndAcceptsOnlyTheOldPassword(IdentityHttpTests.java:189)",
+        "com.yueji.mall.IdentityHttpTests.refreshReplayRevokesTheEntireFamilyAndCommitsDespite401(IdentityHttpTests.java:160)",
+        "com.yueji.mall.IdentityHttpTests.roleCreationEditingAndPermissionDirectoryFollowTheContract(IdentityHttpTests.java:240)",
+        "com.yueji.mall.IdentityHttpTests.shopMembershipIsServerAssignedScopedAndRevokesExistingTokens(IdentityHttpTests.java:272)",
+        "com.yueji.mall.IdentityHttpTests.shopMembershipIsServerAssignedScopedAndRevokesExistingTokens(IdentityHttpTests.java:280)",
+        "com.yueji.mall.IdentityHttpTests.userDisableAndGrantChangesInvalidateOldAccessAndRefreshImmediately(IdentityHttpTests.java:222)",
+        "com.yueji.mall.IdentityHttpTests.userDisableAndGrantChangesInvalidateOldAccessAndRefreshImmediately(IdentityHttpTests.java:227)"
+      ]
+    },
+    {
+      "operationId": "API-06",
+      "method": "PUT",
+      "path": "/api/v1/me/password",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.passwordChangeRevokesAllSessionsAndAcceptsOnlyTheOldPassword(IdentityHttpTests.java:187)",
+        "com.yueji.mall.IdentityHttpTests.passwordChangeRevokesAllSessionsAndAcceptsOnlyTheOldPassword(IdentityHttpTests.java:188)"
+      ]
+    },
+    {
+      "operationId": "API-07",
+      "method": "GET",
+      "path": "/api/v1/addresses",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        403
+      ],
+      "observations": 10,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.addressCountAndNonDefaultUpdatesRespectTheServerBoundary(IdentityHttpTests.java:125)",
+        "com.yueji.mall.IdentityHttpTests.addressesAreOwnedHaveOneDefaultAndDeleteIdempotently(IdentityHttpTests.java:197)",
+        "com.yueji.mall.IdentityHttpTests.roleCreationEditingAndPermissionDirectoryFollowTheContract(IdentityHttpTests.java:238)",
+        "com.yueji.mall.IdentityHttpTests.roleCreationEditingAndPermissionDirectoryFollowTheContract(IdentityHttpTests.java:241)"
+      ]
+    },
+    {
+      "operationId": "API-08",
+      "method": "POST",
+      "path": "/api/v1/addresses",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        409
+      ],
+      "observations": 50,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.addressCountAndNonDefaultUpdatesRespectTheServerBoundary(IdentityHttpTests.java:121)",
+        "com.yueji.mall.IdentityHttpTests.addressCountAndNonDefaultUpdatesRespectTheServerBoundary(IdentityHttpTests.java:123)",
+        "com.yueji.mall.IdentityHttpTests.addressCountAndNonDefaultUpdatesRespectTheServerBoundary(IdentityHttpTests.java:124)",
+        "com.yueji.mall.IdentityHttpTests.addressesAreOwnedHaveOneDefaultAndDeleteIdempotently(IdentityHttpTests.java:194)",
+        "com.yueji.mall.IdentityHttpTests.addressesAreOwnedHaveOneDefaultAndDeleteIdempotently(IdentityHttpTests.java:195)",
+        "com.yueji.mall.IdentityHttpTests.addressesAreOwnedHaveOneDefaultAndDeleteIdempotently(IdentityHttpTests.java:205)"
+      ]
+    },
+    {
+      "operationId": "API-09",
+      "method": "PUT",
+      "path": "/api/v1/addresses/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        404
+      ],
+      "observations": 10,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.addressCountAndNonDefaultUpdatesRespectTheServerBoundary(IdentityHttpTests.java:122)",
+        "com.yueji.mall.IdentityHttpTests.addressesAreOwnedHaveOneDefaultAndDeleteIdempotently(IdentityHttpTests.java:198)",
+        "com.yueji.mall.IdentityHttpTests.addressesAreOwnedHaveOneDefaultAndDeleteIdempotently(IdentityHttpTests.java:200)",
+        "com.yueji.mall.IdentityHttpTests.addressesAreOwnedHaveOneDefaultAndDeleteIdempotently(IdentityHttpTests.java:203)"
+      ]
+    },
+    {
+      "operationId": "API-10",
+      "method": "DELETE",
+      "path": "/api/v1/addresses/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        404
+      ],
+      "observations": 8,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.addressesAreOwnedHaveOneDefaultAndDeleteIdempotently(IdentityHttpTests.java:199)",
+        "com.yueji.mall.IdentityHttpTests.addressesAreOwnedHaveOneDefaultAndDeleteIdempotently(IdentityHttpTests.java:201)",
+        "com.yueji.mall.IdentityHttpTests.addressesAreOwnedHaveOneDefaultAndDeleteIdempotently(IdentityHttpTests.java:202)"
+      ]
+    },
+    {
+      "operationId": "API-11",
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 4,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.remainingPublicAndSupportContractsExerciseRejectionsAndAuthorizedSuccess(FinancialBoundaryHttpTests.java:42)",
+        "com.yueji.mall.StageCHttpTests.publicSearchFiltersIsbnSortingAndSchemasAreReal(StageCHttpTests.java:94)"
+      ]
+    },
+    {
+      "operationId": "API-12",
+      "method": "GET",
+      "path": "/api/v1/products",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400
+      ],
+      "observations": 16,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.StageCHttpTests.publicReadsExcludeDraftOffShelfDisabledBooksCategoriesAndSuspendedShops(StageCHttpTests.java:98)",
+        "com.yueji.mall.StageCHttpTests.publicSearchFiltersIsbnSortingAndSchemasAreReal(StageCHttpTests.java:85)",
+        "com.yueji.mall.StageCHttpTests.publicSearchFiltersIsbnSortingAndSchemasAreReal(StageCHttpTests.java:88)",
+        "com.yueji.mall.StageCHttpTests.publicSearchFiltersIsbnSortingAndSchemasAreReal(StageCHttpTests.java:89)",
+        "com.yueji.mall.StageCHttpTests.publicSearchFiltersIsbnSortingAndSchemasAreReal(StageCHttpTests.java:90)",
+        "com.yueji.mall.StageCHttpTests.publicSearchFiltersIsbnSortingAndSchemasAreReal(StageCHttpTests.java:91)",
+        "com.yueji.mall.StageCHttpTests.publicSearchFiltersIsbnSortingAndSchemasAreReal(StageCHttpTests.java:92)",
+        "com.yueji.mall.StageCHttpTests.publicSearchFiltersIsbnSortingAndSchemasAreReal(StageCHttpTests.java:93)"
+      ]
+    },
+    {
+      "operationId": "API-13",
+      "method": "GET",
+      "path": "/api/v1/products/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        404
+      ],
+      "observations": 12,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.StageCHttpTests.filesAreDecodedReencodedAndAttachedAsPublicCovers(StageCHttpTests.java:225)",
+        "com.yueji.mall.StageCHttpTests.operatorModerationCannotForceMerchantOffShelfProductsOnSale(StageCHttpTests.java:137)",
+        "com.yueji.mall.StageCHttpTests.publicReadsExcludeDraftOffShelfDisabledBooksCategoriesAndSuspendedShops(StageCHttpTests.java:101)",
+        "com.yueji.mall.StageCHttpTests.publicReadsExcludeDraftOffShelfDisabledBooksCategoriesAndSuspendedShops(StageCHttpTests.java:106)",
+        "com.yueji.mall.StageCHttpTests.publicReadsExcludeDraftOffShelfDisabledBooksCategoriesAndSuspendedShops(StageCHttpTests.java:109)",
+        "com.yueji.mall.StageCHttpTests.publicReadsExcludeDraftOffShelfDisabledBooksCategoriesAndSuspendedShops(StageCHttpTests.java:97)"
+      ]
+    },
+    {
+      "operationId": "API-14",
+      "method": "GET",
+      "path": "/api/v1/products/{id}/reviews",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.remainingPublicAndSupportContractsExerciseRejectionsAndAuthorizedSuccess(FinancialBoundaryHttpTests.java:44)",
+        "com.yueji.mall.StageCHttpTests.reviewReadingUsesRealTableAndModerationRequiresAnExistingReview(StageCHttpTests.java:267)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:106)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:108)"
+      ]
+    },
+    {
+      "operationId": "API-15",
+      "method": "GET",
+      "path": "/api/v1/merchant/shops/{shopId}/products",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        404
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.merchantAndMemberScopesUseServerRelationsAndActionPermissions(StageCHttpTests.java:145)",
+        "com.yueji.mall.StageCHttpTests.merchantAndMemberScopesUseServerRelationsAndActionPermissions(StageCHttpTests.java:151)"
+      ]
+    },
+    {
+      "operationId": "API-16",
+      "method": "POST",
+      "path": "/api/v1/merchant/shops/{shopId}/products",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        401,
+        409
+      ],
+      "observations": 36,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.fixtures(StageCHttpTests.java:44)",
+        "com.yueji.mall.StageCHttpTests.oneProductOneSkuAndVersionUpdatesCannotBeBypassed(StageCHttpTests.java:112)"
+      ]
+    },
+    {
+      "operationId": "API-17",
+      "method": "PUT",
+      "path": "/api/v1/merchant/shops/{shopId}/products/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        404,
+        409
+      ],
+      "observations": 12,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.merchantAndMemberScopesUseServerRelationsAndActionPermissions(StageCHttpTests.java:147)",
+        "com.yueji.mall.StageCHttpTests.oneProductOneSkuAndVersionUpdatesCannotBeBypassed(StageCHttpTests.java:114)",
+        "com.yueji.mall.StageCHttpTests.oneProductOneSkuAndVersionUpdatesCannotBeBypassed(StageCHttpTests.java:116)",
+        "com.yueji.mall.StageCHttpTests.oneProductOneSkuAndVersionUpdatesCannotBeBypassed(StageCHttpTests.java:117)",
+        "com.yueji.mall.StageCHttpTests.oneProductOneSkuAndVersionUpdatesCannotBeBypassed(StageCHttpTests.java:119)"
+      ]
+    },
+    {
+      "operationId": "API-18",
+      "method": "PUT",
+      "path": "/api/v1/merchant/shops/{shopId}/products/{id}/status",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        409
+      ],
+      "observations": 48,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.status(StageCHttpTests.java:71)"
+      ]
+    },
+    {
+      "operationId": "API-19",
+      "method": "GET",
+      "path": "/api/v1/merchant/shops/{shopId}/inventory",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "observations": 12,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.inventoryReplayReturnsOriginalSnapshotAndNeverWritesTwice(StageCHttpTests.java:155)",
+        "com.yueji.mall.StageCHttpTests.inventoryReplayReturnsOriginalSnapshotAndNeverWritesTwice(StageCHttpTests.java:156)",
+        "com.yueji.mall.StageCHttpTests.inventoryReplayReturnsOriginalSnapshotAndNeverWritesTwice(StageCHttpTests.java:157)",
+        "com.yueji.mall.StageCHttpTests.merchantAndMemberScopesUseServerRelationsAndActionPermissions(StageCHttpTests.java:146)",
+        "com.yueji.mall.StageCHttpTests.merchantAndMemberScopesUseServerRelationsAndActionPermissions(StageCHttpTests.java:152)"
+      ]
+    },
+    {
+      "operationId": "API-20",
+      "method": "POST",
+      "path": "/api/v1/merchant/shops/{shopId}/inventory/{skuId}/adjustments",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        409
+      ],
+      "observations": 62,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.adjust(StageCHttpTests.java:72)"
+      ]
+    },
+    {
+      "operationId": "API-21",
+      "method": "POST",
+      "path": "/api/v1/files",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        403,
+        413,
+        415
+      ],
+      "observations": 29,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.upload(StageCHttpTests.java:80)",
+        "test-helper"
+      ]
+    },
+    {
+      "operationId": "API-22",
+      "method": "GET",
+      "path": "/api/v1/files/{id}/content",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        404
+      ],
+      "observations": 24,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.StageCHttpTests.content(StageCHttpTests.java:82)"
+      ]
+    },
+    {
+      "operationId": "API-23",
+      "method": "GET",
+      "path": "/api/v1/cart",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        403
+      ],
+      "observations": 12,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.cartReportsStaleItemsAndRejectsNewUnavailableSelections(StageCHttpTests.java:211)",
+        "com.yueji.mall.StageCHttpTests.cartReportsStaleItemsAndRejectsNewUnavailableSelections(StageCHttpTests.java:216)",
+        "com.yueji.mall.StageCHttpTests.cartSetsAbsoluteQuantityGroupsByShopAndHasNoCrossUserRows(StageCHttpTests.java:196)",
+        "com.yueji.mall.StageCHttpTests.cartSetsAbsoluteQuantityGroupsByShopAndHasNoCrossUserRows(StageCHttpTests.java:198)",
+        "com.yueji.mall.StageCHttpTests.merchantAndMemberScopesUseServerRelationsAndActionPermissions(StageCHttpTests.java:149)"
+      ]
+    },
+    {
+      "operationId": "API-24",
+      "method": "PUT",
+      "path": "/api/v1/cart/items/{skuId}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        409
+      ],
+      "observations": 32,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.RedisIntegrationTests.realRedisConnectionLossFallsBackForReadsRejectsWritesAndRecovers(RedisIntegrationTests.java:48)",
+        "com.yueji.mall.StageCHttpTests.cartReportsStaleItemsAndRejectsNewUnavailableSelections(StageCHttpTests.java:209)",
+        "com.yueji.mall.StageCHttpTests.cartReportsStaleItemsAndRejectsNewUnavailableSelections(StageCHttpTests.java:213)",
+        "com.yueji.mall.StageCHttpTests.cartReportsStaleItemsAndRejectsNewUnavailableSelections(StageCHttpTests.java:214)",
+        "com.yueji.mall.StageCHttpTests.cartReportsStaleItemsAndRejectsNewUnavailableSelections(StageCHttpTests.java:217)",
+        "com.yueji.mall.StageCHttpTests.cartReportsStaleItemsAndRejectsNewUnavailableSelections(StageCHttpTests.java:218)",
+        "com.yueji.mall.StageCHttpTests.cartSetsAbsoluteQuantityGroupsByShopAndHasNoCrossUserRows(StageCHttpTests.java:194)",
+        "com.yueji.mall.StageCHttpTests.cartSetsAbsoluteQuantityGroupsByShopAndHasNoCrossUserRows(StageCHttpTests.java:197)",
+        "com.yueji.mall.StageCHttpTests.cartSetsAbsoluteQuantityGroupsByShopAndHasNoCrossUserRows(StageCHttpTests.java:200)",
+        "com.yueji.mall.StageCHttpTests.cartSetsAbsoluteQuantityGroupsByShopAndHasNoCrossUserRows(StageCHttpTests.java:201)",
+        "com.yueji.mall.StageCHttpTests.cartSetsAbsoluteQuantityGroupsByShopAndHasNoCrossUserRows(StageCHttpTests.java:202)",
+        "com.yueji.mall.StageCHttpTests.cartSetsAbsoluteQuantityGroupsByShopAndHasNoCrossUserRows(StageCHttpTests.java:203)",
+        "com.yueji.mall.StageCHttpTests.cartSetsAbsoluteQuantityGroupsByShopAndHasNoCrossUserRows(StageCHttpTests.java:204)"
+      ]
+    },
+    {
+      "operationId": "API-25",
+      "method": "DELETE",
+      "path": "/api/v1/cart/items/{skuId}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 8,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.cartSetsAbsoluteQuantityGroupsByShopAndHasNoCrossUserRows(StageCHttpTests.java:205)",
+        "com.yueji.mall.StageCHttpTests.cartSetsAbsoluteQuantityGroupsByShopAndHasNoCrossUserRows(StageCHttpTests.java:206)"
+      ]
+    },
+    {
+      "operationId": "API-26",
+      "method": "POST",
+      "path": "/api/v1/checkout/previews",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        404,
+        409
+      ],
+      "observations": 284,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.DashboardHttpTests.financeAndSupportOnlyReceiveTheirOwnMetrics(DashboardHttpTests.java:36)",
+        "com.yueji.mall.DashboardHttpTests.merchantMetricsAreRestrictedToActiveMembershipAndCannotReadOtherShop(DashboardHttpTests.java:23)",
+        "com.yueji.mall.DashboardHttpTests.warehouseAndSupportScopeAreIndependentlyAuthorized(DashboardHttpTests.java:50)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedEligibleOrder(FinancialBoundaryHttpTests.java:138)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:112)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.issueResolutionFindsOrderThroughPaymentOrRefundAndPreservesEvidence(FinancialBoundaryHttpTests.java:228)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.lateCompensationRecoversOriginalRefundNumberAndNeverRestocksCancelledOrder(FinancialBoundaryHttpTests.java:188)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.lateRefundSubmissionUnknownDoesNotPretendSuccess(FinancialBoundaryHttpTests.java:213)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.lateRefundSuccessRejectsUnverifiedChannelFacts(FinancialBoundaryHttpTests.java:201)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reconciliationQuarantinesUnverifiedRefundFactsWithoutChangingStock(FinancialBoundaryHttpTests.java:146)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundOnlyCannotBeRequestedAfterShipmentAndReturnRequiresReceipt(FinancialBoundaryHttpTests.java:127)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundSuccessServiceRejectsUnverifiedIdentityAmountAndStatus(FinancialBoundaryHttpTests.java:174)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundWrongChannelIdentityCreatesDifferenceAndNeverRestocks(FinancialBoundaryHttpTests.java:91)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.remainingPublicAndSupportContractsExerciseRejectionsAndAuthorizedSuccess(FinancialBoundaryHttpTests.java:45)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reviewModerationIsAuditedOnceAndFilteringNeverExpandsScope(FinancialBoundaryHttpTests.java:53)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.MessagingIntegrationTests.brokerOutageKeepsDurablePendingFactsAndResumesAfterRecovery(MessagingIntegrationTests.java:84)",
+        "com.yueji.mall.MessagingIntegrationTests.confirmedPublicationDuplicateAndOutOfOrderDeliveryHaveOneSideEffect(MessagingIntegrationTests.java:34)",
+        "com.yueji.mall.MessagingIntegrationTests.deadLetterReplayRequiresAdminPermissionExpectedEventAndKeepsOriginalId(MessagingIntegrationTests.java:113)",
+        "com.yueji.mall.MessagingIntegrationTests.expiredPublisherLeaseIsRecoverableAndConcurrentPublishersCannotLoseFacts(MessagingIntegrationTests.java:75)",
+        "com.yueji.mall.MessagingIntegrationTests.failedConsumerTransactionRollsBackDedupAndCanBeRedelivered(MessagingIntegrationTests.java:58)",
+        "com.yueji.mall.MessagingIntegrationTests.lostConfirmReplaysOriginalEventAndUnknownRouteStaysPending(MessagingIntegrationTests.java:48)",
+        "com.yueji.mall.MessagingIntegrationTests.persistentFailuresBackOffAndEventuallyRequireAuditedOperatorReplay(MessagingIntegrationTests.java:99)",
+        "com.yueji.mall.StageDHttpTests.amountAddressAndCartVersionLimitsFailBeforeAnyOrderIsWritten(StageDHttpTests.java:254)",
+        "com.yueji.mall.StageDHttpTests.amountAddressAndCartVersionLimitsFailBeforeAnyOrderIsWritten(StageDHttpTests.java:257)",
+        "com.yueji.mall.StageDHttpTests.preview(StageDHttpTests.java:67)",
+        "com.yueji.mall.StageDHttpTests.previewValidationOwnershipAndIdempotencyInputRejectClientOverrides(StageDHttpTests.java:201)",
+        "com.yueji.mall.StageDHttpTests.previewValidationOwnershipAndIdempotencyInputRejectClientOverrides(StageDHttpTests.java:202)",
+        "com.yueji.mall.StageDHttpTests.previewValidationOwnershipAndIdempotencyInputRejectClientOverrides(StageDHttpTests.java:203)",
+        "com.yueji.mall.StageDHttpTests.previewValidationOwnershipAndIdempotencyInputRejectClientOverrides(StageDHttpTests.java:204)",
+        "com.yueji.mall.StageDHttpTests.previewValidationOwnershipAndIdempotencyInputRejectClientOverrides(StageDHttpTests.java:207)",
+        "com.yueji.mall.StageDHttpTests.tc06SplitTransactionSnapshotsAndDurableOutbox(StageDHttpTests.java:92)",
+        "com.yueji.mall.StageEHttpTests.amountAndChannelTradeMismatchAreRecordedWithoutChangingOrder(StageEHttpTests.java:127)",
+        "com.yueji.mall.StageEHttpTests.channelIsOutsideTransactionAndUnknownKeepsClosingAndStock(StageEHttpTests.java:91)",
+        "com.yueji.mall.StageEHttpTests.closedChannelFactBeforeExpiryStillConvergesAndCannotBePaidAgain(StageEHttpTests.java:144)",
+        "com.yueji.mall.StageEHttpTests.closingPaidWinsOrAlreadyClosedRejectsMockPaymentWithoutRevival(StageEHttpTests.java:100)",
+        "com.yueji.mall.StageEHttpTests.creationIsIdempotentAndEveryOrderHasItsOwnPaymentNumber(StageEHttpTests.java:57)",
+        "com.yueji.mall.StageEHttpTests.failedLocalTransactionDoesNotLoseDurableChannelSuccess(StageEHttpTests.java:109)",
+        "com.yueji.mall.StageEHttpTests.latePaymentCreatesOneCompensationAndNeverReacquiresReleasedStock(StageEHttpTests.java:116)",
+        "com.yueji.mall.StageEHttpTests.localPaymentTwentyReplaysAndConcurrentConfirmCommitOnlyOnce(StageEHttpTests.java:47)",
+        "com.yueji.mall.StageEHttpTests.neverConfirmedNotFoundAndBackoffDoNotReleaseReservation(StageEHttpTests.java:137)",
+        "com.yueji.mall.StageEHttpTests.ownershipPermissionsAndClientOverridesCannotChoosePaymentFacts(StageEHttpTests.java:67)",
+        "com.yueji.mall.StageEHttpTests.paidFactBeforeCrashIsRecoveredUsingOriginalNumber(StageEHttpTests.java:85)",
+        "com.yueji.mall.StageEHttpTests.paymentRequestTimeoutPreservesNumberAndDoesNotPretendAcceptedChannelAction(StageEHttpTests.java:149)",
+        "com.yueji.mall.StageEHttpTests.unstartedCancelledOrderReleasesOnlyItsOwnReservation(StageEHttpTests.java:79)",
+        "com.yueji.mall.StageESandboxProtocolTests.invalidSignIdentityAmountAndUnknownNumberCannotChangeBusiness(StageESandboxProtocolTests.java:63)",
+        "com.yueji.mall.StageESandboxProtocolTests.malformedOrUnboundedSignedNotificationsAreRejectedAndDiagnosed(StageESandboxProtocolTests.java:83)",
+        "com.yueji.mall.StageESandboxProtocolTests.querySuccessAfterRequestCrashUsesSameNoAndUnknownClosePreservesStock(StageESandboxProtocolTests.java:75)",
+        "com.yueji.mall.StageESandboxProtocolTests.sdkGeneratesSignedSandboxRedirectAndSignedNotificationReplaysTwentyTimes(StageESandboxProtocolTests.java:53)",
+        "com.yueji.mall.StageFHttpTests.acceptedReturnWithoutResaleDoesNotRestock(StageFHttpTests.java:285)",
+        "com.yueji.mall.StageFHttpTests.activeReturnApplicationExcludesOrderFromSettlementCandidates(StageFHttpTests.java:187)",
+        "com.yueji.mall.StageFHttpTests.mismatchedSuccessfulRefundEvidenceIsNotApplied(StageFHttpTests.java:342)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAcceptsPreviouslyAppliedNormalRefund(StageFHttpTests.java:274)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAppliesVerifiedChannelRefundFailure(StageFHttpTests.java:261)",
+        "com.yueji.mall.StageFHttpTests.reconciliationConfirmsLateCompensationFromChannelEvidence(StageFHttpTests.java:213)",
+        "com.yueji.mall.StageFHttpTests.reconciliationFlagsPaymentTradeNumberMismatch(StageFHttpTests.java:227)",
+        "com.yueji.mall.StageFHttpTests.reconciliationKeepsLateCompensationUnknownAsOpenDifference(StageFHttpTests.java:248)",
+        "com.yueji.mall.StageFHttpTests.reconciliationKeepsPaymentUnknownAsOpenDifference(StageFHttpTests.java:237)",
+        "com.yueji.mall.StageFHttpTests.reconciliationPersistsOpenRefundDifferenceAndResolvesWithEvidence(StageFHttpTests.java:195)",
+        "com.yueji.mall.StageFHttpTests.reconciliationRecoversTimedOutRefundUsingSameRefundNumber(StageFHttpTests.java:309)",
+        "com.yueji.mall.StageFHttpTests.rejectedSettlementCanBeRebuiltAndChangedSnapshotsCannotBeApproved(StageFHttpTests.java:353)",
+        "com.yueji.mall.StageFHttpTests.requestedAfterSaleCanBeCancelledAndSupportRejectionIsReplaySafe(StageFHttpTests.java:365)",
+        "com.yueji.mall.StageFHttpTests.returnEligibilityDeadlineAndDamagedInspectionAreEnforced(StageFHttpTests.java:327)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:28)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:55)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:112)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:90)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:118)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:135)",
+        "com.yueji.mall.StageFHttpTests.unknownRefundResultKeepsProcessingAndInventoryHeld(StageFHttpTests.java:297)",
+        "test-helper"
+      ]
+    },
+    {
+      "operationId": "API-27",
+      "method": "POST",
+      "path": "/api/v1/checkout/orders",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        409,
+        410
+      ],
+      "observations": 364,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.DashboardHttpTests.financeAndSupportOnlyReceiveTheirOwnMetrics(DashboardHttpTests.java:36)",
+        "com.yueji.mall.DashboardHttpTests.merchantMetricsAreRestrictedToActiveMembershipAndCannotReadOtherShop(DashboardHttpTests.java:23)",
+        "com.yueji.mall.DashboardHttpTests.warehouseAndSupportScopeAreIndependentlyAuthorized(DashboardHttpTests.java:50)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedEligibleOrder(FinancialBoundaryHttpTests.java:138)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:112)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.issueResolutionFindsOrderThroughPaymentOrRefundAndPreservesEvidence(FinancialBoundaryHttpTests.java:228)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.lateCompensationRecoversOriginalRefundNumberAndNeverRestocksCancelledOrder(FinancialBoundaryHttpTests.java:188)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.lateRefundSubmissionUnknownDoesNotPretendSuccess(FinancialBoundaryHttpTests.java:213)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.lateRefundSuccessRejectsUnverifiedChannelFacts(FinancialBoundaryHttpTests.java:201)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reconciliationQuarantinesUnverifiedRefundFactsWithoutChangingStock(FinancialBoundaryHttpTests.java:146)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundOnlyCannotBeRequestedAfterShipmentAndReturnRequiresReceipt(FinancialBoundaryHttpTests.java:127)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundSuccessServiceRejectsUnverifiedIdentityAmountAndStatus(FinancialBoundaryHttpTests.java:174)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundWrongChannelIdentityCreatesDifferenceAndNeverRestocks(FinancialBoundaryHttpTests.java:91)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.remainingPublicAndSupportContractsExerciseRejectionsAndAuthorizedSuccess(FinancialBoundaryHttpTests.java:45)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reviewModerationIsAuditedOnceAndFilteringNeverExpandsScope(FinancialBoundaryHttpTests.java:53)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.MessagingIntegrationTests.brokerOutageKeepsDurablePendingFactsAndResumesAfterRecovery(MessagingIntegrationTests.java:84)",
+        "com.yueji.mall.MessagingIntegrationTests.confirmedPublicationDuplicateAndOutOfOrderDeliveryHaveOneSideEffect(MessagingIntegrationTests.java:34)",
+        "com.yueji.mall.MessagingIntegrationTests.deadLetterReplayRequiresAdminPermissionExpectedEventAndKeepsOriginalId(MessagingIntegrationTests.java:113)",
+        "com.yueji.mall.MessagingIntegrationTests.expiredPublisherLeaseIsRecoverableAndConcurrentPublishersCannotLoseFacts(MessagingIntegrationTests.java:75)",
+        "com.yueji.mall.MessagingIntegrationTests.failedConsumerTransactionRollsBackDedupAndCanBeRedelivered(MessagingIntegrationTests.java:58)",
+        "com.yueji.mall.MessagingIntegrationTests.lostConfirmReplaysOriginalEventAndUnknownRouteStaysPending(MessagingIntegrationTests.java:48)",
+        "com.yueji.mall.MessagingIntegrationTests.persistentFailuresBackOffAndEventuallyRequireAuditedOperatorReplay(MessagingIntegrationTests.java:99)",
+        "com.yueji.mall.StageDHttpTests.create(StageDHttpTests.java:68)",
+        "com.yueji.mall.StageDHttpTests.previewValidationOwnershipAndIdempotencyInputRejectClientOverrides(StageDHttpTests.java:206)",
+        "com.yueji.mall.StageEHttpTests.amountAndChannelTradeMismatchAreRecordedWithoutChangingOrder(StageEHttpTests.java:127)",
+        "com.yueji.mall.StageEHttpTests.channelIsOutsideTransactionAndUnknownKeepsClosingAndStock(StageEHttpTests.java:91)",
+        "com.yueji.mall.StageEHttpTests.closedChannelFactBeforeExpiryStillConvergesAndCannotBePaidAgain(StageEHttpTests.java:144)",
+        "com.yueji.mall.StageEHttpTests.closingPaidWinsOrAlreadyClosedRejectsMockPaymentWithoutRevival(StageEHttpTests.java:100)",
+        "com.yueji.mall.StageEHttpTests.creationIsIdempotentAndEveryOrderHasItsOwnPaymentNumber(StageEHttpTests.java:57)",
+        "com.yueji.mall.StageEHttpTests.failedLocalTransactionDoesNotLoseDurableChannelSuccess(StageEHttpTests.java:109)",
+        "com.yueji.mall.StageEHttpTests.latePaymentCreatesOneCompensationAndNeverReacquiresReleasedStock(StageEHttpTests.java:116)",
+        "com.yueji.mall.StageEHttpTests.localPaymentTwentyReplaysAndConcurrentConfirmCommitOnlyOnce(StageEHttpTests.java:47)",
+        "com.yueji.mall.StageEHttpTests.neverConfirmedNotFoundAndBackoffDoNotReleaseReservation(StageEHttpTests.java:137)",
+        "com.yueji.mall.StageEHttpTests.ownershipPermissionsAndClientOverridesCannotChoosePaymentFacts(StageEHttpTests.java:67)",
+        "com.yueji.mall.StageEHttpTests.paidFactBeforeCrashIsRecoveredUsingOriginalNumber(StageEHttpTests.java:85)",
+        "com.yueji.mall.StageEHttpTests.paymentRequestTimeoutPreservesNumberAndDoesNotPretendAcceptedChannelAction(StageEHttpTests.java:149)",
+        "com.yueji.mall.StageEHttpTests.unstartedCancelledOrderReleasesOnlyItsOwnReservation(StageEHttpTests.java:79)",
+        "com.yueji.mall.StageESandboxProtocolTests.invalidSignIdentityAmountAndUnknownNumberCannotChangeBusiness(StageESandboxProtocolTests.java:63)",
+        "com.yueji.mall.StageESandboxProtocolTests.malformedOrUnboundedSignedNotificationsAreRejectedAndDiagnosed(StageESandboxProtocolTests.java:83)",
+        "com.yueji.mall.StageESandboxProtocolTests.querySuccessAfterRequestCrashUsesSameNoAndUnknownClosePreservesStock(StageESandboxProtocolTests.java:75)",
+        "com.yueji.mall.StageESandboxProtocolTests.sdkGeneratesSignedSandboxRedirectAndSignedNotificationReplaysTwentyTimes(StageESandboxProtocolTests.java:53)",
+        "com.yueji.mall.StageFHttpTests.acceptedReturnWithoutResaleDoesNotRestock(StageFHttpTests.java:285)",
+        "com.yueji.mall.StageFHttpTests.activeReturnApplicationExcludesOrderFromSettlementCandidates(StageFHttpTests.java:187)",
+        "com.yueji.mall.StageFHttpTests.mismatchedSuccessfulRefundEvidenceIsNotApplied(StageFHttpTests.java:342)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAcceptsPreviouslyAppliedNormalRefund(StageFHttpTests.java:274)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAppliesVerifiedChannelRefundFailure(StageFHttpTests.java:261)",
+        "com.yueji.mall.StageFHttpTests.reconciliationConfirmsLateCompensationFromChannelEvidence(StageFHttpTests.java:213)",
+        "com.yueji.mall.StageFHttpTests.reconciliationFlagsPaymentTradeNumberMismatch(StageFHttpTests.java:227)",
+        "com.yueji.mall.StageFHttpTests.reconciliationKeepsLateCompensationUnknownAsOpenDifference(StageFHttpTests.java:248)",
+        "com.yueji.mall.StageFHttpTests.reconciliationKeepsPaymentUnknownAsOpenDifference(StageFHttpTests.java:237)",
+        "com.yueji.mall.StageFHttpTests.reconciliationPersistsOpenRefundDifferenceAndResolvesWithEvidence(StageFHttpTests.java:195)",
+        "com.yueji.mall.StageFHttpTests.reconciliationRecoversTimedOutRefundUsingSameRefundNumber(StageFHttpTests.java:309)",
+        "com.yueji.mall.StageFHttpTests.rejectedSettlementCanBeRebuiltAndChangedSnapshotsCannotBeApproved(StageFHttpTests.java:353)",
+        "com.yueji.mall.StageFHttpTests.requestedAfterSaleCanBeCancelledAndSupportRejectionIsReplaySafe(StageFHttpTests.java:365)",
+        "com.yueji.mall.StageFHttpTests.returnEligibilityDeadlineAndDamagedInspectionAreEnforced(StageFHttpTests.java:327)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:28)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:55)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:112)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:90)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:118)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:135)",
+        "com.yueji.mall.StageFHttpTests.unknownRefundResultKeepsProcessingAndInventoryHeld(StageFHttpTests.java:297)",
+        "test-helper"
+      ]
+    },
+    {
+      "operationId": "API-28",
+      "method": "GET",
+      "path": "/api/v1/checkout/batches/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        404
+      ],
+      "observations": 4,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageDHttpTests.expiredPreviewAndLostResponseHaveRecoveryPaths(StageDHttpTests.java:138)",
+        "com.yueji.mall.StageDHttpTests.readsAreOwnedScopedFilteredAndStableAndFulfillmentRequiresMerchantScope(StageDHttpTests.java:189)"
+      ]
+    },
+    {
+      "operationId": "API-29",
+      "method": "GET",
+      "path": "/api/v1/orders",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        403
+      ],
+      "observations": 9,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageDHttpTests.readsAreOwnedScopedFilteredAndStableAndFulfillmentRequiresMerchantScope(StageDHttpTests.java:191)",
+        "com.yueji.mall.StageDHttpTests.readsAreOwnedScopedFilteredAndStableAndFulfillmentRequiresMerchantScope(StageDHttpTests.java:192)",
+        "com.yueji.mall.StageDHttpTests.readsAreOwnedScopedFilteredAndStableAndFulfillmentRequiresMerchantScope(StageDHttpTests.java:193)",
+        "com.yueji.mall.StageDHttpTests.readsAreOwnedScopedFilteredAndStableAndFulfillmentRequiresMerchantScope(StageDHttpTests.java:194)",
+        "com.yueji.mall.StageDHttpTests.readsAreOwnedScopedFilteredAndStableAndFulfillmentRequiresMerchantScope(StageDHttpTests.java:197)"
+      ]
+    },
+    {
+      "operationId": "API-30",
+      "method": "GET",
+      "path": "/api/v1/orders/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        404
+      ],
+      "observations": 7,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageDHttpTests.readsAreOwnedScopedFilteredAndStableAndFulfillmentRequiresMerchantScope(StageDHttpTests.java:189)",
+        "com.yueji.mall.StageDHttpTests.readsAreOwnedScopedFilteredAndStableAndFulfillmentRequiresMerchantScope(StageDHttpTests.java:195)",
+        "com.yueji.mall.StageDHttpTests.sessionRevocationAndCancelledOrPaidStatesDoNotBypassTransitionChecks(StageDHttpTests.java:215)",
+        "com.yueji.mall.StageDHttpTests.tc06SplitTransactionSnapshotsAndDurableOutbox(StageDHttpTests.java:105)",
+        "com.yueji.mall.StageDHttpTests.tc06SplitTransactionSnapshotsAndDurableOutbox(StageDHttpTests.java:96)"
+      ]
+    },
+    {
+      "operationId": "API-31",
+      "method": "POST",
+      "path": "/api/v1/orders/{id}/cancel",
+      "successStatuses": [
+        200,
+        202
+      ],
+      "rejectionStatuses": [
+        401,
+        404,
+        409
+      ],
+      "observations": 15,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageDHttpTests.cancelAndTimeoutPersistClosingWithoutPretendingChannelSuccess(StageDHttpTests.java:178)",
+        "com.yueji.mall.StageDHttpTests.cancelAndTimeoutPersistClosingWithoutPretendingChannelSuccess(StageDHttpTests.java:179)",
+        "com.yueji.mall.StageDHttpTests.cancelAndTimeoutPersistClosingWithoutPretendingChannelSuccess(StageDHttpTests.java:180)",
+        "com.yueji.mall.StageDHttpTests.readsAreOwnedScopedFilteredAndStableAndFulfillmentRequiresMerchantScope(StageDHttpTests.java:190)",
+        "com.yueji.mall.StageDHttpTests.sessionRevocationAndCancelledOrPaidStatesDoNotBypassTransitionChecks(StageDHttpTests.java:212)",
+        "com.yueji.mall.StageDHttpTests.sessionRevocationAndCancelledOrPaidStatesDoNotBypassTransitionChecks(StageDHttpTests.java:214)",
+        "com.yueji.mall.StageEHttpTests.cancel(StageEHttpTests.java:27)",
+        "com.yueji.mall.StageESandboxProtocolTests.querySuccessAfterRequestCrashUsesSameNoAndUnknownClosePreservesStock(StageESandboxProtocolTests.java:76)"
+      ]
+    },
+    {
+      "operationId": "API-32",
+      "method": "POST",
+      "path": "/api/v1/orders/{id}/payments",
+      "successStatuses": [
+        200,
+        201
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        404,
+        409
+      ],
+      "observations": 155,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.DashboardHttpTests.financeAndSupportOnlyReceiveTheirOwnMetrics(DashboardHttpTests.java:37)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedEligibleOrder(FinancialBoundaryHttpTests.java:138)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:112)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.issueResolutionFindsOrderThroughPaymentOrRefundAndPreservesEvidence(FinancialBoundaryHttpTests.java:228)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.lateCompensationRecoversOriginalRefundNumberAndNeverRestocksCancelledOrder(FinancialBoundaryHttpTests.java:188)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.lateRefundSubmissionUnknownDoesNotPretendSuccess(FinancialBoundaryHttpTests.java:213)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.lateRefundSuccessRejectsUnverifiedChannelFacts(FinancialBoundaryHttpTests.java:201)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reconciliationQuarantinesUnverifiedRefundFactsWithoutChangingStock(FinancialBoundaryHttpTests.java:146)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundOnlyCannotBeRequestedAfterShipmentAndReturnRequiresReceipt(FinancialBoundaryHttpTests.java:127)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundSuccessServiceRejectsUnverifiedIdentityAmountAndStatus(FinancialBoundaryHttpTests.java:174)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundWrongChannelIdentityCreatesDifferenceAndNeverRestocks(FinancialBoundaryHttpTests.java:91)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.remainingPublicAndSupportContractsExerciseRejectionsAndAuthorizedSuccess(FinancialBoundaryHttpTests.java:45)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reviewModerationIsAuditedOnceAndFilteringNeverExpandsScope(FinancialBoundaryHttpTests.java:53)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageEHttpTests.creationIsIdempotentAndEveryOrderHasItsOwnPaymentNumber(StageEHttpTests.java:58)",
+        "com.yueji.mall.StageEHttpTests.creationIsIdempotentAndEveryOrderHasItsOwnPaymentNumber(StageEHttpTests.java:59)",
+        "com.yueji.mall.StageEHttpTests.creationIsIdempotentAndEveryOrderHasItsOwnPaymentNumber(StageEHttpTests.java:60)",
+        "com.yueji.mall.StageEHttpTests.creationIsIdempotentAndEveryOrderHasItsOwnPaymentNumber(StageEHttpTests.java:61)",
+        "com.yueji.mall.StageEHttpTests.creationIsIdempotentAndEveryOrderHasItsOwnPaymentNumber(StageEHttpTests.java:62)",
+        "com.yueji.mall.StageEHttpTests.ownershipPermissionsAndClientOverridesCannotChoosePaymentFacts(StageEHttpTests.java:69)",
+        "com.yueji.mall.StageEHttpTests.ownershipPermissionsAndClientOverridesCannotChoosePaymentFacts(StageEHttpTests.java:72)",
+        "com.yueji.mall.StageEHttpTests.ownershipPermissionsAndClientOverridesCannotChoosePaymentFacts(StageEHttpTests.java:74)",
+        "com.yueji.mall.StageEHttpTests.pay(StageEHttpTests.java:25)",
+        "com.yueji.mall.StageEHttpTests.paymentRequestTimeoutPreservesNumberAndDoesNotPretendAcceptedChannelAction(StageEHttpTests.java:150)",
+        "com.yueji.mall.StageEHttpTests.paymentRequestTimeoutPreservesNumberAndDoesNotPretendAcceptedChannelAction(StageEHttpTests.java:152)",
+        "com.yueji.mall.StageEHttpTests.paymentRequestTimeoutPreservesNumberAndDoesNotPretendAcceptedChannelAction(StageEHttpTests.java:154)",
+        "com.yueji.mall.StageEHttpTests.unstartedCancelledOrderReleasesOnlyItsOwnReservation(StageEHttpTests.java:82)",
+        "com.yueji.mall.StageESandboxProtocolTests.pay(StageESandboxProtocolTests.java:35)",
+        "com.yueji.mall.StageESandboxProtocolTests.sdkGeneratesSignedSandboxRedirectAndSignedNotificationReplaysTwentyTimes(StageESandboxProtocolTests.java:53)",
+        "com.yueji.mall.StageFHttpTests.acceptedReturnWithoutResaleDoesNotRestock(StageFHttpTests.java:285)",
+        "com.yueji.mall.StageFHttpTests.activeReturnApplicationExcludesOrderFromSettlementCandidates(StageFHttpTests.java:187)",
+        "com.yueji.mall.StageFHttpTests.mismatchedSuccessfulRefundEvidenceIsNotApplied(StageFHttpTests.java:342)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAcceptsPreviouslyAppliedNormalRefund(StageFHttpTests.java:274)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAppliesVerifiedChannelRefundFailure(StageFHttpTests.java:261)",
+        "com.yueji.mall.StageFHttpTests.reconciliationConfirmsLateCompensationFromChannelEvidence(StageFHttpTests.java:213)",
+        "com.yueji.mall.StageFHttpTests.reconciliationFlagsPaymentTradeNumberMismatch(StageFHttpTests.java:227)",
+        "com.yueji.mall.StageFHttpTests.reconciliationKeepsLateCompensationUnknownAsOpenDifference(StageFHttpTests.java:248)",
+        "com.yueji.mall.StageFHttpTests.reconciliationKeepsPaymentUnknownAsOpenDifference(StageFHttpTests.java:237)",
+        "com.yueji.mall.StageFHttpTests.reconciliationPersistsOpenRefundDifferenceAndResolvesWithEvidence(StageFHttpTests.java:195)",
+        "com.yueji.mall.StageFHttpTests.reconciliationRecoversTimedOutRefundUsingSameRefundNumber(StageFHttpTests.java:309)",
+        "com.yueji.mall.StageFHttpTests.rejectedSettlementCanBeRebuiltAndChangedSnapshotsCannotBeApproved(StageFHttpTests.java:353)",
+        "com.yueji.mall.StageFHttpTests.requestedAfterSaleCanBeCancelledAndSupportRejectionIsReplaySafe(StageFHttpTests.java:365)",
+        "com.yueji.mall.StageFHttpTests.returnEligibilityDeadlineAndDamagedInspectionAreEnforced(StageFHttpTests.java:327)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:28)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:55)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:112)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:90)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:119)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:135)",
+        "com.yueji.mall.StageFHttpTests.unknownRefundResultKeepsProcessingAndInventoryHeld(StageFHttpTests.java:297)",
+        "test-helper"
+      ]
+    },
+    {
+      "operationId": "API-33",
+      "method": "GET",
+      "path": "/api/v1/payments/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        404
+      ],
+      "observations": 7,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageEHttpTests.ownershipPermissionsAndClientOverridesCannotChoosePaymentFacts(StageEHttpTests.java:70)",
+        "com.yueji.mall.StageEHttpTests.ownershipPermissionsAndClientOverridesCannotChoosePaymentFacts(StageEHttpTests.java:71)",
+        "com.yueji.mall.StageEHttpTests.ownershipPermissionsAndClientOverridesCannotChoosePaymentFacts(StageEHttpTests.java:75)",
+        "com.yueji.mall.StageESandboxProtocolTests.invalidSignIdentityAmountAndUnknownNumberCannotChangeBusiness(StageESandboxProtocolTests.java:67)",
+        "com.yueji.mall.StageESandboxProtocolTests.invalidSignIdentityAmountAndUnknownNumberCannotChangeBusiness(StageESandboxProtocolTests.java:68)"
+      ]
+    },
+    {
+      "operationId": "API-34",
+      "method": "POST",
+      "path": "/api/v1/payments/{id}/mock-confirm",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        403,
+        404,
+        409
+      ],
+      "observations": 158,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.DashboardHttpTests.financeAndSupportOnlyReceiveTheirOwnMetrics(DashboardHttpTests.java:38)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedEligibleOrder(FinancialBoundaryHttpTests.java:138)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:112)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.issueResolutionFindsOrderThroughPaymentOrRefundAndPreservesEvidence(FinancialBoundaryHttpTests.java:228)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.lateCompensationRecoversOriginalRefundNumberAndNeverRestocksCancelledOrder(FinancialBoundaryHttpTests.java:188)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.lateRefundSubmissionUnknownDoesNotPretendSuccess(FinancialBoundaryHttpTests.java:213)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.lateRefundSuccessRejectsUnverifiedChannelFacts(FinancialBoundaryHttpTests.java:201)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reconciliationQuarantinesUnverifiedRefundFactsWithoutChangingStock(FinancialBoundaryHttpTests.java:146)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundOnlyCannotBeRequestedAfterShipmentAndReturnRequiresReceipt(FinancialBoundaryHttpTests.java:127)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundSuccessServiceRejectsUnverifiedIdentityAmountAndStatus(FinancialBoundaryHttpTests.java:174)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundWrongChannelIdentityCreatesDifferenceAndNeverRestocks(FinancialBoundaryHttpTests.java:91)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.remainingPublicAndSupportContractsExerciseRejectionsAndAuthorizedSuccess(FinancialBoundaryHttpTests.java:45)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reviewModerationIsAuditedOnceAndFilteringNeverExpandsScope(FinancialBoundaryHttpTests.java:53)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.ProductionIsolationTests.productionDoesNotExposeDocsOrMockPaymentAndUsesSeparateManagementPort(ProductionIsolationTests.java:23)",
+        "com.yueji.mall.StageEHttpTests.closedChannelFactBeforeExpiryStillConvergesAndCannotBePaidAgain(StageEHttpTests.java:146)",
+        "com.yueji.mall.StageEHttpTests.lambda$closingPaidWinsOrAlreadyClosedRejectsMockPaymentWithoutRevival$2(StageEHttpTests.java:102)",
+        "com.yueji.mall.StageEHttpTests.lambda$localPaymentTwentyReplaysAndConcurrentConfirmCommitOnlyOnce$0(StageEHttpTests.java:50)",
+        "com.yueji.mall.StageEHttpTests.localPaymentTwentyReplaysAndConcurrentConfirmCommitOnlyOnce(StageEHttpTests.java:48)",
+        "com.yueji.mall.StageEHttpTests.localPaymentTwentyReplaysAndConcurrentConfirmCommitOnlyOnce(StageEHttpTests.java:49)",
+        "com.yueji.mall.StageEHttpTests.ownershipPermissionsAndClientOverridesCannotChoosePaymentFacts(StageEHttpTests.java:68)",
+        "com.yueji.mall.StageEHttpTests.ownershipPermissionsAndClientOverridesCannotChoosePaymentFacts(StageEHttpTests.java:70)",
+        "com.yueji.mall.StageEHttpTests.ownershipPermissionsAndClientOverridesCannotChoosePaymentFacts(StageEHttpTests.java:73)",
+        "com.yueji.mall.StageESandboxProtocolTests.sandboxNeverRegistersMockRouteEvenWithSwitchEnabled(StageESandboxProtocolTests.java:72)",
+        "com.yueji.mall.StageFHttpTests.acceptedReturnWithoutResaleDoesNotRestock(StageFHttpTests.java:285)",
+        "com.yueji.mall.StageFHttpTests.activeReturnApplicationExcludesOrderFromSettlementCandidates(StageFHttpTests.java:187)",
+        "com.yueji.mall.StageFHttpTests.mismatchedSuccessfulRefundEvidenceIsNotApplied(StageFHttpTests.java:342)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAcceptsPreviouslyAppliedNormalRefund(StageFHttpTests.java:274)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAppliesVerifiedChannelRefundFailure(StageFHttpTests.java:261)",
+        "com.yueji.mall.StageFHttpTests.reconciliationConfirmsLateCompensationFromChannelEvidence(StageFHttpTests.java:213)",
+        "com.yueji.mall.StageFHttpTests.reconciliationFlagsPaymentTradeNumberMismatch(StageFHttpTests.java:227)",
+        "com.yueji.mall.StageFHttpTests.reconciliationKeepsLateCompensationUnknownAsOpenDifference(StageFHttpTests.java:248)",
+        "com.yueji.mall.StageFHttpTests.reconciliationKeepsPaymentUnknownAsOpenDifference(StageFHttpTests.java:237)",
+        "com.yueji.mall.StageFHttpTests.reconciliationPersistsOpenRefundDifferenceAndResolvesWithEvidence(StageFHttpTests.java:195)",
+        "com.yueji.mall.StageFHttpTests.reconciliationRecoversTimedOutRefundUsingSameRefundNumber(StageFHttpTests.java:309)",
+        "com.yueji.mall.StageFHttpTests.rejectedSettlementCanBeRebuiltAndChangedSnapshotsCannotBeApproved(StageFHttpTests.java:353)",
+        "com.yueji.mall.StageFHttpTests.requestedAfterSaleCanBeCancelledAndSupportRejectionIsReplaySafe(StageFHttpTests.java:365)",
+        "com.yueji.mall.StageFHttpTests.returnEligibilityDeadlineAndDamagedInspectionAreEnforced(StageFHttpTests.java:327)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:28)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:55)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:112)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:90)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:119)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:135)",
+        "com.yueji.mall.StageFHttpTests.unknownRefundResultKeepsProcessingAndInventoryHeld(StageFHttpTests.java:297)",
+        "test-helper"
+      ]
+    },
+    {
+      "operationId": "API-35",
+      "method": "POST",
+      "path": "/api/v1/payments/alipay/notify",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        200
+      ],
+      "observations": 36,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.StageESandboxProtocolTests.notify(StageESandboxProtocolTests.java:49)"
+      ]
+    },
+    {
+      "operationId": "API-36",
+      "method": "POST",
+      "path": "/api/v1/orders/{id}/confirm-receipt",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 22,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedEligibleOrder(FinancialBoundaryHttpTests.java:138)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:112)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reviewModerationIsAuditedOnceAndFilteringNeverExpandsScope(FinancialBoundaryHttpTests.java:53)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.acceptedReturnWithoutResaleDoesNotRestock(StageFHttpTests.java:285)",
+        "com.yueji.mall.StageFHttpTests.activeReturnApplicationExcludesOrderFromSettlementCandidates(StageFHttpTests.java:187)",
+        "com.yueji.mall.StageFHttpTests.rejectedSettlementCanBeRebuiltAndChangedSnapshotsCannotBeApproved(StageFHttpTests.java:353)",
+        "com.yueji.mall.StageFHttpTests.returnEligibilityDeadlineAndDamagedInspectionAreEnforced(StageFHttpTests.java:327)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:44)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:47)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:112)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:90)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:119)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:135)",
+        "test-helper"
+      ]
+    },
+    {
+      "operationId": "API-37",
+      "method": "POST",
+      "path": "/api/v1/reviews",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        409
+      ],
+      "observations": 13,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.reviewModerationIsAuditedOnceAndFilteringNeverExpandsScope(FinancialBoundaryHttpTests.java:56)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reviewModerationIsAuditedOnceAndFilteringNeverExpandsScope(FinancialBoundaryHttpTests.java:57)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:86)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:103)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:104)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:105)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:114)"
+      ]
+    },
+    {
+      "operationId": "API-38",
+      "method": "GET",
+      "path": "/api/v1/merchant/shops/{shopId}/orders",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "observations": 17,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.remainingPublicAndSupportContractsExerciseRejectionsAndAuthorizedSuccess(FinancialBoundaryHttpTests.java:48)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.remainingPublicAndSupportContractsExerciseRejectionsAndAuthorizedSuccess(FinancialBoundaryHttpTests.java:50)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageDHttpTests.readsAreOwnedScopedFilteredAndStableAndFulfillmentRequiresMerchantScope(StageDHttpTests.java:196)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:30)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:31)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:32)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:49)"
+      ]
+    },
+    {
+      "operationId": "API-39",
+      "method": "GET",
+      "path": "/api/v1/merchant/shops/{shopId}/orders/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        403
+      ],
+      "observations": 25,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedEligibleOrder(FinancialBoundaryHttpTests.java:138)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:112)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundOnlyCannotBeRequestedAfterShipmentAndReturnRequiresReceipt(FinancialBoundaryHttpTests.java:127)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reviewModerationIsAuditedOnceAndFilteringNeverExpandsScope(FinancialBoundaryHttpTests.java:53)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.acceptedReturnWithoutResaleDoesNotRestock(StageFHttpTests.java:285)",
+        "com.yueji.mall.StageFHttpTests.activeReturnApplicationExcludesOrderFromSettlementCandidates(StageFHttpTests.java:187)",
+        "com.yueji.mall.StageFHttpTests.rejectedSettlementCanBeRebuiltAndChangedSnapshotsCannotBeApproved(StageFHttpTests.java:353)",
+        "com.yueji.mall.StageFHttpTests.returnEligibilityDeadlineAndDamagedInspectionAreEnforced(StageFHttpTests.java:327)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:29)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:48)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:62)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:112)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:90)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:119)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:135)",
+        "test-helper"
+      ]
+    },
+    {
+      "operationId": "API-40",
+      "method": "POST",
+      "path": "/api/v1/merchant/shops/{shopId}/orders/{id}/ship",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        401,
+        409
+      ],
+      "observations": 25,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedEligibleOrder(FinancialBoundaryHttpTests.java:138)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:112)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundOnlyCannotBeRequestedAfterShipmentAndReturnRequiresReceipt(FinancialBoundaryHttpTests.java:127)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reviewModerationIsAuditedOnceAndFilteringNeverExpandsScope(FinancialBoundaryHttpTests.java:53)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.acceptedReturnWithoutResaleDoesNotRestock(StageFHttpTests.java:285)",
+        "com.yueji.mall.StageFHttpTests.activeReturnApplicationExcludesOrderFromSettlementCandidates(StageFHttpTests.java:187)",
+        "com.yueji.mall.StageFHttpTests.rejectedSettlementCanBeRebuiltAndChangedSnapshotsCannotBeApproved(StageFHttpTests.java:353)",
+        "com.yueji.mall.StageFHttpTests.returnEligibilityDeadlineAndDamagedInspectionAreEnforced(StageFHttpTests.java:327)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:35)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:36)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:63)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:112)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:90)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:119)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:135)",
+        "test-helper"
+      ]
+    },
+    {
+      "operationId": "API-41",
+      "method": "POST",
+      "path": "/api/v1/merchant/shops/{shopId}/shipments/{id}/events",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        400,
+        401
+      ],
+      "observations": 4,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:40)",
+        "com.yueji.mall.StageFHttpTests.tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate(StageFHttpTests.java:41)"
+      ]
+    },
+    {
+      "operationId": "API-42",
+      "method": "POST",
+      "path": "/api/v1/after-sales",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        401,
+        409
+      ],
+      "observations": 58,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.approvedRefund(FinancialBoundaryHttpTests.java:134)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:113)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundOnlyCannotBeRequestedAfterShipmentAndReturnRequiresReceipt(FinancialBoundaryHttpTests.java:129)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.remainingPublicAndSupportContractsExerciseRejectionsAndAuthorizedSuccess(FinancialBoundaryHttpTests.java:45)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.acceptedReturnWithoutResaleDoesNotRestock(StageFHttpTests.java:286)",
+        "com.yueji.mall.StageFHttpTests.activeReturnApplicationExcludesOrderFromSettlementCandidates(StageFHttpTests.java:188)",
+        "com.yueji.mall.StageFHttpTests.mismatchedSuccessfulRefundEvidenceIsNotApplied(StageFHttpTests.java:343)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAcceptsPreviouslyAppliedNormalRefund(StageFHttpTests.java:275)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAppliesVerifiedChannelRefundFailure(StageFHttpTests.java:262)",
+        "com.yueji.mall.StageFHttpTests.reconciliationPersistsOpenRefundDifferenceAndResolvesWithEvidence(StageFHttpTests.java:196)",
+        "com.yueji.mall.StageFHttpTests.reconciliationRecoversTimedOutRefundUsingSameRefundNumber(StageFHttpTests.java:310)",
+        "com.yueji.mall.StageFHttpTests.requestedAfterSaleCanBeCancelledAndSupportRejectionIsReplaySafe(StageFHttpTests.java:366)",
+        "com.yueji.mall.StageFHttpTests.requestedAfterSaleCanBeCancelledAndSupportRejectionIsReplaySafe(StageFHttpTests.java:369)",
+        "com.yueji.mall.StageFHttpTests.returnEligibilityDeadlineAndDamagedInspectionAreEnforced(StageFHttpTests.java:329)",
+        "com.yueji.mall.StageFHttpTests.returnEligibilityDeadlineAndDamagedInspectionAreEnforced(StageFHttpTests.java:331)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:56)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:61)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:81)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:91)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:121)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:122)",
+        "com.yueji.mall.StageFHttpTests.unknownRefundResultKeepsProcessingAndInventoryHeld(StageFHttpTests.java:298)"
+      ]
+    },
+    {
+      "operationId": "API-43",
+      "method": "GET",
+      "path": "/api/v1/after-sales",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:36)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.requestedAfterSaleCanBeCancelledAndSupportRejectionIsReplaySafe(StageFHttpTests.java:372)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:57)"
+      ]
+    },
+    {
+      "operationId": "API-44",
+      "method": "GET",
+      "path": "/api/v1/after-sales/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 4,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:130)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:131)"
+      ]
+    },
+    {
+      "operationId": "API-45",
+      "method": "POST",
+      "path": "/api/v1/after-sales/{id}/cancel",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        409
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:123)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.requestedAfterSaleCanBeCancelledAndSupportRejectionIsReplaySafe(StageFHttpTests.java:367)",
+        "com.yueji.mall.StageFHttpTests.requestedAfterSaleCanBeCancelledAndSupportRejectionIsReplaySafe(StageFHttpTests.java:368)"
+      ]
+    },
+    {
+      "operationId": "API-46",
+      "method": "PUT",
+      "path": "/api/v1/after-sales/{id}/return-shipment",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        404,
+        409
+      ],
+      "observations": 16,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:119)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:120)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:121)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:122)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.acceptedReturnWithoutResaleDoesNotRestock(StageFHttpTests.java:288)",
+        "com.yueji.mall.StageFHttpTests.returnEligibilityDeadlineAndDamagedInspectionAreEnforced(StageFHttpTests.java:334)",
+        "com.yueji.mall.StageFHttpTests.returnEligibilityDeadlineAndDamagedInspectionAreEnforced(StageFHttpTests.java:335)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:93)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:125)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:126)"
+      ]
+    },
+    {
+      "operationId": "API-47",
+      "method": "GET",
+      "path": "/api/v1/support/after-sales",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401
+      ],
+      "observations": 9,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:124)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:34)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:35)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:58)"
+      ]
+    },
+    {
+      "operationId": "API-48",
+      "method": "GET",
+      "path": "/api/v1/support/after-sales/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        403
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.remainingPublicAndSupportContractsExerciseRejectionsAndAuthorizedSuccess(FinancialBoundaryHttpTests.java:46)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.remainingPublicAndSupportContractsExerciseRejectionsAndAuthorizedSuccess(FinancialBoundaryHttpTests.java:47)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)"
+      ]
+    },
+    {
+      "operationId": "API-49",
+      "method": "POST",
+      "path": "/api/v1/support/after-sales/{id}/decision",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        409
+      ],
+      "observations": 53,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.approvedRefund(FinancialBoundaryHttpTests.java:135)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:115)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:116)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.completedReturnRejectsDifferentSecondParcelAndDuplicateDecision(FinancialBoundaryHttpTests.java:117)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.acceptedReturnWithoutResaleDoesNotRestock(StageFHttpTests.java:287)",
+        "com.yueji.mall.StageFHttpTests.mismatchedSuccessfulRefundEvidenceIsNotApplied(StageFHttpTests.java:344)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAcceptsPreviouslyAppliedNormalRefund(StageFHttpTests.java:276)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAppliesVerifiedChannelRefundFailure(StageFHttpTests.java:263)",
+        "com.yueji.mall.StageFHttpTests.reconciliationPersistsOpenRefundDifferenceAndResolvesWithEvidence(StageFHttpTests.java:197)",
+        "com.yueji.mall.StageFHttpTests.reconciliationRecoversTimedOutRefundUsingSameRefundNumber(StageFHttpTests.java:311)",
+        "com.yueji.mall.StageFHttpTests.requestedAfterSaleCanBeCancelledAndSupportRejectionIsReplaySafe(StageFHttpTests.java:370)",
+        "com.yueji.mall.StageFHttpTests.requestedAfterSaleCanBeCancelledAndSupportRejectionIsReplaySafe(StageFHttpTests.java:371)",
+        "com.yueji.mall.StageFHttpTests.returnEligibilityDeadlineAndDamagedInspectionAreEnforced(StageFHttpTests.java:332)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:64)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:82)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:92)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:123)",
+        "com.yueji.mall.StageFHttpTests.tc19ReturnWithoutTrackingExpiresButShippedReturnRemainsPending(StageFHttpTests.java:124)",
+        "com.yueji.mall.StageFHttpTests.unknownRefundResultKeepsProcessingAndInventoryHeld(StageFHttpTests.java:299)"
+      ]
+    },
+    {
+      "operationId": "API-50",
+      "method": "GET",
+      "path": "/api/v1/merchant/shops/{shopId}/after-sales",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401
+      ],
+      "observations": 7,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:31)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:32)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:60)"
+      ]
+    },
+    {
+      "operationId": "API-51",
+      "method": "POST",
+      "path": "/api/v1/merchant/shops/{shopId}/after-sales/{id}/inspection",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        409
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.acceptedReturnWithoutResaleDoesNotRestock(StageFHttpTests.java:289)",
+        "com.yueji.mall.StageFHttpTests.acceptedReturnWithoutResaleDoesNotRestock(StageFHttpTests.java:290)",
+        "com.yueji.mall.StageFHttpTests.returnEligibilityDeadlineAndDamagedInspectionAreEnforced(StageFHttpTests.java:336)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:94)"
+      ]
+    },
+    {
+      "operationId": "API-52",
+      "method": "GET",
+      "path": "/api/v1/finance/refunds",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401
+      ],
+      "observations": 12,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:23)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:24)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:25)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:29)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:72)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:73)"
+      ]
+    },
+    {
+      "operationId": "API-53",
+      "method": "POST",
+      "path": "/api/v1/finance/refunds/{id}/execute",
+      "successStatuses": [
+        202
+      ],
+      "rejectionStatuses": [
+        401,
+        403,
+        409
+      ],
+      "observations": 18,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundWrongChannelIdentityCreatesDifferenceAndNeverRestocks(FinancialBoundaryHttpTests.java:93)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.refundWrongChannelIdentityCreatesDifferenceAndNeverRestocks(FinancialBoundaryHttpTests.java:97)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.acceptedReturnWithoutResaleDoesNotRestock(StageFHttpTests.java:291)",
+        "com.yueji.mall.StageFHttpTests.mismatchedSuccessfulRefundEvidenceIsNotApplied(StageFHttpTests.java:347)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAcceptsPreviouslyAppliedNormalRefund(StageFHttpTests.java:277)",
+        "com.yueji.mall.StageFHttpTests.reconciliationRecoversTimedOutRefundUsingSameRefundNumber(StageFHttpTests.java:315)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:66)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:70)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:77)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:83)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:97)",
+        "com.yueji.mall.StageFHttpTests.unknownRefundResultKeepsProcessingAndInventoryHeld(StageFHttpTests.java:302)",
+        "com.yueji.mall.StageFHttpTests.unknownRefundResultKeepsProcessingAndInventoryHeld(StageFHttpTests.java:303)"
+      ]
+    },
+    {
+      "operationId": "API-54",
+      "method": "GET",
+      "path": "/api/v1/finance/reconciliations",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401
+      ],
+      "observations": 5,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:27)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.reconciliationPersistsOpenRefundDifferenceAndResolvesWithEvidence(StageFHttpTests.java:203)"
+      ]
+    },
+    {
+      "operationId": "API-55",
+      "method": "POST",
+      "path": "/api/v1/finance/reconciliations",
+      "successStatuses": [
+        202
+      ],
+      "rejectionStatuses": [
+        400,
+        401
+      ],
+      "observations": 45,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:37)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reconciliationCanResumeFailedRunAndKeepsRunningRunIdStable(FinancialBoundaryHttpTests.java:104)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reconciliationCanResumeFailedRunAndKeepsRunningRunIdStable(FinancialBoundaryHttpTests.java:106)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reconciliationCanResumeFailedRunAndKeepsRunningRunIdStable(FinancialBoundaryHttpTests.java:108)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reconciliationQuarantinesUnverifiedRefundFactsWithoutChangingStock(FinancialBoundaryHttpTests.java:163)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAcceptsPreviouslyAppliedNormalRefund(StageFHttpTests.java:279)",
+        "com.yueji.mall.StageFHttpTests.reconciliationAppliesVerifiedChannelRefundFailure(StageFHttpTests.java:268)",
+        "com.yueji.mall.StageFHttpTests.reconciliationConfirmsLateCompensationFromChannelEvidence(StageFHttpTests.java:220)",
+        "com.yueji.mall.StageFHttpTests.reconciliationFlagsPaymentTradeNumberMismatch(StageFHttpTests.java:231)",
+        "com.yueji.mall.StageFHttpTests.reconciliationKeepsLateCompensationUnknownAsOpenDifference(StageFHttpTests.java:253)",
+        "com.yueji.mall.StageFHttpTests.reconciliationKeepsPaymentUnknownAsOpenDifference(StageFHttpTests.java:241)",
+        "com.yueji.mall.StageFHttpTests.reconciliationPersistsOpenRefundDifferenceAndResolvesWithEvidence(StageFHttpTests.java:201)",
+        "com.yueji.mall.StageFHttpTests.reconciliationPersistsOpenRefundDifferenceAndResolvesWithEvidence(StageFHttpTests.java:208)",
+        "com.yueji.mall.StageFHttpTests.reconciliationRecoversTimedOutRefundUsingSameRefundNumber(StageFHttpTests.java:319)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:140)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:142)"
+      ]
+    },
+    {
+      "operationId": "API-56",
+      "method": "GET",
+      "path": "/api/v1/finance/reconciliation-issues",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401
+      ],
+      "observations": 13,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:23)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:24)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:25)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.reconciliationFlagsPaymentTradeNumberMismatch(StageFHttpTests.java:233)",
+        "com.yueji.mall.StageFHttpTests.reconciliationKeepsLateCompensationUnknownAsOpenDifference(StageFHttpTests.java:257)",
+        "com.yueji.mall.StageFHttpTests.reconciliationKeepsPaymentUnknownAsOpenDifference(StageFHttpTests.java:244)",
+        "com.yueji.mall.StageFHttpTests.reconciliationPersistsOpenRefundDifferenceAndResolvesWithEvidence(StageFHttpTests.java:204)",
+        "com.yueji.mall.StageFHttpTests.reconciliationPersistsOpenRefundDifferenceAndResolvesWithEvidence(StageFHttpTests.java:207)"
+      ]
+    },
+    {
+      "operationId": "API-57",
+      "method": "POST",
+      "path": "/api/v1/finance/reconciliation-issues/{id}/resolve",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 14,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.issueResolutionFindsOrderThroughPaymentOrRefundAndPreservesEvidence(FinancialBoundaryHttpTests.java:230)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.settledOrderIsRevalidatedBeforeApprovalAndNoSnapshotCanHideNewDifference(FinancialBoundaryHttpTests.java:84)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.reconciliationPersistsOpenRefundDifferenceAndResolvesWithEvidence(StageFHttpTests.java:205)",
+        "com.yueji.mall.StageFHttpTests.reconciliationPersistsOpenRefundDifferenceAndResolvesWithEvidence(StageFHttpTests.java:206)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:146)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:169)"
+      ]
+    },
+    {
+      "operationId": "API-58",
+      "method": "GET",
+      "path": "/api/v1/finance/settlements",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401
+      ],
+      "observations": 11,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:23)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:24)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:25)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:29)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:151)"
+      ]
+    },
+    {
+      "operationId": "API-59",
+      "method": "POST",
+      "path": "/api/v1/finance/settlements",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        401,
+        409
+      ],
+      "observations": 16,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.statement(FinancialBoundaryHttpTests.java:141)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.activeReturnApplicationExcludesOrderFromSettlementCandidates(StageFHttpTests.java:190)",
+        "com.yueji.mall.StageFHttpTests.activeReturnApplicationExcludesOrderFromSettlementCandidates(StageFHttpTests.java:191)",
+        "com.yueji.mall.StageFHttpTests.rejectedSettlementCanBeRebuiltAndChangedSnapshotsCannotBeApproved(StageFHttpTests.java:355)",
+        "com.yueji.mall.StageFHttpTests.rejectedSettlementCanBeRebuiltAndChangedSnapshotsCannotBeApproved(StageFHttpTests.java:358)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:145)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:147)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:149)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:178)"
+      ]
+    },
+    {
+      "operationId": "API-60",
+      "method": "POST",
+      "path": "/api/v1/finance/settlements/{id}/decision",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        403,
+        409
+      ],
+      "observations": 21,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.rejectedSettlementCanBeRegeneratedAndStaleApprovalCannotMutateIt(FinancialBoundaryHttpTests.java:71)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.rejectedSettlementCanBeRegeneratedAndStaleApprovalCannotMutateIt(FinancialBoundaryHttpTests.java:72)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.rejectedSettlementCanBeRegeneratedAndStaleApprovalCannotMutateIt(FinancialBoundaryHttpTests.java:74)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.settledOrderIsRevalidatedBeforeApprovalAndNoSnapshotCanHideNewDifference(FinancialBoundaryHttpTests.java:82)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.settledOrderIsRevalidatedBeforeApprovalAndNoSnapshotCanHideNewDifference(FinancialBoundaryHttpTests.java:85)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.settledOrderIsRevalidatedBeforeApprovalAndNoSnapshotCanHideNewDifference(FinancialBoundaryHttpTests.java:86)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.settledOrderIsRevalidatedBeforeApprovalAndNoSnapshotCanHideNewDifference(FinancialBoundaryHttpTests.java:87)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.rejectedSettlementCanBeRebuiltAndChangedSnapshotsCannotBeApproved(StageFHttpTests.java:356)",
+        "com.yueji.mall.StageFHttpTests.rejectedSettlementCanBeRebuiltAndChangedSnapshotsCannotBeApproved(StageFHttpTests.java:361)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:152)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:153)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:180)"
+      ]
+    },
+    {
+      "operationId": "API-61",
+      "method": "POST",
+      "path": "/api/v1/finance/settlements/{id}/mock-payout",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        409
+      ],
+      "observations": 7,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.rejectedSettlementCanBeRegeneratedAndStaleApprovalCannotMutateIt(FinancialBoundaryHttpTests.java:70)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:154)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:156)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:181)"
+      ]
+    },
+    {
+      "operationId": "API-62",
+      "method": "GET",
+      "path": "/api/v1/merchant/shops/{shopId}/settlements",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401
+      ],
+      "observations": 7,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:31)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:32)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:157)"
+      ]
+    },
+    {
+      "operationId": "API-63",
+      "method": "GET",
+      "path": "/api/v1/ops/books",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.publicReadsExcludeDraftOffShelfDisabledBooksCategoriesAndSuspendedShops(StageCHttpTests.java:102)",
+        "com.yueji.mall.StageCHttpTests.publicReadsExcludeDraftOffShelfDisabledBooksCategoriesAndSuspendedShops(StageCHttpTests.java:103)"
+      ]
+    },
+    {
+      "operationId": "API-64",
+      "method": "POST",
+      "path": "/api/v1/ops/books",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        409
+      ],
+      "observations": 38,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.categoryDepthCycleDisableAndIsbnRulesAreEnforced(StageCHttpTests.java:127)",
+        "com.yueji.mall.StageCHttpTests.categoryDepthCycleDisableAndIsbnRulesAreEnforced(StageCHttpTests.java:128)",
+        "com.yueji.mall.StageCHttpTests.fixtures(StageCHttpTests.java:43)"
+      ]
+    },
+    {
+      "operationId": "API-65",
+      "method": "PUT",
+      "path": "/api/v1/ops/books/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        409
+      ],
+      "observations": 12,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.categoryDepthCycleDisableAndIsbnRulesAreEnforced(StageCHttpTests.java:129)",
+        "com.yueji.mall.StageCHttpTests.filesAreDecodedReencodedAndAttachedAsPublicCovers(StageCHttpTests.java:224)",
+        "com.yueji.mall.StageCHttpTests.privateEvidenceHasNoStaticUrlAndOnlyItsOwnerCanReadWithoutAssociation(StageCHttpTests.java:249)",
+        "com.yueji.mall.StageCHttpTests.publicReadsExcludeDraftOffShelfDisabledBooksCategoriesAndSuspendedShops(StageCHttpTests.java:100)",
+        "com.yueji.mall.StageCHttpTests.publicReadsExcludeDraftOffShelfDisabledBooksCategoriesAndSuspendedShops(StageCHttpTests.java:104)"
+      ]
+    },
+    {
+      "operationId": "API-66",
+      "method": "POST",
+      "path": "/api/v1/ops/categories",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        401,
+        403,
+        409
+      ],
+      "observations": 40,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.categoryDepthCycleDisableAndIsbnRulesAreEnforced(StageCHttpTests.java:123)",
+        "com.yueji.mall.StageCHttpTests.categoryDepthCycleDisableAndIsbnRulesAreEnforced(StageCHttpTests.java:124)",
+        "com.yueji.mall.StageCHttpTests.fixtures(StageCHttpTests.java:42)",
+        "com.yueji.mall.StageCHttpTests.merchantAndMemberScopesUseServerRelationsAndActionPermissions(StageCHttpTests.java:150)"
+      ]
+    },
+    {
+      "operationId": "API-67",
+      "method": "PUT",
+      "path": "/api/v1/ops/categories/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        409
+      ],
+      "observations": 8,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.categoryDepthCycleDisableAndIsbnRulesAreEnforced(StageCHttpTests.java:125)",
+        "com.yueji.mall.StageCHttpTests.categoryDepthCycleDisableAndIsbnRulesAreEnforced(StageCHttpTests.java:126)",
+        "com.yueji.mall.StageCHttpTests.categoryDepthCycleDisableAndIsbnRulesAreEnforced(StageCHttpTests.java:130)"
+      ]
+    },
+    {
+      "operationId": "API-68",
+      "method": "PUT",
+      "path": "/api/v1/ops/products/{id}/moderation",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        409
+      ],
+      "observations": 8,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.operatorModerationCannotForceMerchantOffShelfProductsOnSale(StageCHttpTests.java:135)",
+        "com.yueji.mall.StageCHttpTests.operatorModerationCannotForceMerchantOffShelfProductsOnSale(StageCHttpTests.java:138)",
+        "com.yueji.mall.StageCHttpTests.operatorModerationCannotForceMerchantOffShelfProductsOnSale(StageCHttpTests.java:140)"
+      ]
+    },
+    {
+      "operationId": "API-69",
+      "method": "PUT",
+      "path": "/api/v1/ops/reviews/{id}/visibility",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        404
+      ],
+      "observations": 11,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.reviewModerationIsAuditedOnceAndFilteringNeverExpandsScope(FinancialBoundaryHttpTests.java:60)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reviewModerationIsAuditedOnceAndFilteringNeverExpandsScope(FinancialBoundaryHttpTests.java:61)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.reviewReadingUsesRealTableAndModerationRequiresAnExistingReview(StageCHttpTests.java:269)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:107)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:111)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:160)"
+      ]
+    },
+    {
+      "operationId": "API-70",
+      "method": "GET",
+      "path": "/api/v1/admin/users",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        403
+      ],
+      "observations": 18,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.administrationRequiresPermissionsAndNeverTrustsClientRoleClaims(IdentityHttpTests.java:209)",
+        "com.yueji.mall.IdentityHttpTests.administrationRequiresPermissionsAndNeverTrustsClientRoleClaims(IdentityHttpTests.java:210)",
+        "com.yueji.mall.IdentityHttpTests.administrationRequiresPermissionsAndNeverTrustsClientRoleClaims(IdentityHttpTests.java:214)",
+        "com.yueji.mall.IdentityHttpTests.administrationRequiresPermissionsAndNeverTrustsClientRoleClaims(IdentityHttpTests.java:215)",
+        "com.yueji.mall.IdentityHttpTests.administrationRequiresPermissionsAndNeverTrustsClientRoleClaims(IdentityHttpTests.java:216)",
+        "com.yueji.mall.IdentityHttpTests.administrationRequiresPermissionsAndNeverTrustsClientRoleClaims(IdentityHttpTests.java:217)",
+        "com.yueji.mall.IdentityHttpTests.auditQueryAndAdministrativeSortHaveStrictBounds(IdentityHttpTests.java:130)",
+        "com.yueji.mall.IdentityHttpTests.lastAdministratorAndBuiltinCriticalPermissionsAreProtected(IdentityHttpTests.java:252)"
+      ]
+    },
+    {
+      "operationId": "API-71",
+      "method": "POST",
+      "path": "/api/v1/admin/users",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        400,
+        401
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.roleCreationEditingAndPermissionDirectoryFollowTheContract(IdentityHttpTests.java:236)",
+        "com.yueji.mall.IdentityHttpTests.roleCreationEditingAndPermissionDirectoryFollowTheContract(IdentityHttpTests.java:243)"
+      ]
+    },
+    {
+      "operationId": "API-72",
+      "method": "PUT",
+      "path": "/api/v1/admin/users/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        403,
+        409
+      ],
+      "observations": 18,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.lambda$concurrentAdministratorRevocationsCannotRemoveBothOperators$1(IdentityHttpTests.java:259)",
+        "com.yueji.mall.IdentityHttpTests.lambda$concurrentAdministratorRevocationsCannotRemoveBothOperators$2(IdentityHttpTests.java:260)",
+        "com.yueji.mall.IdentityHttpTests.lastAdministratorAndBuiltinCriticalPermissionsAreProtected(IdentityHttpTests.java:248)",
+        "com.yueji.mall.IdentityHttpTests.lastAdministratorAndBuiltinCriticalPermissionsAreProtected(IdentityHttpTests.java:249)",
+        "com.yueji.mall.IdentityHttpTests.lastAdministratorAndBuiltinCriticalPermissionsAreProtected(IdentityHttpTests.java:250)",
+        "com.yueji.mall.IdentityHttpTests.userDisableAndGrantChangesInvalidateOldAccessAndRefreshImmediately(IdentityHttpTests.java:221)",
+        "com.yueji.mall.IdentityHttpTests.userDisableAndGrantChangesInvalidateOldAccessAndRefreshImmediately(IdentityHttpTests.java:224)",
+        "com.yueji.mall.IdentityHttpTests.userDisableAndGrantChangesInvalidateOldAccessAndRefreshImmediately(IdentityHttpTests.java:226)"
+      ]
+    },
+    {
+      "operationId": "API-73",
+      "method": "GET",
+      "path": "/api/v1/admin/roles",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        403
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.administrationRequiresPermissionsAndNeverTrustsClientRoleClaims(IdentityHttpTests.java:211)",
+        "com.yueji.mall.IdentityHttpTests.roleCreationEditingAndPermissionDirectoryFollowTheContract(IdentityHttpTests.java:242)"
+      ]
+    },
+    {
+      "operationId": "API-74",
+      "method": "POST",
+      "path": "/api/v1/admin/roles",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 4,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.roleCreationEditingAndPermissionDirectoryFollowTheContract(IdentityHttpTests.java:235)"
+      ]
+    },
+    {
+      "operationId": "API-75",
+      "method": "PUT",
+      "path": "/api/v1/admin/roles/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        409
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.lastAdministratorAndBuiltinCriticalPermissionsAreProtected(IdentityHttpTests.java:251)",
+        "com.yueji.mall.IdentityHttpTests.roleCreationEditingAndPermissionDirectoryFollowTheContract(IdentityHttpTests.java:239)"
+      ]
+    },
+    {
+      "operationId": "API-76",
+      "method": "GET",
+      "path": "/api/v1/admin/permissions",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 4,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.roleCreationEditingAndPermissionDirectoryFollowTheContract(IdentityHttpTests.java:231)"
+      ]
+    },
+    {
+      "operationId": "API-77",
+      "method": "GET",
+      "path": "/api/v1/admin/audit-logs",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        403
+      ],
+      "observations": 18,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.auditIsScopedSafeAndSupportsTraceFiltering(IdentityHttpTests.java:289)",
+        "com.yueji.mall.IdentityHttpTests.auditIsScopedSafeAndSupportsTraceFiltering(IdentityHttpTests.java:292)",
+        "com.yueji.mall.IdentityHttpTests.auditIsScopedSafeAndSupportsTraceFiltering(IdentityHttpTests.java:293)",
+        "com.yueji.mall.IdentityHttpTests.auditQueryAndAdministrativeSortHaveStrictBounds(IdentityHttpTests.java:131)",
+        "com.yueji.mall.IdentityHttpTests.auditQueryAndAdministrativeSortHaveStrictBounds(IdentityHttpTests.java:132)",
+        "com.yueji.mall.IdentityHttpTests.auditQueryAndAdministrativeSortHaveStrictBounds(IdentityHttpTests.java:133)",
+        "com.yueji.mall.IdentityHttpTests.auditQueryAndAdministrativeSortHaveStrictBounds(IdentityHttpTests.java:134)",
+        "com.yueji.mall.IdentityHttpTests.auditQueryAndAdministrativeSortHaveStrictBounds(IdentityHttpTests.java:135)"
+      ]
+    },
+    {
+      "operationId": "API-78",
+      "method": "GET",
+      "path": "/api/v1/support/after-sales/{id}/order",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 3,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc16Tc17UnshippedRefundIsReservedRetriedAndRestockedOnce(StageFHttpTests.java:59)"
+      ]
+    },
+    {
+      "operationId": "API-79",
+      "method": "GET",
+      "path": "/api/v1/finance/settlements/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.settledOrderIsRevalidatedBeforeApprovalAndNoSnapshotCanHideNewDifference(FinancialBoundaryHttpTests.java:88)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:162)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:183)"
+      ]
+    },
+    {
+      "operationId": "API-80",
+      "method": "GET",
+      "path": "/api/v1/merchant/shops/{shopId}/settlements/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 4,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:159)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:182)"
+      ]
+    },
+    {
+      "operationId": "API-81",
+      "method": "POST",
+      "path": "/api/v1/finance/settlement-adjustments",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        401,
+        409
+      ],
+      "observations": 4,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:170)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:171)"
+      ]
+    },
+    {
+      "operationId": "API-82",
+      "method": "GET",
+      "path": "/api/v1/finance/settlement-adjustments",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401
+      ],
+      "observations": 12,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:23)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:24)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:25)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.financialQueriesRejectInvalidFiltersInsteadOfChangingScope(FinancialBoundaryHttpTests.java:29)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:173)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:177)"
+      ]
+    },
+    {
+      "operationId": "API-83",
+      "method": "POST",
+      "path": "/api/v1/finance/settlement-adjustments/{id}/approve",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        403
+      ],
+      "observations": 5,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:174)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:175)",
+        "com.yueji.mall.StageFHttpTests.tc21Tc22Tc23ReconciliationEvidenceSettlementSnapshotsAndNegativeCarryForward(StageFHttpTests.java:176)"
+      ]
+    },
+    {
+      "operationId": "API-84",
+      "method": "GET",
+      "path": "/api/v1/admin/shops",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        403
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.administrationRequiresPermissionsAndNeverTrustsClientRoleClaims(IdentityHttpTests.java:212)",
+        "com.yueji.mall.IdentityHttpTests.shopMembershipIsServerAssignedScopedAndRevokesExistingTokens(IdentityHttpTests.java:283)"
+      ]
+    },
+    {
+      "operationId": "API-85",
+      "method": "POST",
+      "path": "/api/v1/admin/shops",
+      "successStatuses": [
+        201
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 8,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.auditIsScopedSafeAndSupportsTraceFiltering(IdentityHttpTests.java:288)",
+        "com.yueji.mall.IdentityHttpTests.shopMembershipIsServerAssignedScopedAndRevokesExistingTokens(IdentityHttpTests.java:269)",
+        "com.yueji.mall.IdentityHttpTests.shopMembershipIsServerAssignedScopedAndRevokesExistingTokens(IdentityHttpTests.java:270)"
+      ]
+    },
+    {
+      "operationId": "API-86",
+      "method": "PUT",
+      "path": "/api/v1/admin/shops/{id}",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 4,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.shopMembershipIsServerAssignedScopedAndRevokesExistingTokens(IdentityHttpTests.java:282)"
+      ]
+    },
+    {
+      "operationId": "API-87",
+      "method": "GET",
+      "path": "/api/v1/admin/shops/{shopId}/members",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        403
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.shopMembershipIsServerAssignedScopedAndRevokesExistingTokens(IdentityHttpTests.java:277)",
+        "com.yueji.mall.IdentityHttpTests.shopMembershipIsServerAssignedScopedAndRevokesExistingTokens(IdentityHttpTests.java:278)"
+      ]
+    },
+    {
+      "operationId": "API-88",
+      "method": "PUT",
+      "path": "/api/v1/admin/shops/{shopId}/members/{userId}/{duty}",
+      "successStatuses": [
+        200,
+        201
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.IdentityHttpTests.shopMembershipIsServerAssignedScopedAndRevokesExistingTokens(IdentityHttpTests.java:271)",
+        "com.yueji.mall.IdentityHttpTests.shopMembershipIsServerAssignedScopedAndRevokesExistingTokens(IdentityHttpTests.java:279)"
+      ]
+    },
+    {
+      "operationId": "API-89",
+      "method": "GET",
+      "path": "/api/v1/dashboard",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401,
+        403,
+        404
+      ],
+      "observations": 30,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.DashboardHttpTests.dashboardRequiresPermissionAndOmitsUnauthorizedMetrics(DashboardHttpTests.java:14)",
+        "com.yueji.mall.DashboardHttpTests.dashboardRequiresPermissionAndOmitsUnauthorizedMetrics(DashboardHttpTests.java:15)",
+        "com.yueji.mall.DashboardHttpTests.dashboardRequiresPermissionAndOmitsUnauthorizedMetrics(DashboardHttpTests.java:17)",
+        "com.yueji.mall.DashboardHttpTests.dashboardRequiresPermissionAndOmitsUnauthorizedMetrics(DashboardHttpTests.java:18)",
+        "com.yueji.mall.DashboardHttpTests.financeAndSupportOnlyReceiveTheirOwnMetrics(DashboardHttpTests.java:39)",
+        "com.yueji.mall.DashboardHttpTests.financeAndSupportOnlyReceiveTheirOwnMetrics(DashboardHttpTests.java:43)",
+        "com.yueji.mall.DashboardHttpTests.financeAndSupportOnlyReceiveTheirOwnMetrics(DashboardHttpTests.java:45)",
+        "com.yueji.mall.DashboardHttpTests.merchantMetricsAreRestrictedToActiveMembershipAndCannotReadOtherShop(DashboardHttpTests.java:24)",
+        "com.yueji.mall.DashboardHttpTests.merchantMetricsAreRestrictedToActiveMembershipAndCannotReadOtherShop(DashboardHttpTests.java:28)",
+        "com.yueji.mall.DashboardHttpTests.merchantMetricsAreRestrictedToActiveMembershipAndCannotReadOtherShop(DashboardHttpTests.java:29)",
+        "com.yueji.mall.DashboardHttpTests.merchantMetricsAreRestrictedToActiveMembershipAndCannotReadOtherShop(DashboardHttpTests.java:31)",
+        "com.yueji.mall.DashboardHttpTests.warehouseAndSupportScopeAreIndependentlyAuthorized(DashboardHttpTests.java:51)",
+        "com.yueji.mall.DashboardHttpTests.warehouseAndSupportScopeAreIndependentlyAuthorized(DashboardHttpTests.java:55)",
+        "com.yueji.mall.DashboardHttpTests.warehouseAndSupportScopeAreIndependentlyAuthorized(DashboardHttpTests.java:57)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)"
+      ]
+    },
+    {
+      "operationId": "API-90",
+      "method": "GET",
+      "path": "/api/v1/ops/products",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401,
+        403
+      ],
+      "observations": 6,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.merchantAndMemberScopesUseServerRelationsAndActionPermissions(StageCHttpTests.java:148)",
+        "com.yueji.mall.StageCHttpTests.operatorModerationCannotForceMerchantOffShelfProductsOnSale(StageCHttpTests.java:142)"
+      ]
+    },
+    {
+      "operationId": "API-91",
+      "method": "GET",
+      "path": "/api/v1/ops/reviews",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        400,
+        401
+      ],
+      "observations": 16,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FinancialBoundaryHttpTests.reviewModerationIsAuditedOnceAndFilteringNeverExpandsScope(FinancialBoundaryHttpTests.java:63)",
+        "com.yueji.mall.FinancialBoundaryHttpTests.reviewModerationIsAuditedOnceAndFilteringNeverExpandsScope(FinancialBoundaryHttpTests.java:65)",
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.reviewReadingUsesRealTableAndModerationRequiresAnExistingReview(StageCHttpTests.java:270)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:109)",
+        "com.yueji.mall.StageFHttpTests.tc18ReturnInspectionRestocksOnlyResalableGoodsAndReviewCanBeModerated(StageFHttpTests.java:110)"
+      ]
+    },
+    {
+      "operationId": "API-92",
+      "method": "GET",
+      "path": "/api/v1/ops/categories",
+      "successStatuses": [
+        200
+      ],
+      "rejectionStatuses": [
+        401
+      ],
+      "observations": 4,
+      "status": "OBSERVED_BOTH",
+      "sources": [
+        "com.yueji.mall.FoundationHttpTests.lambda$everyImplementedProtectedOperationRejectsAnonymousRequests$2(FoundationHttpTests.java:75)",
+        "com.yueji.mall.StageCHttpTests.categoryDepthCycleDisableAndIsbnRulesAreEnforced(StageCHttpTests.java:131)"
+      ]
+    }
+  ]
+}

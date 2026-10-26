@@ -22,8 +22,10 @@ public class ProductService {
     private final SqlStore sql;private final CatalogRepository repository;private final CatalogAccess access;
     private final CatalogMaintenance maintenance;private final IdentityRepository identities;private final IdentityPolicy policy;
     private final InventoryService inventory;private final AuditRepository audit;
+    private final com.yueji.mall.platform.service.RedisSupport cache;
     public ProductService(SqlStore sql,CatalogRepository repository,CatalogAccess access,CatalogMaintenance maintenance,
-            IdentityRepository identities,IdentityPolicy policy,InventoryService inventory,AuditRepository audit) {
+            IdentityRepository identities,IdentityPolicy policy,InventoryService inventory,AuditRepository audit,com.yueji.mall.platform.service.RedisSupport cache) {
+        this.cache=cache;
         this.sql=sql;this.repository=repository;this.access=access;this.maintenance=maintenance;
         this.identities=identities;this.policy=policy;this.inventory=inventory;this.audit=audit;
     }
@@ -31,7 +33,11 @@ public class ProductService {
         if(ops) policy.require(actor,"catalog.moderate");
         else if(!publicOnly) policy.requireShop(actor,shop,"MERCHANT","shop.product.read");
         if(!publicOnly && page.sort()!=null) throw new BusinessException(ErrorCode.PARAM_INVALID);
-        return repository.products(new Filter(shop,status,keyword,category,featured,publicOnly),page);
+        var filter=new Filter(shop,status,keyword,category,featured,publicOnly);
+        // 仅常用公开首页建键，含库存的快照最长5秒；任意搜索不写缓存。
+        if(publicOnly && keyword==null && category==null && shop==null && page.page()<=5 && page.pageSize()==20 && page.sort()==null)
+            return cache.cached("products:"+page.page()+":"+featured,java.time.Duration.ofSeconds(5),new com.fasterxml.jackson.core.type.TypeReference<PageData<ProductView>>() {},()->repository.products(filter,page));
+        return repository.products(filter,page);
     }
     public ProductView publicProduct(String id) {
         new ApiId(id);var row=repository.product(id);
@@ -43,7 +49,7 @@ public class ProductService {
         var list=sql.rows("SELECT r.*,u.nickname FROM review r JOIN iam_user u ON u.id=r.user_id WHERE r.product_id=? AND r.status='VISIBLE' ORDER BY r.created_at DESC,r.id DESC LIMIT ? OFFSET ?",id,page.pageSize(),page.offset()).stream().map(r->new ReviewView(new ApiId(text(r,"id")),new ApiId(id),((Number)r.get("rating")).intValue(),text(r,"content"),text(r,"nickname"),RowValues.instant(r.get("created_at")),"VISIBLE")).toList();
         return new PageData<>(list,page.page(),page.pageSize(),sql.count("SELECT COUNT(*) FROM review WHERE product_id=? AND status='VISIBLE'",id));
     }
-    private void lock(Actor actor) {identities.lockAdminAnchor();identities.lockUser(actor.userId());policy.current(actor);}
+    private void lock(Actor actor) {identities.lockAdminAnchor();identities.lockUser(actor.userId());policy.current(actor);cache.invalidateAfterCommit();}
     private void price(ApiMoney value) {if(value.value().signum()<=0) throw new BusinessException(ErrorCode.PARAM_INVALID);}
     @Transactional
     public ProductView create(Actor actor,String shop,ProductInput input) {

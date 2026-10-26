@@ -20,7 +20,7 @@ if status != expected_status or body.get("code") != expected_code:
     raise SystemExit(f"{name}: expected HTTP {expected_status}/{expected_code}, got {status}/{body.get('code')}")
 if not isinstance(body.get("traceId"), str) or not body["traceId"]:
     raise SystemExit(f"{name}: missing traceId")
-if expected_status == "501" and body.get("data") is not None:
+if int(expected_status) >= 400 and body.get("data") is not None:
     raise SystemExit(f"{name}: unexpected data for an unimplemented operation")
 if expected_status == "200" and body.get("data") is None:
     raise SystemExit(f"{name}: missing response data")
@@ -30,5 +30,5 @@ PY
 
 check categories /api/v1/categories 200 OK
 check products '/api/v1/products?page=1&pageSize=5' 200 OK
-# Dashboard is an intentionally unimplemented API-89 contract; a 501 is expected.
-check dashboard-contract /api/v1/dashboard 501 NOT_IMPLEMENTED
+# 实现后的 API-89 必须拒绝匿名访问；成功数据由授权角色契约测试验证。
+check dashboard-contract /api/v1/dashboard 401 AUTH_REQUIRED

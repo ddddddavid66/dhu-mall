@@ -2,6 +2,7 @@ $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 . (Join-Path $PSScriptRoot 'use-tools.ps1')
 if (-not $env:YUEJI_TEST_DB_URL) { . (Join-Path $PSScriptRoot 'use-db.ps1') }
+. (Join-Path $PSScriptRoot 'use-dependencies.ps1')
 New-Item -ItemType Directory -Force -Path (Join-Path $projectRoot '.artifacts') | Out-Null
 $results = [System.Collections.Generic.List[object]]::new()
 

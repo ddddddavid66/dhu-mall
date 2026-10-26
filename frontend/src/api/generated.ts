@@ -98,7 +98,7 @@ export const API_OPERATIONS = {
   "API-86": { method: "PUT", path: "/api/v1/admin/shops/{id}", status: "IMPLEMENTED", requiresIdempotencyKey: false, requiresVersion: false },
   "API-87": { method: "GET", path: "/api/v1/admin/shops/{shopId}/members", status: "IMPLEMENTED", requiresIdempotencyKey: false, requiresVersion: false },
   "API-88": { method: "PUT", path: "/api/v1/admin/shops/{shopId}/members/{userId}/{duty}", status: "IMPLEMENTED", requiresIdempotencyKey: false, requiresVersion: false },
-  "API-89": { method: "GET", path: "/api/v1/dashboard", status: "NOT_IMPLEMENTED", requiresIdempotencyKey: false, requiresVersion: false },
+  "API-89": { method: "GET", path: "/api/v1/dashboard", status: "IMPLEMENTED", requiresIdempotencyKey: false, requiresVersion: false },
   "API-90": { method: "GET", path: "/api/v1/ops/products", status: "IMPLEMENTED", requiresIdempotencyKey: false, requiresVersion: false },
   "API-91": { method: "GET", path: "/api/v1/ops/reviews", status: "IMPLEMENTED", requiresIdempotencyKey: false, requiresVersion: false },
   "API-92": { method: "GET", path: "/api/v1/ops/categories", status: "IMPLEMENTED", requiresIdempotencyKey: false, requiresVersion: false },

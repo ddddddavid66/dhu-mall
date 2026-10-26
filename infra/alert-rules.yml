@@ -1,4 +1,25 @@
 groups:
+  - name: yueji-business
+    rules:
+      - alert: YuejiOutboxDelayed
+        expr: yueji_outbox_oldest_seconds > 120 or yueji_outbox_failed_count > 0
+        for: 30s
+        labels: {severity: warning}
+        annotations: {summary: 'Outbox facts require recovery'}
+      - alert: YuejiPaymentCloseStuck
+        expr: yueji_payment_closing_oldest_seconds > 300
+        for: 30s
+        labels: {severity: warning}
+        annotations: {summary: 'Payment closing remains unknown; retain reservation'}
+      - alert: YuejiRefundProcessingStuck
+        expr: yueji_refund_processing_oldest_seconds > 600
+        for: 30s
+        labels: {severity: warning}
+        annotations: {summary: 'Query original refund number; do not recreate'}
+      - alert: YuejiInventoryConstraintViolation
+        expr: yueji_inventory_constraint_violations > 0
+        labels: {severity: critical}
+        annotations: {summary: 'Stop affected inventory operations and investigate'}
   - name: yueji-runtime
     rules:
       - alert: YuejiBackendUnavailable

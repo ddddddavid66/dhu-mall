@@ -13,8 +13,14 @@ public class LoginLimiter {
     private final ConcurrentHashMap<String,Window> windows=new ConcurrentHashMap<>();
     private final int limit;
     private final Clock clock;
-    public LoginLimiter(@Value("${yueji.security.login-limit}") int limit,Clock clock) { this.limit=limit; this.clock=clock; }
+    private com.yueji.mall.platform.service.RedisSupport redis;
+    public LoginLimiter(int limit,Clock clock) { this.limit=limit; this.clock=clock; }
+    @org.springframework.beans.factory.annotation.Autowired
+    public LoginLimiter(@Value("${yueji.security.login-limit}") int limit,Clock clock,com.yueji.mall.platform.service.RedisSupport redis) {
+        this(limit,clock);this.redis=redis;
+    }
     public void check(String ip) {
+        if(redis!=null && redis.enabled()) {redis.limit("login",ip,limit);return;}
         long minute=clock.instant().getEpochSecond()/60;
         if (windows.size()>10000) windows.entrySet().removeIf(e -> e.getValue().minute()<minute);
         if (windows.size()>10000) throw new BusinessException(ErrorCode.RATE_LIMITED);

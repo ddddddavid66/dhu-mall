@@ -16,7 +16,7 @@ public final class SettlementModels {
     public record AdjustmentDecisionInput(@NotBlank @Size(max=300) String note) {}
     public record ItemView(ApiId orderId,ApiMoney goodsAmount,ApiMoney refundAmount,ApiMoney netAmount,ApiMoney feeAmount,ApiMoney payableAmount) {}
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public record AdjustmentView(ApiId id,ApiMoney amount,String reason,String status,ApiId createdBy,ApiId approvedBy,ApiId targetSettlementId) {}
+    public record AdjustmentView(ApiId id,ApiId originalSettlementId,ApiId orderId,ApiId issueId,ApiMoney amount,String reason,String status,ApiId createdBy,ApiId approvedBy,ApiId targetSettlementId) {}
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public record SettlementView(ApiId id,String settlementNo,ApiId shopId,LocalDate periodDate,String status,ApiMoney grossAmount,ApiMoney refundAmount,ApiMoney feeAmount,ApiMoney adjustmentAmount,ApiMoney payableAmount,ApiId createdBy,ApiId approvedBy,Instant paidAt,String mockPayoutNo,long version,List<ItemView> items,List<AdjustmentView> adjustments) {}
 }

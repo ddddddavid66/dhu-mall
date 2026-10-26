@@ -1,0 +1,30 @@
+{
+  "stage": "R",
+  "recordedAt": "2026-10-26",
+  "toolchainBaseline": "versions.lock.json",
+  "canceledDependencyOverrideProposal": {
+    "jackson-bom": "2.21.7",
+    "netty-bom": "4.1.137.Final",
+    "rabbitmq-amqp-client": "5.34.0"
+  },
+  "overrideBasis": "Proposal canceled by user on 2026-10-26; dependency overrides removed. Keep Spring Boot 3.5.16 BOM and the previously verified application baseline.",
+  "securityRiskDecision": "User canceled Boot 4 / Spring 7 and compatibility upgrades, accepts unresolved findings for local non-production use. Scans remain failed; no deployment authorization or CI suppression is implied.",
+  "blockedPatches": {
+    "spring-framework": "6.2.20 enterprise-only; Spring 7 requires approved baseline change",
+    "tomcat": "Scanner lists 10.1.58; Maven Central POM check returned 404 on 2026-10-26",
+    "okhttp": "3.12.13 -> 4.x requires separate Alipay SDK transport compatibility verification"
+  },
+  "images": {
+    "redis": "redis@sha256:44960b3100c48159a66d28c18b0588c193492e25f7551d60e51dd464fc3eca5b",
+    "rabbitmq": "rabbitmq@sha256:789893c0b4907f0ff3bc6e630120174ab6879825907f4c3ab79439e2488409cc",
+    "alloy": "grafana/alloy@sha256:89a5a320168387336b9ac3c850609c3ba7757eadd4ae5f1d819deb35e9854b18",
+    "alertmanager": "prom/alertmanager@sha256:e9733bafb1bdef9b00e25a21f8f99dc26a22224bf16641ad754d1649f4c3357a",
+    "python": "python@sha256:d98cc29d3266e535dd9da1099688d9cb3ca4753813571e071763d17725460962",
+    "actionlint": "rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667",
+    "trivy": "aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c",
+    "docker-cli": "docker@sha256:862099ada15c669000bef53aa4cb9d821262829f45b0dda2159ccb276443043b",
+    "nginx": "nginx@sha256:47928bf67eb62a1863cb08d9ecb52d3e704304ba614eaee17884204677702951"
+  },
+  "nginxCorrection": "Stage I Dockerfile transcription corrected to Stage A digest, actually pulled and built; historical Stage I record retained",
+  "applicationDigests": "Read actual final builds from docs/stages/evidence/R-validation.json; do not promote a candidate blocked by security scan"
+}

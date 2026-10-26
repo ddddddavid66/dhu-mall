@@ -92,7 +92,7 @@
 | API-86 | PUT | `/api/v1/admin/shops/{id}` | IMPLEMENTED | 管理员 | ShopInput → ShopView |
 | API-87 | GET | `/api/v1/admin/shops/{shopId}/members` | IMPLEMENTED | 管理员 | 分页 → MemberView 列表 |
 | API-88 | PUT | `/api/v1/admin/shops/{shopId}/members/{userId}/{duty}` | IMPLEMENTED | 管理员 | status → MemberView；首次创建 201，修改 200 |
-| API-89 | GET | `/api/v1/dashboard` | NOT_IMPLEMENTED | 后台角色 | shopId?（商家仓库须本店）→ DashboardView，依角色裁剪 |
+| API-89 | GET | `/api/v1/dashboard` | IMPLEMENTED | 后台角色 | shopId?（商家仓库须本店）→ DashboardView，依角色裁剪 |
 | API-90 | GET | `/api/v1/ops/products` | IMPLEMENTED | 运营 | keyword?、status?、shopId?、分页 → ProductView 列表 |
 | API-91 | GET | `/api/v1/ops/reviews` | IMPLEMENTED | 运营 | productId?、status?、分页 → ReviewView 列表 |
 | API-92 | GET | `/api/v1/ops/categories` | IMPLEMENTED | 运营 | status? → CategoryView 树，包含停用项用于维护 |

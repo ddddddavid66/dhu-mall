@@ -87,7 +87,7 @@ class FoundationHttpTests extends MySqlTestSupport {
             assertThat(response.getBody().get("data").isNull()).isTrue();
             assertThat(response.getBody().path("traceId").asText()).isEqualTo("contract-anonymous-123");
         }));
-        assertThat(protectedOperations[0]).as("OpenAPI 中声明的受保护已实现操作").isEqualTo(83);
+        assertThat(protectedOperations[0]).as("OpenAPI 中声明的受保护已实现操作").isEqualTo(84);
     }
 
     @Test

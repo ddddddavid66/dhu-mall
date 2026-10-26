@@ -195,6 +195,7 @@ async function payOrder(orderId: string) {
       path: { id: orderId }, idempotencyScope: `${userScope()}:order:${orderId}`,
     })
     await router.push(`/payments/${created.id}`)
+    payment.value = created
   } catch (cause) { actionError.value = cause }
   finally { busy.value = false }
 }
@@ -319,6 +320,8 @@ async function changePassword() {
 
 async function loadPayment() {
   const result = await callOperation<PaymentView>('API-33', { path: { id: String(route.params.id) } })
+  const action = payment.value?.id === result.id ? payment.value.paymentAction : null
+  if (!result.paymentAction && result.status === 'PENDING' && action && (!action.expiresAt || Date.parse(action.expiresAt) > Date.now())) result.paymentAction = action
   payment.value = result
   if (['SUCCEEDED', 'CLOSED'].includes(result.status)) paymentPollingFinished.value = true
 }
@@ -344,7 +347,7 @@ function paymentVisibilityChanged() {
   if (pageType.value === 'payment' && !paymentPollingFinished.value) void refreshPaymentManually()
 }
 async function confirmMockPayment() {
-  if (!payment.value || payment.value.provider !== 'LOCAL_MOCK' || payment.value.paymentAction?.type !== 'MOCK') return
+  if (!payment.value || payment.value.provider !== 'LOCAL_MOCK' || payment.value.status !== 'PENDING') return
   busy.value = true
   actionError.value = null
   try {
@@ -452,7 +455,8 @@ onBeforeUnmount(() => {
       <AsyncState :loading="loading" :error="error" :empty="!payment" empty-text="没有找到这笔支付记录。" @retry="load">
         <section v-if="payment" class="payment-card"><p class="status-pill" :class="`status-${payment.status.toLowerCase()}`">{{ statusLabel(payment.status) }}</p><p class="payment-number">支付单号 {{ payment.paymentNo }}</p><p class="payment-amount"><MoneyText :value="payment.amount" /></p><p class="helper-note">{{ payment.provider === 'ALIPAY_SANDBOX' ? '支付宝沙箱支付' : payment.provider === 'LOCAL_MOCK' ? '本地模拟支付（仅开发/测试环境）' : payment.provider }}</p>
           <a v-if="payment.paymentAction?.type === 'REDIRECT' && payment.paymentAction.url" class="button" :href="payment.paymentAction.url" target="_blank" rel="noopener noreferrer">前往支付渠道</a>
-          <button v-if="payment.provider === 'LOCAL_MOCK' && payment.paymentAction?.type === 'MOCK' && payment.status !== 'SUCCEEDED'" class="button" :disabled="busy" @click="confirmMockPayment">{{ busy ? '正在确认…' : '本地模拟确认付款' }}</button>
+          <button v-if="payment.provider === 'LOCAL_MOCK' && payment.status === 'PENDING'" class="button" :disabled="busy" @click="confirmMockPayment">{{ busy ? '正在确认…' : '本地模拟确认付款' }}</button>
+          <button v-if="payment.provider !== 'LOCAL_MOCK' && payment.status === 'PENDING' && !payment.paymentAction" class="button" :disabled="busy" @click="payOrder(payment.orderId)">重新获取此订单支付入口</button>
           <p v-if="payment.paymentAction?.type === 'MOCK' && payment.provider !== 'LOCAL_MOCK'" class="inline-error">当前服务端不是 LOCAL_MOCK，本地模拟确认不可用。</p>
           <p class="payment-poll-note" role="status">{{ paymentRefresh ? '正在向服务端查询支付状态…' : paymentPollingFinished ? '自动查询已停止，可手动刷新状态。' : '自动查询不会发起新的付款。' }}</p>
           <div class="button-row"><button class="button button-secondary" @click="refreshPaymentManually">手动查询状态</button><RouterLink class="text-button" to="/account/orders">返回订单</RouterLink></div>
@@ -516,7 +520,7 @@ onBeforeUnmount(() => {
       <AsyncState :loading="loading" :error="error" :empty="!afterSale" empty-text="没有找到这笔售后。" @retry="load"><template v-if="afterSale"><p v-if="actionError" class="inline-error" role="alert">{{ fieldErrorMessage(actionError) }}</p>
         <section class="order-status-panel"><span class="status-pill">{{ statusLabel(afterSale.status) }}</span><span>{{ afterSale.afterSaleNo }}</span><MoneyText :value="afterSale.requestedAmount" /></section>
         <section class="checkout-panel"><h2>申请信息</h2><p>{{ afterSale.type === 'REFUND_ONLY' ? '未发货退款' : '退货退款' }} · {{ afterSale.quantity }} 件</p><p>原因：{{ afterSale.reason }}</p><p v-if="afterSale.reviewNote">审核说明：{{ afterSale.reviewNote }}</p><p v-if="afterSale.returnDeadline">退货截止：{{ timeText(afterSale.returnDeadline) }}</p><p v-if="afterSale.returnCarrier">退货物流：{{ afterSale.returnCarrier }} · {{ afterSale.returnTrackingNo }}</p><p v-if="afterSale.refund">退款 {{ afterSale.refund.refundNo }} · {{ statusLabel(afterSale.refund.status) }}</p></section>
-        <form v-if="afterSale.status === 'RETURNING' && !afterSale.returnTrackingNo" class="checkout-panel" @submit.prevent="sendReturnShipment"><h2>填写退货运单</h2><label>承运方<input v-model="returnDraft.carrier" maxlength="50" required /></label><label>运单号<input v-model="returnDraft.trackingNo" maxlength="80" required /></label><button class="button">提交运单</button></form>
+        <form v-if="afterSale.status === 'APPROVED' && afterSale.type === 'RETURN_REFUND' && !afterSale.returnTrackingNo" class="checkout-panel" @submit.prevent="sendReturnShipment"><h2>填写退货运单</h2><label>承运方<input v-model="returnDraft.carrier" maxlength="50" required /></label><label>运单号<input v-model="returnDraft.trackingNo" maxlength="80" required /></label><button class="button">提交运单</button></form>
         <button v-if="afterSale.status === 'REQUESTED'" class="button button-secondary" :disabled="busy" @click="cancelAfterSale">撤销售后申请</button>
       </template></AsyncState>
     </template>

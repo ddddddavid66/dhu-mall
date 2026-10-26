@@ -1,0 +1,5 @@
+FROM docker@sha256:862099ada15c669000bef53aa4cb9d821262829f45b0dda2159ccb276443043b
+RUN apk add --no-cache age rclone python3 bash coreutils tar gzip util-linux
+COPY scripts/yueji-ops-common.sh scripts/backup-yueji-linux.sh scripts/restore-yueji-isolated-linux.sh /usr/local/lib/yueji/
+COPY infra/local-recovery-runner.sh /usr/local/bin/local-recovery-runner
+ENTRYPOINT ["bash", "/usr/local/bin/local-recovery-runner"]

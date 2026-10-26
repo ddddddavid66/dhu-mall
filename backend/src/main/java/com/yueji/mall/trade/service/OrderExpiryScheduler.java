@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.*;
 
-@Configuration @EnableScheduling
+@Configuration
 @ConditionalOnProperty(name="yueji.trade.expiry-enabled",havingValue="true",matchIfMissing=true)
 public class OrderExpiryScheduler {
     private final OrderExpiryService expiry;private final String owner="expiry-"+UUID.randomUUID();

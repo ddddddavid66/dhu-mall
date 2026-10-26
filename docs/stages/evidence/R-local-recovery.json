@@ -1,0 +1,22 @@
+{
+  "status": "LOCAL_RESTORE_INVARIANTS_PASSED",
+  "restoreDatabase": "yueji_mall_restore_20261026T065010Z",
+  "restoreSubpath": "restore/20261026T065010Z",
+  "invariants": {
+    "files": 1,
+    "onHand": 297,
+    "orders": 7,
+    "refunds": 4,
+    "payments": 6,
+    "reserved": 1,
+    "movements": 17,
+    "settlements": 1,
+    "refundOverflow": 0,
+    "invalidInventory": 0,
+    "invalidSettlement": 0
+  },
+  "referencedFileSha256": "98350a9c096e253c66105834a35cb544d066e794419a8674abae42d8fbef89d7",
+  "repeatedNonemptyRestoreRejected": true,
+  "offsiteVerified": false,
+  "limitation": "Encrypted rclone copy was on the same Docker host; independent offsite storage was not provided."
+}

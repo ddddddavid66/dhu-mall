@@ -5,6 +5,7 @@ import java.util.Base64;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 
+@org.springframework.context.annotation.Import(ContractObservationConfiguration.class)
 public abstract class MySqlTestSupport {
     private static final String KEY=Base64.getEncoder().encodeToString(Base64.getUrlDecoder().decode(Crypto.randomToken()));
     public static String databaseUrl() {
@@ -24,6 +25,8 @@ public abstract class MySqlTestSupport {
         properties.add("yueji.security.write-limit",() -> 1000);
         properties.add("yueji.security.public-read-limit",() -> 1000);
         properties.add("yueji.trade.expiry-enabled",() -> false);
+        properties.add("yueji.messaging.scheduling-enabled",() -> false);
+        properties.add("yueji.scheduling.enabled",() -> false);
         properties.add("yueji.files.root",() -> "../.artifacts/storage/test");
     }
     private static String required(String name) {

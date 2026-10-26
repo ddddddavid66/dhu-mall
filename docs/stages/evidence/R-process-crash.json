@@ -1,0 +1,21 @@
+{
+  "status": "PASSED",
+  "provider": "LOCAL_MOCK",
+  "orderId": "7",
+  "paymentNo": "Pd679a15aed454c80b5dc52b10e200d34",
+  "killedAt": "2026-10-25T19:31:34.468718+00:00",
+  "recoveredAt": "2026-10-25T19:36:30.808211+00:00",
+  "channelFactCommittedBeforeKill": true,
+  "processSignal": "SIGKILL",
+  "originalPaymentNumberPreserved": true,
+  "paymentRows": 1,
+  "before": {
+    "onHand": 98,
+    "reserved": 1
+  },
+  "after": {
+    "onHand": 97,
+    "reserved": 0
+  },
+  "cleanup": "test-only trigger removed; restart policy restored; test order retained as evidence"
+}

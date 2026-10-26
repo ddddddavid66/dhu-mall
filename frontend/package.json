@@ -15,7 +15,8 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "preview": "vite preview --host 127.0.0.1",
-    "contract:lint": "redocly lint ../contracts/openapi.json --config ../redocly.yaml"
+    "contract:lint": "redocly lint ../contracts/openapi.json --config ../redocly.yaml",
+    "test:acceptance": "playwright test --config playwright.acceptance.config.ts"
   },
   "dependencies": {
     "element-plus": "2.14.7",

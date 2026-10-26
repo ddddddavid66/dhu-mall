@@ -5,6 +5,40 @@ x-rotated-logs: &rotated-logs
     max-file: "10"
 
 services:
+  alloy:
+    image: grafana/alloy@sha256:89a5a320168387336b9ac3c850609c3ba7757eadd4ae5f1d819deb35e9854b18
+    profiles: [observability]
+    restart: unless-stopped
+    command: [run, /etc/alloy/config.alloy, --storage.path=/var/lib/alloy]
+    volumes:
+      - ./alloy.config:/etc/alloy/config.alloy:ro
+      - application-logs:/var/log/yueji:ro
+      - alloy-data:/var/lib/alloy
+    networks: [yueji]
+    depends_on: [loki]
+    logging: *rotated-logs
+  alertmanager:
+    image: prom/alertmanager@sha256:e9733bafb1bdef9b00e25a21f8f99dc26a22224bf16641ad754d1649f4c3357a
+    profiles: [observability]
+    restart: unless-stopped
+    command: [--config.file=/etc/alertmanager/config.yml, --storage.path=/alertmanager]
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager/config.yml:ro
+      - alertmanager-data:/alertmanager
+    networks: [yueji]
+    depends_on: [alert-receiver]
+    logging: *rotated-logs
+  alert-receiver:
+    image: python@sha256:d98cc29d3266e535dd9da1099688d9cb3ca4753813571e071763d17725460962
+    profiles: [observability]
+    restart: unless-stopped
+    read_only: true
+    command: [python, /app/receiver.py]
+    volumes:
+      - ./alert-receiver.py:/app/receiver.py:ro
+      - alert-evidence:/evidence
+    networks: [yueji]
+    logging: *rotated-logs
   prometheus:
     image: prom/prometheus:v3.15.0@sha256:efd719c99d83b060d9daefdcf00360461adf279f45ef5391f8d111892118753e
     profiles: [observability]
@@ -62,6 +96,9 @@ services:
     logging: *rotated-logs
 
 volumes:
+  alloy-data:
+  alertmanager-data:
+  alert-evidence:
   prometheus-data:
   loki-data:
   grafana-data:

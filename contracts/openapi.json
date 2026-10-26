@@ -1,9 +1,9 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "阅集图书商城阶段 F 契约",
-    "version": "0.6.0",
-    "description": "阶段 B/C/D/E/F 共 91 项操作已实现；API-89 运营仪表盘仍为占位。支付宝沙箱联调结果独立记录。"
+    "title": "阅集图书商城契约",
+    "version": "0.7.0",
+    "description": "92 项操作已实现，API-89 按权限裁剪真实统计。支付宝沙箱联调结果独立记录。"
   },
   "servers": [
     {
@@ -12,8 +12,8 @@
   ],
   "tags": [
     {
-      "name": "StageA",
-      "description": "未实现的设计清单"
+      "name": "Platform",
+      "description": "平台授权统计与支撑"
     },
     {
       "name": "Identity",
@@ -14025,29 +14025,104 @@
       "get": {
         "operationId": "API-89",
         "summary": "API-89 GET /dashboard",
-        "description": "阶段 A 契约占位。计划权限：后台角色。计划输入输出：shopId?（商家仓库须本店）→ DashboardView，依角色裁剪。完整业务规则见 docs/04-接口设计.md。",
+        "description": "按有效动作权限裁剪；不允许读取他店范围；日期按上海自然日；无权字段省略。",
         "tags": [
-          "StageA"
+          "Platform"
         ],
-        "security": [],
-        "parameters": [],
-        "x-implementation-status": "NOT_IMPLEMENTED",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "shopId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Id"
+            }
+          }
+        ],
+        "x-implementation-status": "IMPLEMENTED",
         "x-planned-authorization": "后台角色",
         "x-planned-contract": "shopId?（商家仓库须本店）→ DashboardView，依角色裁剪",
         "x-design-source": "docs/04-接口设计.md",
         "x-requires-idempotency-key": false,
         "x-requires-version": false,
         "responses": {
-          "501": {
-            "description": "尚未实现；无任何业务成功或副作用",
-            "headers": {
-              "X-Request-Id": {
-                "description": "与错误响应 traceId 一致",
+          "200": {
+            "description": "真实权限内统计",
+            "content": {
+              "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ResultDashboardView"
                 }
               }
-            },
+            }
+          },
+          "400": {
+            "description": "统一错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "统一错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "统一错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "统一错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultError"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "统一错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "统一错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "统一错误",
             "content": {
               "application/json": {
                 "schema": {
@@ -18670,6 +18745,15 @@
                 "type": "null"
               }
             ]
+          },
+          "originalSettlementId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "orderId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "issueId": {
+            "$ref": "#/components/schemas/Id"
           }
         },
         "required": [
@@ -18677,9 +18761,9 @@
           "amount",
           "reason",
           "status",
-          "createdBy",
-          "approvedBy",
-          "targetSettlementId"
+          "originalSettlementId",
+          "orderId",
+          "issueId"
         ]
       },
       "SettlementView": {
@@ -18801,13 +18885,7 @@
           "feeAmount",
           "adjustmentAmount",
           "payableAmount",
-          "createdBy",
-          "approvedBy",
-          "paidAt",
-          "mockPayoutNo",
-          "version",
-          "items",
-          "adjustments"
+          "version"
         ]
       },
       "SettlementAdjustmentInput": {
@@ -19349,6 +19427,57 @@
           },
           "data": {
             "$ref": "#/components/schemas/SettlementAdjustmentPage"
+          },
+          "traceId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "data",
+          "traceId"
+        ]
+      },
+      "DashboardView": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "todayOrderCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "todayPaidAmount": {
+            "$ref": "#/components/schemas/Money"
+          },
+          "pendingShipmentCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "openAfterSaleCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "unresolvedIssueCount": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": []
+      },
+      "ResultDashboardView": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string",
+            "const": "OK"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DashboardView"
           },
           "traceId": {
             "type": "string"

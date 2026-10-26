@@ -23,10 +23,16 @@ public class CatalogMaintenance {
     private final IdentityPolicy policy;
     private final FileService files;
     private final AuditRepository audit;
-    public CatalogMaintenance(SqlStore sql,CatalogRepository repository,IdentityRepository identities,IdentityPolicy policy,FileService files,AuditRepository audit) {
+    private final com.yueji.mall.platform.service.RedisSupport cache;
+    public CatalogMaintenance(SqlStore sql,CatalogRepository repository,IdentityRepository identities,IdentityPolicy policy,FileService files,AuditRepository audit,com.yueji.mall.platform.service.RedisSupport cache) {
+        this.cache=cache;
         this.sql=sql;this.repository=repository;this.identities=identities;this.policy=policy;this.files=files;this.audit=audit;
     }
     public List<CategoryView> categories(Actor actor,Status filter,boolean maintenance) {
+        if(!maintenance && filter==null) return cache.cached("categories",java.time.Duration.ofSeconds(300+java.util.concurrent.ThreadLocalRandom.current().nextInt(31)),new com.fasterxml.jackson.core.type.TypeReference<List<CategoryView>>() {},()->categoryTree(actor,filter,false));
+        return categoryTree(actor,filter,maintenance);
+    }
+    private List<CategoryView> categoryTree(Actor actor,Status filter,boolean maintenance) {
         if(maintenance) policy.require(actor,"catalog.category.manage");
         var rows=repository.categories();
         var visible=new ArrayList<Map<String,Object>>();
@@ -47,6 +53,7 @@ public class CatalogMaintenance {
     }
     private void lock(Actor actor,String permission) {
         identities.lockAdminAnchor();identities.lockUser(actor.userId());policy.require(actor,permission);
+        cache.invalidateAfterCommit();
     }
     @Transactional
     public CategoryView saveCategory(Actor actor,String id,CategoryInput input) {

@@ -23,27 +23,7 @@ import static org.mockito.Mockito.*;
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties={"yueji.mock-payment-enabled=true","yueji.payment.provider=LOCAL_MOCK"})
-class StageFHttpTests extends StageEFixtures {
-    @Autowired AfterSaleService afterSales;
-    @MockitoSpyBean LocalMockAdapter channel;
-
-    Buyer merchant, warehouse, support, supportFinance, finance, financeApprover, operator;
-
-    @BeforeEach void stageFActors() {
-        merchant=buyer("stage_f_merchant","MERCHANT");
-        warehouse=buyer("stage_f_warehouse","WAREHOUSE");
-        support=buyer("stage_f_support","SUPPORT");
-        supportFinance=buyer("stage_f_support_finance","SUPPORT");
-        sql.update("INSERT INTO iam_user_role(user_id,role_id) SELECT ?,id FROM iam_role WHERE code='FINANCE'",supportFinance.id());
-        finance=buyer("stage_f_finance","FINANCE");
-        financeApprover=buyer("stage_f_finance_approver","FINANCE");
-        operator=buyer("stage_f_operator","OPERATOR");
-        for(String shop:java.util.List.of(shop1,shop2)) {
-            sql.insert("INSERT INTO shop_member(shop_id,user_id,duty) VALUES(?,?,'MERCHANT')",shop,merchant.id());
-            sql.insert("INSERT INTO shop_member(shop_id,user_id,duty) VALUES(?,?,'WAREHOUSE')",shop,warehouse.id());
-        }
-    }
-
+class StageFHttpTests extends StageFFixtures {
     @Test void tc15WholeShipmentManualEventsAndReceiptKeepOrderStateSeparate() {
         String orderId=firstOrder(batch());pay(orderId);
         JsonNode detail=data(call("GET","/merchant/shops/"+shop1+"/orders/"+orderId,null,merchant,null),200);
@@ -392,15 +372,4 @@ class StageFHttpTests extends StageEFixtures {
         error(call("GET","/after-sales?status=INVALID",null,a,null),400,"PARAM_INVALID");
     }
 
-    private String firstOrder(JsonNode batch) {return batch.path("orders").get(0).path("id").asText();}
-    private String orderItem(String orderId) {return sql.required("SELECT id FROM order_item WHERE order_id=? ORDER BY id LIMIT 1",orderId).get("id").toString();}
-    private void pay(String orderId) {
-        String payment=data(call("POST","/orders/"+orderId+"/payments",null,a,key()),201).path("id").asText();
-        data(call("POST","/payments/"+payment+"/mock-confirm",null,a,key()),200);
-    }
-    private void ship(String orderId,String shop) {
-        JsonNode order=data(call("GET","/merchant/shops/"+shop+"/orders/"+orderId,null,merchant,null),200);
-        data(call("POST","/merchant/shops/"+shop+"/orders/"+orderId+"/ship",Map.of("carrier","虚构承运商","trackingNo","SHIP-"+orderId,"version",order.path("version").asLong()),merchant,key()),201);
-    }
-    private void receive(String orderId) {data(call("POST","/orders/"+orderId+"/confirm-receipt",null,a,key()),200);}
 }

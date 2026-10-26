@@ -20,7 +20,7 @@ def main() -> None:
     for name, path, expected_status, expected_code in [
         ('categories', '/api/v1/categories', 200, 'OK'),
         ('products', '/api/v1/products?page=1&pageSize=5', 200, 'OK'),
-        ('dashboard-not-implemented', '/api/v1/dashboard', 501, 'NOT_IMPLEMENTED'),
+        ('dashboard-auth-required', '/api/v1/dashboard', 401, 'AUTH_REQUIRED'),
     ]:
         request = Request(args.base_url.rstrip('/') + path, headers={'X-Request-Id': 'stage-g-http-smoke'})
         try:
@@ -33,7 +33,7 @@ def main() -> None:
             assert body.get('code') == expected_code, (name, body.get('code'))
             assert isinstance(body.get('traceId'), str) and body['traceId'], (name, 'traceId missing')
             data = body.get('data')
-            if expected_status == 501:
+            if expected_status >= 400:
                 assert data is None, (name, 'unexpected success payload')
             else:
                 assert data is not None, (name, 'missing success payload')

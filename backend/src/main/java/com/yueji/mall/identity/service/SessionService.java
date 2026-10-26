@@ -31,8 +31,10 @@ public class SessionService {
     private final AuditRepository audit;
     private final Clock clock;
     private final String dummyPasswordHash;
+    private final com.yueji.mall.platform.service.RedisSupport redis;
     public SessionService(SessionRepository repository,IdentityRepository identities,PasswordEncoder passwords,AccessTokens tokens,
-            BrowserSessionGuard browser,AuditRepository audit,Clock clock) {
+            BrowserSessionGuard browser,AuditRepository audit,Clock clock,com.yueji.mall.platform.service.RedisSupport redis) {
+        this.redis=redis;
         this.repository=repository; this.identities=identities; this.passwords=passwords; this.tokens=tokens;
         this.browser=browser; this.audit=audit; this.clock=clock;
         this.dummyPasswordHash=passwords.encode(Crypto.randomToken());
@@ -64,6 +66,7 @@ public class SessionService {
     @Transactional(noRollbackFor=SessionRejectedException.class)
     public Issued refresh(String raw,String csrf,String origin) {
         browser.origin(origin,csrf);
+        redis.requireAvailable();
         var old=lockedSession(raw);
         var user=identities.user(text(old,"user_id"));
         browser.csrf(csrf,text(old,"csrf_hash"));

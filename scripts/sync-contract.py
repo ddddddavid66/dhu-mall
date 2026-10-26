@@ -9,6 +9,7 @@ from stage_c_contract import apply_stage_c, IMPLEMENTED as STAGE_C_IMPLEMENTED
 from stage_d_contract import apply_stage_d, IMPLEMENTED as STAGE_D_IMPLEMENTED
 from stage_e_contract import apply_stage_e, IMPLEMENTED as STAGE_E_IMPLEMENTED
 from stage_f_contract import apply_stage_f, IMPLEMENTED as STAGE_F_IMPLEMENTED
+from stage_r_contract import apply_stage_r
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = ROOT / 'docs' / '04-接口设计.md'
@@ -77,14 +78,15 @@ def build():
     apply_stage_d(schemas,paths)
     apply_stage_e(schemas,paths)
     apply_stage_f(schemas,paths)
-    current_inventory=['# 阶段 F 接口契约清单','','从 04 设计及阶段 B/C/D/E/F schema 生成；91 项操作已实现，API-89 仍为未实现占位。支付宝沙箱联调状态独立记录。','',*inventory[7:9]]
+    apply_stage_r(schemas,paths)
+    current_inventory=['# 收尾阶段 R 接口契约清单','','从 04 设计及阶段 B—F/R schema 生成；92 项操作已实现。实现不等于外部验收通过。支付宝沙箱联调状态独立记录。','',*inventory[7:9]]
     for line in inventory[9:]:
         operation_id=line.split('|')[1].strip()
-        if operation_id in IMPLEMENTED | STAGE_C_IMPLEMENTED | STAGE_D_IMPLEMENTED | STAGE_E_IMPLEMENTED | STAGE_F_IMPLEMENTED: line=line.replace('NOT_IMPLEMENTED','IMPLEMENTED').replace('DISABLED','IMPLEMENTED')
+        if operation_id in IMPLEMENTED | STAGE_C_IMPLEMENTED | STAGE_D_IMPLEMENTED | STAGE_E_IMPLEMENTED | STAGE_F_IMPLEMENTED | {'API-89'}: line=line.replace('NOT_IMPLEMENTED','IMPLEMENTED').replace('DISABLED','IMPLEMENTED')
         current_inventory.append(line)
-    contract = {'openapi': '3.1.0', 'info': {'title': '阅集图书商城阶段 F 契约', 'version': '0.6.0',
-                'description': '阶段 B/C/D/E/F 共 91 项操作已实现；API-89 运营仪表盘仍为占位。支付宝沙箱联调结果独立记录。'},
-                'servers': [{'url': '/'}], 'tags': [{'name': 'StageA', 'description': '未实现的设计清单'},{'name':'Identity','description':'阶段 B 已实现身份地址和管理'},{'name':'Catalog','description':'阶段 C 书目商品库存文件购物车'},{'name':'Trade','description':'阶段 D 订单与阶段 F 履约'},{'name':'Payment','description':'阶段 E/F 支付、退款和对账'},{'name':'Fulfillment','description':'阶段 F 发货与收货'},{'name':'AfterSale','description':'阶段 F 售后流程'},{'name':'Review','description':'阶段 F 评价与审核'},{'name':'Reconciliation','description':'阶段 F 渠道核对和差异'},{'name':'Settlement','description':'阶段 F 结算、调整和模拟出款'}],
+    contract = {'openapi': '3.1.0', 'info': {'title': '阅集图书商城契约', 'version': '0.7.0',
+                'description': '92 项操作已实现，API-89 按权限裁剪真实统计。支付宝沙箱联调结果独立记录。'},
+                'servers': [{'url': '/'}], 'tags': [{'name': 'Platform', 'description': '平台授权统计与支撑'},{'name':'Identity','description':'阶段 B 已实现身份地址和管理'},{'name':'Catalog','description':'阶段 C 书目商品库存文件购物车'},{'name':'Trade','description':'阶段 D 订单与阶段 F 履约'},{'name':'Payment','description':'阶段 E/F 支付、退款和对账'},{'name':'Fulfillment','description':'阶段 F 发货与收货'},{'name':'AfterSale','description':'阶段 F 售后流程'},{'name':'Review','description':'阶段 F 评价与审核'},{'name':'Reconciliation','description':'阶段 F 渠道核对和差异'},{'name':'Settlement','description':'阶段 F 结算、调整和模拟出款'}],
                 'paths': paths, 'components': {'schemas': schemas,
                 'securitySchemes': {'bearerAuth': {'type': 'http', 'scheme': 'bearer', 'bearerFormat': 'JWT',
                                     'description': '15 分钟访问 JWT，服务端核对数据库会话及 authVersion'},
@@ -121,7 +123,7 @@ def build():
                  'export const API_OPERATIONS = {\n' + '\n'.join(operation_lines) + '\n} as const\n'
                  'export type ApiOperationId = keyof typeof API_OPERATIONS\n')
     return {ROOT / 'contracts/openapi.json': json.dumps(contract, ensure_ascii=False, indent=2) + '\n',
-            ROOT / 'docs/stages/F-接口契约清单.md': '\n'.join(current_inventory) + '\n',
+            ROOT / 'docs/stages/R-接口契约清单.md': '\n'.join(current_inventory) + '\n',
             ROOT / 'frontend/src/api/generated.ts': generated}
 
 

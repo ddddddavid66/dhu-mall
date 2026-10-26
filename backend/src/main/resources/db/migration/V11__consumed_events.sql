@@ -1,0 +1,10 @@
+-- 03 第10节已定义的消费去重表；扩展迁移，不改写 V1—V10。
+CREATE TABLE consumed_event (
+ id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ created_at DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+ updated_at DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+ consumer_name VARCHAR(80) COLLATE utf8mb4_bin NOT NULL,
+ event_id VARCHAR(64) COLLATE utf8mb4_bin NOT NULL,
+ processed_at DATETIME(3) NOT NULL,
+ UNIQUE(consumer_name,event_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

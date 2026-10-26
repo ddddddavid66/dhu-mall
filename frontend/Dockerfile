@@ -7,7 +7,7 @@ RUN pnpm install --frozen-lockfile
 COPY frontend/ ./
 RUN pnpm run build
 
-FROM nginx@sha256:47928bf67eb62a1863cb08aaf98f7082a77d318a7f92af3d9fe2c0fd2723df10
+FROM nginx@sha256:47928bf67eb62a1863cb08d9ecb52d3e704304ba614eaee17884204677702951
 ENV NGINX_ENVSUBST_FILTER=^APP_HOSTNAME$
 COPY frontend/nginx.conf.template /etc/nginx/templates/default.conf.template
 COPY --from=build /workspace/dist/ /usr/share/nginx/html/

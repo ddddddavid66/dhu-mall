@@ -25,16 +25,16 @@ class MySqlMigrationTests extends MySqlTestSupport {
         assertThat(first.migrate().migrationsExecuted).isEqualTo(1);
         var jdbc=new JdbcTemplate(source());
         jdbc.update("INSERT INTO iam_user(username,password_hash,nickname) VALUES('legacy_user','not-a-production-password','旧版测试行')");
-        assertThat(migrations.migrate().migrationsExecuted).isEqualTo(9);
+        assertThat(migrations.migrate().migrationsExecuted).isEqualTo(10);
         assertThat(migrations.migrate().migrationsExecuted).isZero();
         // 使用 V1 的列和查询方式验证向前兼容，不伪造不存在的数据库降级。
         assertThat(jdbc.queryForObject("SELECT nickname FROM iam_user WHERE username='legacy_user'",String.class)).isEqualTo("旧版测试行");
         assertThat(jdbc.queryForObject("SELECT VERSION()",String.class)).startsWith("8.4.");
-        assertThat(jdbc.queryForObject("SELECT COUNT(*) FROM flyway_schema_history WHERE success=1",Integer.class)).isEqualTo(10);
+        assertThat(jdbc.queryForObject("SELECT COUNT(*) FROM flyway_schema_history WHERE success=1",Integer.class)).isEqualTo(11);
         assertThat(jdbc.queryForObject("SELECT COUNT(*) FROM iam_user",Integer.class)).isEqualTo(1);
         assertThat(jdbc.queryForObject("SELECT COUNT(*) FROM iam_permission",Integer.class)).isEqualTo(38);
         assertThat(jdbc.queryForObject("SELECT character_maximum_length FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name='refund' AND column_name='reason_type'",Integer.class)).isEqualTo(32);
-        for(String table:List.of("shipment","shipment_item","shipment_event","settlement","settlement_item","settlement_adjustment"))
+        for(String table:List.of("shipment","shipment_item","shipment_event","settlement","settlement_item","settlement_adjustment","consumed_event"))
             assertThat(jdbc.queryForObject("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name=?",Integer.class,table)).isEqualTo(1);
     }
     @Test void mysqlConstraintsAndAuditImmutabilityAreEnforcedByTheDatabase() {

@@ -1,0 +1,7 @@
+{
+  "provider": "ALIPAY_SANDBOX",
+  "method": "alipay.trade.query",
+  "code": "40004",
+  "subCode": "ACQ.TRADE_NOT_EXIST",
+  "paymentExecuted": false
+}

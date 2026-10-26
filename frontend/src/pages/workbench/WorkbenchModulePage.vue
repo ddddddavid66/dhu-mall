@@ -239,7 +239,7 @@ const fields = computed<FieldSpec[]>(() => {
     case 'issue-resolve': return [{name:'resolution',label:'处理说明',type:'textarea',required:true,maxLength:1000},{name:'evidenceReference',label:'证据编号或引用',required:true,maxLength:255}]
     case 'settlement-create': return [{name:'shopId',label:'店铺 ID',required:true,hint:'使用已有结算记录中的服务端店铺 ID。接口会再次校验权限与资格。'},{name:'periodDate',label:'已结束的北京时间账期',type:'date',required:true}]
     case 'settlement-decision': return [{name:'approved',label:'审核结果',type:'select',required:true,options:[{value:'true',label:'批准'},{value:'false',label:'拒绝'}]},{name:'note',label:'审核说明',type:'textarea',required:true,maxLength:500}]
-    case 'adjustment-create': return [{name:'originalSettlementId',label:'原结算单',type:'select',required:true,options:options(settlements.value,'id','settlementNo')},{name:'issueId',label:'未解决差异',type:'select',required:true,options:options(issues.value,'id','issueType')},{name:'orderId',label:'关联订单 ID',required:true},{name:'amount',label:'调整金额（人民币，两位小数，可负）',required:true},{name:'reason',label:'调整理由',type:'textarea',required:true,maxLength:500}]
+    case 'adjustment-create': return [{name:'originalSettlementId',label:'原结算单',type:'select',required:true,options:options(settlements.value,'id','settlementNo')},{name:'issueId',label:'已解决且有核对证据的差异',type:'select',required:true,options:options(issues.value,'id','issueType')},{name:'orderId',label:'关联订单 ID',required:true},{name:'amount',label:'调整金额（人民币，两位小数，可负）',required:true},{name:'reason',label:'调整理由',type:'textarea',required:true,maxLength:500}]
     case 'adjustment-approve': return [{name:'note',label:'复核说明',type:'textarea',required:true,maxLength:300}]
     case 'product-moderate': return [{name:'featured',label:'设为精选',type:'checkbox'},{name:'reason',label:'运营说明',type:'textarea',required:true,maxLength:300,hint:'本操作只可下架违规商品，不会替商家强制上架。'}]
     case 'review-visibility': return [{name:'status',label:'评价可见性',type:'select',required:true,options:[{value:'VISIBLE',label:'公开'},{value:'HIDDEN',label:'隐藏'}]},{name:'reason',label:'审核原因',type:'textarea',required:true,maxLength:300}]
@@ -314,8 +314,8 @@ async function loadReference(action: ActionName) {
   }
   if (action === 'adjustment-create') {
     const [settlementPage, issuePage] = await Promise.all([
-      callOperation<Page<ApiRow>>('API-58', { query: { page: 1, pageSize: 100 } }),
-      callOperation<Page<ApiRow>>('API-56', { query: { status: 'OPEN', page: 1, pageSize: 100 } }),
+      callOperation<Page<ApiRow>>('API-58', { query: { status: 'PAID', page: 1, pageSize: 100 } }),
+      callOperation<Page<ApiRow>>('API-56', { query: { status: 'RESOLVED', page: 1, pageSize: 100 } }),
     ])
     settlements.value = settlementPage.items
     issues.value = issuePage.items
@@ -337,6 +337,8 @@ function defaultsFor(action: ActionName, row: ApiRow | null): Record<string, Fie
     case 'shipment-event': return { eventTime:new Date().toISOString().slice(0,16),description:'' }
     case 'sale-decision': return { approved:'true',note:'' }
     case 'return-inspection': return { accepted:'true',restock:false,note:'' }
+    case 'refund-execute':
+    case 'settlement-payout': return {}
     case 'reconciliation-start': return { billDate:plusDaysInShanghai(1),provider:'LOCAL_MOCK' }
     case 'issue-resolve': return { resolution:'',evidenceReference:'' }
     case 'settlement-create': return { shopId:'',periodDate:plusDaysInShanghai(1) }
@@ -615,6 +617,7 @@ onBeforeUnmount(() => { activeController?.abort(); if (evidenceUrl) URL.revokeOb
       <p v-if="activeAction === 'product-status' && formString('status') === 'ON_SALE'" class="inline-error">运营不能用此操作强制上架；仅商家可上架本店商品。</p>
       <form class="dialog-form" @submit.prevent="submitAction">
         <label v-for="field in fields" :key="field.name" class="form-field" :class="{ 'checkbox-field': field.type === 'checkbox' }">
+          <span v-if="field.type === 'checkbox'">{{ field.label }}</span>
           <span v-if="field.type !== 'checkbox'">{{ field.label }}<b v-if="field.required"> *</b></span>
           <textarea v-if="field.type === 'textarea'" :value="formString(field.name)" @input="setFormString(field.name, ($event.target as HTMLTextAreaElement).value)" :maxlength="field.maxLength" :required="field.required" rows="4"></textarea>
           <select v-else-if="field.type === 'select'" v-model="formValues[field.name]" :multiple="field.multiple" :required="field.required" :size="field.multiple ? 5 : undefined">

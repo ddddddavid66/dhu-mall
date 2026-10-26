@@ -1,4 +1,20 @@
 spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST:127.0.0.1}
+    port: ${RABBITMQ_PORT:15673}
+    username: ${RABBITMQ_USERNAME:}
+    password: ${RABBITMQ_PASSWORD:}
+    virtual-host: ${RABBITMQ_VHOST:yueji_dev}
+    connection-timeout: 2s
+    publisher-confirm-type: correlated
+    publisher-returns: true
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:16379}
+      password: ${REDIS_PASSWORD:}
+      connect-timeout: 500ms
+      timeout: 500ms
   application:
     name: yueji-mall
   profiles:
@@ -59,6 +75,12 @@ springdoc:
     path: /swagger-ui.html
     supported-submit-methods: []
 yueji:
+  messaging:
+    enabled: ${MESSAGING_ENABLED:false}
+    namespace: ${MESSAGING_NAMESPACE:yueji.dev}
+  redis:
+    enabled: ${REDIS_ENABLED:false}
+    namespace: ${REDIS_NAMESPACE:yueji.dev}
   stage: E
   files:
     root: ${FILE_STORAGE_ROOT:.artifacts/storage/dev}

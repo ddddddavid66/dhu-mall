@@ -1,0 +1,37 @@
+# 独立本机 LOCAL_MOCK 演练覆盖层；不得加入任何 prod 发布命令。
+services:
+  mysql:
+    command: [--log-bin-trust-function-creators=1]
+    ports: ['127.0.0.1:23306:3306']
+  backend:
+    environment:
+      SPRING_PROFILES_ACTIVE: test
+      SERVER_PORT: '8080'
+      PAYMENT_PROVIDER: LOCAL_MOCK
+      ENABLE_MOCK_PAYMENT: 'true'
+      REDIS_ENABLED: 'true'
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      REDIS_PASSWORD_FILE: /run/secrets/redis_password
+      REDIS_NAMESPACE: yueji.local-test
+      MESSAGING_ENABLED: 'true'
+      MESSAGING_NAMESPACE: yueji.local-test
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: '5672'
+      RABBITMQ_USERNAME: ${RABBITMQ_USERNAME}
+      RABBITMQ_PASSWORD_FILE: /run/secrets/rabbitmq_password
+      RABBITMQ_VHOST: yueji_test
+      YUEJI_SECURITY_COOKIE_SECURE: 'false'
+      YUEJI_SECURITY_LOGIN_LIMIT: '1000'
+      YUEJI_SECURITY_WRITE_LIMIT: '1000'
+      LOGGING_LEVEL_ROOT: INFO
+      YUEJI_PAYMENT_RECOVERY_ENABLED: 'true'
+    ports: ['127.0.0.1:18080:8080', '127.0.0.1:19081:9081']
+    secrets: [redis_password, rabbitmq_password]
+  web:
+    ports: !override ['127.0.0.1:18000:80', '127.0.0.1:18443:443']
+secrets:
+  redis_password:
+    file: ${REDIS_PASSWORD_FILE:?local dependency password required}
+  rabbitmq_password:
+    file: ${RABBITMQ_PASSWORD_FILE:?local dependency password required}
