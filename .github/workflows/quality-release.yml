@@ -203,10 +203,13 @@ jobs:
           repository="ghcr.io/${GITHUB_REPOSITORY,,}"
           tag="${GITHUB_SHA}"
           docker buildx version
-          docker buildx build --platform linux/amd64 --push --sbom=true --provenance=true \
+          docker buildx create --name yueji-release --driver docker-container \
+            --driver-opt image=moby/buildkit@sha256:99368f3e46177c6405b9740e4461d91cee004128daeecca78d4ceac50ec1da5c --use
+          docker buildx inspect --bootstrap
+          docker buildx build --platform linux/amd64 --push --sbom=generator=docker/buildkit-syft-scanner@sha256:ae4f3b554449e7e25548e7d8ccc029d17357348e30c6e3df01b92bc93654d6a9 --provenance=true \
             --metadata-file "$RUNNER_TEMP/backend-metadata.json" \
             --tag "$repository/backend:$tag" --file backend/Dockerfile .
-          docker buildx build --platform linux/amd64 --push --sbom=true --provenance=true \
+          docker buildx build --platform linux/amd64 --push --sbom=generator=docker/buildkit-syft-scanner@sha256:ae4f3b554449e7e25548e7d8ccc029d17357348e30c6e3df01b92bc93654d6a9 --provenance=true \
             --metadata-file "$RUNNER_TEMP/frontend-metadata.json" \
             --tag "$repository/frontend:$tag" --file frontend/Dockerfile .
           backend_digest="$(jq -r '.["containerimage.digest"]' "$RUNNER_TEMP/backend-metadata.json")"

@@ -21,7 +21,7 @@ def secret(name, value=None):
 
 
 environment = dict(DEPLOY_ENV='test', APP_HOSTNAME='localhost', APP_BASE_URL='https://localhost:18443',
-                   ALLOWED_ORIGINS='http://127.0.0.1:5173', MYSQL_DATABASE='yueji_mall_test', DB_USERNAME='yueji_test',
+                   ALLOWED_ORIGINS='http://127.0.0.1:5173,https://localhost:18443', MYSQL_DATABASE='yueji_mall_test', DB_USERNAME='yueji_test',
                    BACKEND_IMAGE='yueji-local-backend:r', FRONTEND_IMAGE='yueji-local-frontend:r',
                    IMAGE_REPOSITORY='local-validation-only', PAYMENT_PROVIDER='LOCAL_MOCK',
                    ALIPAY_APP_ID='LOCAL_MOCK_NO_CHANNEL_APP', ALIPAY_SELLER_ID='LOCAL_MOCK_NO_SELLER',

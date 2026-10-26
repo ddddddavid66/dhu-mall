@@ -23,8 +23,19 @@
     "actionlint": "rhysd/actionlint@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667",
     "trivy": "aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c",
     "docker-cli": "docker@sha256:862099ada15c669000bef53aa4cb9d821262829f45b0dda2159ccb276443043b",
-    "nginx": "nginx@sha256:47928bf67eb62a1863cb08d9ecb52d3e704304ba614eaee17884204677702951"
+    "nginx": "nginx@sha256:47928bf67eb62a1863cb08d9ecb52d3e704304ba614eaee17884204677702951",
+    "buildkit": "moby/buildkit@sha256:99368f3e46177c6405b9740e4461d91cee004128daeecca78d4ceac50ec1da5c",
+    "sbom-generator": "docker/buildkit-syft-scanner@sha256:ae4f3b554449e7e25548e7d8ccc029d17357348e30c6e3df01b92bc93654d6a9"
   },
   "nginxCorrection": "Stage I Dockerfile transcription corrected to Stage A digest, actually pulled and built; historical Stage I record retained",
-  "applicationDigests": "Read actual final builds from docs/stages/evidence/R-validation.json; do not promote a candidate blocked by security scan"
+  "applicationDigests": "Read actual final builds from docs/stages/evidence/R-validation.json; do not promote a candidate blocked by security scan",
+  "buildAttestation": {
+    "buildkitVersion": "v0.34.1",
+    "buildkitCommit": "f5b59a1f2fb25a0cb7072c398cab9aed7835da4e",
+    "releaseSource": "https://github.com/moby/buildkit/releases/tag/v0.34.1",
+    "driver": "docker-container",
+    "reason": "Default docker driver rejected attestation in actual GitHub run40285947137",
+    "verifiedAt": "2026-10-26",
+    "localBuildx": "v0.35.0-desktop.2"
+  }
 }
