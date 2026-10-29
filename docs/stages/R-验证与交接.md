@@ -79,3 +79,7 @@
 同一提交只为本地专用环境补上https://localhost:18443精确Origin。真实Chromium经过非root Nginx和TLS验证登录、重载Cookie刷新、会员订单页与退出全部通过，CSRF保持启用；证据evidence/R-container-browser.json。未将所有Origin放行，未改变业务权限或令牌策略。追加修复后没有修改后端业务源码；已通过的完整后端与核心E2E结果仍由原始及远端报告支撑。
 
 最终远端40288130302：四个质量job通过，前后端SHA候选镜像成功构建、生成SBOM/provenance并推送GHCR；后端依赖镜像扫描17项（11高危、6严重）退出1，前端镜像扫描和release-manifest跳过。候选digest见evidence/R-ci-candidate-images.json；未执行部署。最终470文件快照秘密/配置复扫退出0；在线首次Maven429保留，离线依赖解析复扫不代替漏洞验收。
+
+## 用户取消持续验收与停机记录
+
+2026-10-26用户明确取消24小时探测并要求停止全部Docker容器。核对PID命令后实际停止43568的probe-availability.py，保留原始JSONL和既有维护失败，summary及机器快照标记CANCELLED_BY_USER、complete24Hours=false。该任务属于可用性探测，不是标准负载压测；两者均不得记为已通过。Docker按运行清单正常停止，不删除容器、镜像或数据卷；重新使用商城时需重新启动依赖与应用。既有课程包保留取消前历史快照，本段和最新14任务表为后续状态。

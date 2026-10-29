@@ -1,0 +1,58 @@
+{
+  "recordedDate": "2026-10-29",
+  "provider": "ALIPAY_SANDBOX",
+  "localMock": false,
+  "payment": {
+    "orderId": "1",
+    "status": "SUCCEEDED",
+    "amount": "0.01",
+    "paidAt": "2026-10-27T15:39:53Z"
+  },
+  "validNotificationAcknowledged": true,
+  "invalidNotificationAcknowledged": false,
+  "refund": {
+    "id": "1",
+    "status": "SUCCEEDED",
+    "amount": "0.01",
+    "succeededAt": "2026-10-27T15:41:06.122Z"
+  },
+  "orderAfterRefund": {
+    "status": "CLOSED_REFUND",
+    "financialStatus": "REFUNDED"
+  },
+  "channelReadOnlyQueries": [
+    {
+      "operation": "query-refunded",
+      "code": "10000",
+      "subCode": "",
+      "tradeStatus": "TRADE_CLOSED",
+      "amount": "0.01"
+    },
+    {
+      "operation": "query-closed",
+      "code": "40004",
+      "subCode": "ACQ.TRADE_NOT_EXIST",
+      "tradeStatus": "",
+      "amount": ""
+    },
+    {
+      "operation": "refund-query",
+      "code": "10000",
+      "refundStatus": "REFUND_SUCCESS",
+      "amount": "0.01"
+    }
+  ],
+  "queryProbeExitCode": 2,
+  "closeConfirmed": false,
+  "lastLocalObservation": {
+    "orderId": "2",
+    "orderStatus": "CLOSING",
+    "paymentStatus": "PENDING",
+    "onHand": 10,
+    "reserved": 1,
+    "observedOn": "2026-10-27"
+  },
+  "localRecheck": "BLOCKED_DOCKER_DESKTOP_ENGINE_SOCKET_ON_2026_10_29",
+  "otherDrills": "NOT_ADDED_PER_USER",
+  "productionDeployment": false
+}

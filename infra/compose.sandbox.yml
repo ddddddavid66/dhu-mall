@@ -1,0 +1,19 @@
+# 仅本机支付宝沙箱；独立 Compose 项目和数据卷，不启用本地模拟付款。
+services:
+  mysql:
+    command: [--log-bin-trust-function-creators=1]
+  backend:
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      PAYMENT_PROVIDER: ALIPAY_SANDBOX
+      ENABLE_MOCK_PAYMENT: 'false'
+      YUEJI_DEVSEED_ENABLED: 'true'
+      DEV_SEED_CREDENTIALS_FILE: /var/lib/yueji/records/accounts.json
+      YUEJI_SECURITY_COOKIE_SECURE: 'true'
+      REDIS_NAMESPACE: yueji.sandbox
+      MESSAGING_NAMESPACE: yueji.sandbox
+    volumes:
+      - ${SANDBOX_RECORDS_PATH:?restricted sandbox records path}:/var/lib/yueji/records
+    ports: ['127.0.0.1:28080:8080', '127.0.0.1:29081:9081']
+  web:
+    ports: !override ['127.0.0.1:28000:80', '127.0.0.1:28443:443']
